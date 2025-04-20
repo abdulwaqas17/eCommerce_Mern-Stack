@@ -1,0 +1,8 @@
+enum ka matlab hota hai:
+
+"Allowed values ki list define karna."
+
+Yani aap ek field me sirf kuch specific values allow kar rahe ho, aur baaki sab reject.
+
+
+5:30 tk sign up login with bakend wagera, ager role base navigation on respective pages ui note neccessary
