@@ -14,43 +14,121 @@ import Products from './pages/Products'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Carts from './pages/Carts'
-import { userData } from './context/context'
+// import { userData } from './context/context'
 
 function App() {
   const [user, setUsers] = useState(null);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    let token = window.localStorage.getItem('token');
+  //   let token = window.localStorage.getItem('token');
 
-    if (token) {
+  //   if (token) {
 
-      let currentUserData = async () => {
+  //     let currentUserData = async () => {
 
-        const res = await fetch('http://localhost:3000/user', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // 👉 yahan se verifyToken middleware chalega
-          }
-        });
+  //       const res = await fetch('http://localhost:3000/user', {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Authorization': `Bearer ${token}` // 👉 yahan se verifyToken middleware chalega
+  //         }
+  //       });
 
-        let data = res.json();
+  //       let data = res.json();
 
-        setUsers(data);
+  //       setUsers(data);
 
-      }
+  //     }
 
-      currentUserData()
-    }
+  //     currentUserData()
+  //   }
 
-  }, [])
+  // }, [])
 
   return (
 
-    <userData.provider  value={user}>
+    // <userData.provider  value={user}>
 
-      <BrowserRouter>
+    //   <BrowserRouter>
+
+
+    //     <Routes>
+
+    //       <Route path='/signup' element={<RegistrationForm />} />
+
+    //       <Route path='/login' element={<Login />} />
+
+    //       <Route path='/' element={<Home />} />
+
+    //       <Route path='/carts' element={
+    //         <ProtectedRoutes>
+    //           <Carts />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/products' element={
+    //         <ProtectedRoutes>
+    //           <Products />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/about' element={
+    //         <ProtectedRoutes>
+    //           <About />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/contact' element={
+    //         <ProtectedRoutes>
+    //           <Contact />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/profile' element={
+    //         <ProtectedRoutes>
+    //           <Profile />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/carts' element={
+    //         <ProtectedRoutes>
+    //           <Carts />
+    //         </ProtectedRoutes>
+    //       } />
+
+
+    //       {/* Dashboards  */}
+
+    //       <Route path='/admindashboard' element={
+    //         <ProtectedRoutes>
+    //           <AdminDashboard />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/employeedashboard' element={
+    //         <ProtectedRoutes>
+    //           <EmployeeDashboard />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='/userdashboard' element={
+    //         <ProtectedRoutes>
+    //           <UserDashboard />
+    //         </ProtectedRoutes>
+    //       } />
+
+    //       <Route path='*' element={<Page404 />} />
+
+    //     </Routes>
+
+
+    //   </BrowserRouter>
+
+
+    // </userData.provider>
+
+    <BrowserRouter>
 
 
         <Routes>
@@ -124,9 +202,6 @@ function App() {
 
 
       </BrowserRouter>
-
-
-    </userData.provider>
 
   )
 }
