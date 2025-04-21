@@ -2,75 +2,22 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footers from '../components/Footers'
 import Slideshow from '../components/Slider'
-import HealthProducts from '../components/homeUtils/HealthProducts'
+import FeaturedBrands from '../components/homeUtils/FeatureBrands'
+import Categories from '../components/homeUtils/Categories'
+import Services from '../components/homeUtils/Services'
+import CardsBar from '../components/homeUtils/CardsBar'
+import BannerCard from '../components/homeUtils/BannerCards'
+import AboutSection from '../components/homeUtils/AboutSection'
+import BlogCard from '../components/homeUtils/BlogCard'
 
 const Home = () => {
 
   
 
-  const services = [
-    {
-      title: "Medicine",
-      description: "Over 25000 products",
-      icon: "/images/asset 7.png",
-    },
-    {
-      title: "Wellness",
-      description: "Health products",
-      icon: "/images/asset 8.png",
-    },
-    {
-      title: "Diagnostic",
-      description: "Book tests & checkups",
-      icon: "/images/asset 9.png",
-    },
-    {
-      title: "Health Corner",
-      description: "Trending from health experts",
-      icon: "/images/asset 10.png",
-    },
-    {
-      title: "Medical Equipments",
-      description: "Devices & Tools",
-      icon: "/images/asset 11.png",
-    },
-  ];
+ 
 
 
-  const categories = [
-    {
-      id: 'hVRgfR',
-      name: 'Covid essentials',
-      count: '12 Products',
-      img: '/images/asset 14.png',
-      bg: 'bg-[#ecf8f8]',
-      link: '/collections/covid-essentials',
-    },
-    {
-      id: 'X3FdiW',
-      name: 'Infrared Thermometer',
-      count: '10 Products',
-      img: '/images/asset 15.png',
-      bg: 'bg-[#f8f5ec]',
-      link: '/collections/infrared-thermometer',
-    },
-    {
-      id: 'LDXkaH',
-      name: 'Health food and drinks',
-      count: '9 Products',
-      img: '/images/asset 16.png',
-      bg: 'bg-[#eeeeee]',
-      link: '/collections/health-food-and-drinks',
-    },
-    {
-      id: '7efjEH',
-      name: 'Skin Care',
-      count: '7 Products',
-      img: '/images/asset 17.png',
-      bg: 'bg-[#f4f0eb]',
-      link: '/collections/skin-care',
-    }
-  ];
+  
 
   return (
     <div>
@@ -80,128 +27,68 @@ const Home = () => {
       <Slideshow/>
 
       {/* services list  */}
-      <section className="bg-white py-14 px-4 sm:px-6 lg:px-8">
-      <div className="w-full">
-        <div className="flex md:justify-between justify-center gap-4 md:gap-0 flex-wrap w-full">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="md:w-[19%] w-[90%] flex flex-col sm:flex-row items-center text-center sm:text-left bg-white shadow-md rounded-md p-4 transition hover:shadow-lg cursor-pointer"
-            >
-              <div className="w-12 h-12 mb-2 sm:mb-0 sm:mr-4 flex-shrink-0">
-                <img src={service.icon} alt={service.title} className="h-full w-auto" />
-              </div>
-              <div>
-                <h3 className="text-lg font-medium text-gray-800">{service.title}</h3>
-                <p className="text-sm text-gray-500">{service.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <Services />
+
+    {/* 2 Banner  */}
+      <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px]">
+
+          <BannerCard topH='GET ALL YOUR' h1='Medication at' h2='One Place' img='/images/asset 12.jpeg'/>
+
+          <BannerCard topH='QUICK ACCESS TO A' h1='PLETHORA OF' h2='Medicines' img='/images/asset 13.jpeg'/>
+    
       </div>
-    </section>
-
-
-    {/* 2 card sections  */}
-    <section className="py-10 lg:py-12 xl:py-14 overflow-hidden bg-transparent">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row justify-center gap-6">
-          {/* Banner Box 1 */}
-          <div className="w-full lg:w-1/2" data-aos="fade-right">
-            <div className="relative cursor-pointer overflow-hidden rounded-lg shadow-lg group">
-              <img
-                src="/images/asset 12.jpeg"
-                alt="Banner 1"
-                className="w-full h-[280px] object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/5 hover:bg-black/0 flex flex-col justify-end p-6 text-white">
-                <h6 className="text-sm tracking-widest mb-1">GET ALL YOUR</h6>
-                <h4 className="text-2xl md:text-3xl font-medium leading-snug mb-4">
-                  Medication at <br /> One Place
-                </h4>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm uppercase tracking-wider hover:text-pink-500 transition-all duration-300"
-                >
-                  Shop Now
-                  <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-gray-900 hover:bg-primary hover:text-white transition-all duration-300">
-                    →
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Banner Box 2 - Repeat above with different image/text if needed */}
-          <div className="w-full lg:w-1/2" data-aos="fade-right">
-            <div className="relative cursor-pointer overflow-hidden rounded-lg shadow-lg group">
-              <img
-                src="/images/asset 13.jpeg"
-                alt="Banner 1"
-                className="w-full h-[280px] object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0  bg-black/5 hover:bg-black/0 flex flex-col justify-end p-6 text-white">
-                <h6 className="text-sm tracking-widest mb-1">GET ALL YOUR</h6>
-                <h4 className="text-2xl md:text-3xl font-medium leading-snug mb-4">
-                  Medication at <br /> One Place
-                </h4>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm uppercase tracking-wider hover:text-pink-500 transition-all duration-300"
-                >
-                  Shop Now
-                  <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-gray-900 hover:bg-primary hover:text-white transition-all duration-300">
-                    →
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    
 
     {/* categories section  */}
-    <section className="bg-white py-16 px-[30px]">
-      <div className="w-full">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#1d2a38] mb-10">
-          Popular Categories
-        </h2>
+    <Categories />
+    
+    {/* gradient 1  */}
+    <section className='py-[40px] bg-sky-50'>
+      
+    {/* products bar  */}
+    <CardsBar  heading='Health Products'/>
 
-        <div className="flex flex-wrap md:justify-between justify-center">
-          {categories.map((cat) => (
-            <div
-              key={cat.id}
-              className={`flex items-center md:w-[23%] sm:w-[48%] w-[95%] p-5 rounded-md ${cat.bg} gap-4`}
-            >
-              <div className="max-w-[50%]">
-                <a href={cat.link}>
-                  <img
-                    src={cat.img}
-                    alt={cat.name}
-                    className="w-full h-auto"
-                    loading="lazy"
-                  />
-                </a>
-              </div>
-              <div className="flex-1">
-                <h5 className="text-[15px] font-medium text-[#1d2a38] mb-2">
-                  <a href={cat.link}>{cat.name}</a>
-                </h5>
-                <p className="text-[15px] text-[#7d879c]">{cat.count}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    {/* FeaturedBrands */}
+    <FeaturedBrands />
+
     </section>
 
+    {/* Daily well being products  */}
+    <CardsBar heading='Daily Well-being' />
 
+    {/* 2 Banner  */}
+    <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
+
+      <BannerCard topH='FlAT 30% OFF' h1='Naturally' h2='Good' img='/images/asset 58.jpeg'/>
+
+      <BannerCard topH='FLAT 25% OFF' h1='Healthcare' h2='Products' img='/images/asset 59.jpeg'/>
+
+    </div>
+
+    {/* AboutSection */}
+    <AboutSection/>
+
+
+         
     {/* products bar  */}
-    <HealthProducts/>
+    <CardsBar  heading='Trending Products'/>
 
 
+
+   {/* Articles Sections */}
+  <section className='bg-sky-50 py-[50px]'>
+  <h2 className='text-center font-bold md:text-4xl text-2xl md:py-[30px]'>Latest Articles & Blogs</h2>
+
+
+<div className="flex flex-wrap justify-center md:justify-between md:gap-0 gap-6 px-[30px]">
+
+  <BlogCard img='images/asset 61.jpeg'/>
+  <BlogCard img='images/asset 62.jpeg'/>
+  <BlogCard img='images/asset 63.jpeg'/>
+  <BlogCard img='images/asset 64.jpeg'/>
+  
+</div>
+  </section>
       
       <Footers/>
       </div>

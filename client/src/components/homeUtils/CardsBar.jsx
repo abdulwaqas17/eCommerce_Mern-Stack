@@ -55,7 +55,7 @@ const products = [
 
 ];
 
-const HealthProducts = () => {
+const CardsBar = (props) => {
 
   const carouselRef = useRef();
 
@@ -71,6 +71,7 @@ const HealthProducts = () => {
   
   return (
     <div className="relative w-full px-4">
+      <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{props.heading}</h2>
       {/* Arrows */}
       <button
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow rounded-full"
@@ -104,11 +105,24 @@ const HealthProducts = () => {
                 className="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
-            <div className="p-4">
-              <p className="text-sm text-gray-500">Medicine</p>
-              <h3 className="font-semibold">{product.name}</h3>
-              <p className="text-green-600 font-bold">{product.price}</p>
-            </div>
+            <div className="p-4 space-y-2">
+        <p className="text-sm text-indigo-600 font-medium">Medicine</p>
+        <h3 className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition">
+          Practical Wooden Bottle
+        </h3>
+       
+
+        <div className="flex items-center space-x-1 text-yellow-400 text-sm">
+          <span>★★★★★</span>
+          <span className="text-gray-500">(0 reviews)</span>
+        </div>
+
+        <div className="text-xl font-bold text-gray-800">$529.28</div>
+
+        <button className="w-full mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+          Add to Cart
+        </button>
+      </div>
           </motion.div>
         ))}
       </motion.div>
@@ -116,4 +130,8 @@ const HealthProducts = () => {
   );
 };
 
-export default HealthProducts;
+export default CardsBar;
+
+/* 
+
+*/
