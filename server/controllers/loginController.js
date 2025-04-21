@@ -1,7 +1,12 @@
 let bcrypt = require('bcryptjs');
-let userModel = require('../models/users')
+let userModel = require('../models/users');
+let jwt = require('jsonwebtoken');
+
 
 let Login = async (req,res) => {
+
+  console.log(req.body);
+  
 
   
     try {
@@ -29,6 +34,8 @@ let Login = async (req,res) => {
       }
   
       let isMatch = await bcrypt.compare(password,user.password);
+
+
   
       if (!isMatch) {
         return (
@@ -50,6 +57,7 @@ let Login = async (req,res) => {
       }
   
       const token = jwt.sign(payloud,'secret123',{'expiresIn':'1h'})
+
       res.send({
         status : 200,
         message : 'Login Successfully',

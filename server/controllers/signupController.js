@@ -44,9 +44,10 @@ let Signup = async (req, res) => {
 
         console.log(newUser);
 
-        res.status(200).json({
+        res.send({
 
-            message: 'data submitted successfully',
+            status : 200,
+            message: 'Register successfully',
             data: newUser
 
         })

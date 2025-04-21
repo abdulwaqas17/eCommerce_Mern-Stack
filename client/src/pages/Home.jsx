@@ -77,7 +77,7 @@ const Home = () => {
 
    {/* Articles Sections */}
   <section className='bg-sky-50 py-[50px]'>
-  <h2 className='text-center font-bold md:text-4xl text-2xl md:py-[30px]'>Latest Articles & Blogs</h2>
+  <h2 className='text-center font-bold md:text-4xl text-2xl py-[30px]'>Latest Articles & Blogs</h2>
 
 
 <div className="flex flex-wrap justify-center md:justify-between md:gap-0 gap-6 px-[30px]">

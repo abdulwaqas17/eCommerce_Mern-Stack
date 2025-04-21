@@ -21,7 +21,7 @@ const FeaturedBrands = () => {
 
       <div className="flex justify-between flex-wrap gap-[30px]">
         {brandImages.map((src, index) => (
-          <div key={index} className="md:w-[23%] flex items-center bg-white justify-center py-[32px] hover:scale-105 transition-transform duration-300 rounded">
+          <div key={index} className="md:w-[23%] sm:w-[50%] w-[100%] flex items-center bg-white justify-center py-[32px] hover:scale-105 transition-transform duration-300 rounded">
             <a href="#">
               <img src={src} alt={`Brand ${index + 1}`} className="max-h-12 object-contain" />
             </a>
