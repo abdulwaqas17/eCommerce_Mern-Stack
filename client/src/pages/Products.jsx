@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
 import Footers from '../components/Footers';
-import AboutHeader from '../components/aboutUtils/aboutHeader';
-import FilterBar from '../components/aboutUtils/FilterBar';
+import AboutHeader from '../components/productsUtils/aboutHeader';
+import FilterBar from '../components/productsUtils/FilterBar';
 import Card from '../components/Card';
 
 const Products = () => {

@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+require('dotenv').config();
 let authRouter = require('./routes/authRoutes');
 let connectDB = require('./config/db');
 let cors = require('cors');

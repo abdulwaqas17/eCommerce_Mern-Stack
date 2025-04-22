@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footers from '../components/Footers'
 import Slideshow from '../components/Slider'
@@ -14,6 +14,19 @@ const Home = () => {
 
   
 
+  useEffect(()=> {
+
+    let fetchData = async ()=> {
+
+      let res = await fetch('http://localhost:3000/home/products');
+      let data = await res.json();
+      console.log(data);
+      
+    }
+
+    fetchData();
+
+  },[])
  
 
 

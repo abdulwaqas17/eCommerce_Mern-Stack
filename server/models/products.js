@@ -2,11 +2,16 @@ let mongoose = require('mongoose');
 
 let productSchema = mongoose.Schema({
 
-    productName :  String,
-    productPrice : Number,
-    productStock :  Number,
-    productImage :  String,
-    productDiscription : String
+    name :  String,
+    useFor : { type: String, enum: ['Respiratory', 'Medicine', 'Covid Protection','beauty'], default: 'Medicine' },
+    type :   { type: String, enum: ['popular', 'trending', 'recent'], default: 'recent' },
+    category :  { type: String, enum: ['Diagnostic', 'supplements', 'health care','beauty'], default: 'health care' },
+    price : Number,
+    image1 : String,
+    image2 : String,
+    stock : Number,
+    inStock : Boolean,
+    
 
 })
 
