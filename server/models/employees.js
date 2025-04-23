@@ -4,10 +4,12 @@ const employeeSchema = new mongoose.Schema({
     fullname: String,
     email: { type: String, unique: true },
     password: String,
-    phone: String,
+    number: String,
     address: String,
-    department: { type: String, enum: ['Inventory', 'Orders', 'Support'], default: 'Support' },
-    role: { type: String, enum: ['user', 'admin', 'employee'], default: 'employee' },
+    country: String,
+    dob: String,
+    department: { type: String, enum: ['Inventory', 'Orders', 'Support', 'Accounts', 'Logistics'], default: 'Support' },
+    role: { type: String, default: 'employee' },
     profileImage: String,
     joiningDate: { type: Date, default: Date.now }
 });

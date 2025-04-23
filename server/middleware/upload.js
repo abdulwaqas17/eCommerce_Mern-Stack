@@ -6,6 +6,15 @@ const upload = multer({ storage });
 module.exports = upload;
 
 
+// Multer → Temporary storage me file rakhta hai (memory ya diskStorage({})).
+
+// Cloudinary → Us file ko leke cloud pe upload karta hai.
+
+// MongoDB me sirf Cloudinary ka URL store ho raha hai, e.g.,:
+
+
+
+
 
 // const multer = require("multer");
 // const path = require("path");

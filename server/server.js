@@ -12,7 +12,6 @@ app.use(express.json());
 app.use(cors()); 
 
 // to connect mongo db
-app.use('/uploads', express.static('uploads')); 
 connectDB();
 
 app.use('/auth',authRouter);

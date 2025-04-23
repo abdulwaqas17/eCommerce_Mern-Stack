@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import RegistrationForm from './pages/Signup'
+import RegistrationForm from './pages/Register&Login/Signup'
 import ProtectedRoutes from './components/ProtectedRoute'
 import Page404 from './pages/Page404'
 import AdminDashboard from './pages/Dashboards/AdminDashboard'
 import EmployeeDashboard from './pages/Dashboards/EmployeeDashboard'
 import UserDashboard from './pages/Dashboards/UserDashboard'
-import Login from './pages/Login'
+import Login from './pages/Register&Login/Login'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Products from './pages/Products'
@@ -144,47 +144,49 @@ function App() {
 
           <Route path='/employee/register' element={<EmployeeRegistrationForm />} />
 
-          <Route path='/employee/Login' element={<EmployeeLogin />} />
+          <Route path='/employee/login' element={<EmployeeLogin />} />
 
-          <Route path='/admin/Login' element={<AdminLogin />} />
+          <Route path='/admin/login' element={<AdminLogin />} />
 
 
            {/* Home Page E commerce  */}
           <Route path='/' element={<Home />} />
 
+          
+
+          <Route path='/products' element={
+          
+              <Products />
+            
+          } />
+
+          <Route path='/about' element={
+           
+              <About />
+            
+          } />
+
+          <Route path='/contact' element={
+        
+              <Contact />
+            
+          } />
+
           {/* Protected Routes  */}
           <Route path='/carts' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes  tokenName='userToken' redirect='/login'>
               <Carts />
             </ProtectedRoutes>
           } />
 
-          <Route path='/products' element={
-            <ProtectedRoutes>
-              <Products />
-            </ProtectedRoutes>
-          } />
-
-          <Route path='/about' element={
-            <ProtectedRoutes>
-              <About />
-            </ProtectedRoutes>
-          } />
-
-          <Route path='/contact' element={
-            <ProtectedRoutes>
-              <Contact />
-            </ProtectedRoutes>
-          } />
-
           <Route path='/profile' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes tokenName='userToken' redirect='/login'>
               <Profile />
             </ProtectedRoutes>
           } />
 
           <Route path='/carts' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes tokenName='userToken' redirect='/login'>
               <Carts />
             </ProtectedRoutes>
           } />
@@ -193,19 +195,19 @@ function App() {
           {/* Dashboards  */}
 
           <Route path='/admindashboard' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
               <AdminDashboard />
             </ProtectedRoutes>
           } />
 
           <Route path='/employeedashboard' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes tokenName='employeeToken' redirect='/employee/login'>
               <EmployeeDashboard />
             </ProtectedRoutes>
           } />
 
           <Route path='/userdashboard' element={
-            <ProtectedRoutes>
+            <ProtectedRoutes tokenName='userToken' redirect='/login'>
               <UserDashboard />
             </ProtectedRoutes>
           } />

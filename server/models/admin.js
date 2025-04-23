@@ -2,9 +2,9 @@ let mongoose = require('mongoose');
 
 const adminSchema = new mongoose.Schema({
     fullname: String,
-    email: { type: String, unique: true },
+    email: String,
     password: String,
-    role: { type: String, enum: ['user', 'admin', 'employee'], default: 'admin' },
+    role: { type: String, default: 'admin' },
  
 });
 

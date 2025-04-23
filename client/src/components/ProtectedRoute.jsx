@@ -1,11 +1,14 @@
 import React from "react"
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoutes = ({children})=> {
+const ProtectedRoutes = (props)=> {
 
-    let token = window.localStorage.getItem('token');
+    console.log(props);
+    
 
-    return token ? children : <Navigate to='/login' />
+    let token = window.localStorage.getItem(props.tokenName);
+
+    return token ? props.children : <Navigate to={props.redirect} />
 
 }
 

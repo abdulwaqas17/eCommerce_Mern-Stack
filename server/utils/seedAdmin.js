@@ -14,7 +14,7 @@ const createAdmin = async () => {
     const hashedPassword = await bcrypt.hash("W@qa$admin", 10);
     let admin = await AdminModel.create({
       fullname: "M Waqas",
-      email: "admin17112005gmail.com",
+      email: "admin17112005@gmail.com",
       password: hashedPassword,
       role: "admin",
     });

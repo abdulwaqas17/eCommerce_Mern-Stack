@@ -41,3 +41,18 @@ product.image2 = ../images/asset 18.jpeg
 
 cloudinary.uploader.upload() kya karta hai?
 Ye method aapki local image file ko Cloudinary ke cloud server par upload karta hai. Jab image upload ho jati hai, ye aapko ek response object return karta hai jisme bohat saari useful info hoti hai.
+
+
+
+✅ 1. multer.diskStorage({}) aur Cloudinary ka connection:
+🔸 Aapka sawal:
+kon si storage multer.diskStorage({}) se file temp storage me ja rahi hai — required for Cloudinary?
+
+📌 Jawab:
+Jab aap multer.diskStorage({}) use karte ho without defining destination, to multer file ko OS ke default temp folder me temporarily store karta hai.
+
+Example behavior:
+
+File locally /tmp/xyz.jpg ya Windows pe C:\Users\username\AppData\Local\Temp\xyz.jpg jaati hai.
+
+Ye temp file phir Cloudinary me upload hoti hai using req.file.path.

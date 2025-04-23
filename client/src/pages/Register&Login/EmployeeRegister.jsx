@@ -8,6 +8,8 @@ const EmployeeRegistrationForm = () => {
     fullname: "",
     email: "",
     password: "",
+    country : "",
+    dob : "",
     number: "",
     address: "",
     department: "",
@@ -25,13 +27,16 @@ const EmployeeRegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+   if (formData.department !== "") {
     const formDataToSend = new FormData();
     for (const key in formData) {
       formDataToSend.append(key, formData[key]);
     }
 
     try {
-      const res = await fetch("http://localhost:3000/auth/signup", {
+      const res = await fetch("http://localhost:3000/auth/employee/register", {
         method: "POST",
         body: formDataToSend,
       });
@@ -41,12 +46,16 @@ const EmployeeRegistrationForm = () => {
       alert(data.message);
 
       if (data.status === 200) {
-        navigate("/login");
+        navigate("/employee/login");
       }
     } catch (err) {
       console.error(err);
       alert("Signup failed. Try again.");
     }
+   } else {
+    alert('Select the Department')
+   }
+
   };
 
   return (
@@ -69,7 +78,7 @@ const EmployeeRegistrationForm = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="w-full flex flex-wrap justify-between gap-4">
           <input
             type="text"
             name="fullname"
@@ -77,7 +86,7 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.fullname}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
@@ -86,7 +95,7 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.email}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
@@ -95,7 +104,7 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.password}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="tel"
@@ -104,8 +113,19 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.number}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+         
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            onChange={handleChange}
+            value={formData.country}
+            required
+            className=" md:w-[48%] w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+         
           <input
             type="text"
             name="address"
@@ -113,7 +133,16 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.address}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <input
+            type="date"
+            name="dob"
+            onChange={handleChange}
+            value={formData.dob}
+            required
+            className=" md:w-[48%] w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           {/* Department dropdown */}
@@ -122,7 +151,7 @@ const EmployeeRegistrationForm = () => {
             onChange={handleChange}
             value={formData.department}
             required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-3 md:w-[48%] w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Department</option>
             <option value="Inventory">Inventory</option>
@@ -138,7 +167,7 @@ const EmployeeRegistrationForm = () => {
             accept="image/*"
             onChange={handleImageChange}
             required
-            className="p-3 border border-gray-300 rounded-md"
+            className="p-3 md:w-[100%] w-full border border-gray-300 rounded-md"
           />
 
           <button
@@ -151,7 +180,7 @@ const EmployeeRegistrationForm = () => {
 
         <footer className="text-center mt-6">
           <Link
-            to="/login"
+            to="/employee/login"
             className="text-sm text-gray-400 hover:text-gray-600"
           >
             Already have an account? Login here

@@ -16,7 +16,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/admin/login", {
+      const res = await fetch("http://localhost:3000/auth/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
@@ -27,7 +27,8 @@ const AdminLogin = () => {
       alert(data.message);
 
       if (data.status === 200) {
-        navigate("/admin-dashboard");
+        window.localStorage.setItem('adminToken',data.token)
+        navigate("/admindashboard");
       }
     } catch (err) {
       console.error(err);

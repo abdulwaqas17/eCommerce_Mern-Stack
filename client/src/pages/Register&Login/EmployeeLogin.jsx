@@ -16,7 +16,7 @@ const EmployeeLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
+      const res = await fetch("http://localhost:3000/auth/employee/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
@@ -27,8 +27,10 @@ const EmployeeLogin = () => {
       alert(data.message);
 
       if (data.status === 200) {
-        navigate("/employee-dashboard");
+        window.localStorage.setItem('employeeToken',data.token)
+        navigate("/employeedashboard");
       }
+
     } catch (err) {
       console.error(err);
       alert("Login failed. Try again.");
@@ -84,7 +86,7 @@ const EmployeeLogin = () => {
 
         <footer className="text-center mt-6">
           <Link
-            to="/register"
+            to="/employee/register"
             className="text-sm text-gray-400 hover:text-gray-600"
           >
             Don't have an account? Register here

@@ -1,13 +1,11 @@
 let bcrypt = require('bcryptjs');
-let userModel = require('../models/users');
+let EmployeeModel = require('../../models/employees');
 let jwt = require('jsonwebtoken');
 
 
-let Login = async (req,res) => {
+let EmpLogin = async (req,res) => {
 
   console.log(req.body);
-  
-
   
     try {
 
@@ -20,11 +18,11 @@ let Login = async (req,res) => {
   
     }
   
-      let user = await userModel.findOne({email});
+      let employee = await EmployeeModel.findOne({email});
   
-      console.log(user);
+      console.log(employee);
   
-      if (!user) {
+      if (!employee) {
         return (
           res.send({
           status : 403,
@@ -33,7 +31,7 @@ let Login = async (req,res) => {
         )
       }
   
-      let isMatch = await bcrypt.compare(password,user.password);
+      let isMatch = await bcrypt.compare(password,employee.password);
 
 
   
@@ -45,28 +43,26 @@ let Login = async (req,res) => {
         })
         )
       }
-  
-      const payloud = {
-  
-        id : user._id,
-        fullname : user.fullname,
-        email : user.email,
-        role : user.role,
-        
 
-      }
+      const {password : _, ...employeeWithOutPassword} = employee._doc;
+
+      console.log('employee.doc', employee._doc);
+      console.log('employeeWithOutPassword', employeeWithOutPassword);
+     
+
+      const payload = employeeWithOutPassword;
   
-      const token = jwt.sign(payloud,'secret123',{'expiresIn':'1h'})
+      const token = jwt.sign(payload,'secret-employee-123',{'expiresIn':'1h'})
 
       res.send({
         status : 200,
         message : 'Login Successfully',
         token : token,
-        user : payloud
+        employee : payload
       })
   
     } catch (err) {
-      console.log('error is login =', err);
+      console.log('error in login =', err);
       res.send({
         status : 500,
         message : err.message
@@ -75,4 +71,4 @@ let Login = async (req,res) => {
     
 }
 
-module.exports = Login;
+module.exports = EmpLogin;

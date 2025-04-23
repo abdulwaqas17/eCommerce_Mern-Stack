@@ -37,11 +37,8 @@ const Login = () => {
 
             if (data.status == 200) {
 
-                window.localStorage.setItem('token', data.token);
-
-                console.log(data.user.role);
+                window.localStorage.setItem('userToken', data.token);
                 
-
                 setFormData({
 
                     email: "",
@@ -49,21 +46,8 @@ const Login = () => {
 
                 });
 
-           
-
-                
-            if (data.user.role == 'admin') {
-
-                navigate('/admindashboard');
-
-            } else if (data.user.role == 'employee') {
-
-                navigate('/employeedashboard');
-
-            } else {
                 navigate('/');
-            }
-
+            
             }
 
 

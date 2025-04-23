@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
     address: String,
     city: String,
     country: String,
-    dob: { type: Date }, // 👈 Added Date of Birth
-    role: { type: String, enum: ['user', 'admin', 'employee'], default: 'user' },
+    dob: String, // 👈 Added Date of Birth
+    role: { type: String, default: 'user' },
     userOders : [{type : mongoose.Schema.Types.ObjectId, ref : 'products'}],
     profileImage: String,
     createdAt: { type: Date, default: Date.now }

@@ -193,7 +193,7 @@ const RegistrationForm = () => {
     address: "",
     dob: "",
     country: "",
-    role: "user",
+    city: "",
     profileImage: null,
   });
 
@@ -321,16 +321,16 @@ const RegistrationForm = () => {
             required
             className="col-span-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <select
-            name="role"
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
             onChange={handleChange}
-            value={formData.role}
+            value={formData.city}
+            required
             className="col-span-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-            <option value="employee">Employee</option>
-          </select>
+          />
+     
 
           <input
             type="file"
