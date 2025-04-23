@@ -24,3 +24,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, ()=> console.log('server is running on port',PORT));
 
+// 9 - 10 = 4
+// 10 - 11 = show products on home and product page  ==> 5
+// 11 - 12 = separte pages for user and admin auth with functionality == 5
+// 12 - 11 = dashboard design === 5
+

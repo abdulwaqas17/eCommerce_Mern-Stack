@@ -6,3 +6,38 @@ Yani aap ek field me sirf kuch specific values allow kar rahe ho, aur baaki sab 
 
 
 5:30 tk sign up login with bakend wagera, ager role base navigation on respective pages ui note neccessary
+
+
+
+
+
+
+__dirname:
+Ye Node.js ka global variable hai jo aapko current file ka directory path deta hai — absolute path.
+
+📦 Example: Agar aapki file yahan hai:
+
+/Users/waqas/my-ecommerce/scripts/seedProducts.js
+
+To agar aap console.log(__dirname); likho ge to output hoga:
+
+/Users/waqas/my-ecommerce/scripts
+
+
+
+
+path.resolve() hota kya hai?
+
+const fullPath = path.resolve(__dirname, '../images/asset 18.jpeg');
+Yeh function relative path ko convert karta hai full absolute path mein.
+
+Example:
+
+__dirname = /Users/waqas/ecommerce/scripts
+product.image2 = ../images/asset 18.jpeg
+=> result = /Users/waqas/ecommerce/images/asset 18.jpeg
+
+
+
+cloudinary.uploader.upload() kya karta hai?
+Ye method aapki local image file ko Cloudinary ke cloud server par upload karta hai. Jab image upload ho jati hai, ye aapko ek response object return karta hai jisme bohat saari useful info hoti hai.

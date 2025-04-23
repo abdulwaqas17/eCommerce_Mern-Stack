@@ -14,6 +14,9 @@ import Products from './pages/Products'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Carts from './pages/Carts'
+import EmployeeRegistrationForm from './pages/Register&Login/EmployeeRegister'
+import EmployeeLogin from './pages/Register&Login/EmployeeLogin'
+import AdminLogin from './pages/Register&Login/AdminLogin'
 // import { userData } from './context/context'
 
 function App() {
@@ -132,13 +135,24 @@ function App() {
 
 
         <Routes>
+          
 
+          {/* Register and Login pages  */}
           <Route path='/signup' element={<RegistrationForm />} />
 
           <Route path='/login' element={<Login />} />
 
+          <Route path='/employee/register' element={<EmployeeRegistrationForm />} />
+
+          <Route path='/employee/Login' element={<EmployeeLogin />} />
+
+          <Route path='/admin/Login' element={<AdminLogin />} />
+
+
+           {/* Home Page E commerce  */}
           <Route path='/' element={<Home />} />
 
+          {/* Protected Routes  */}
           <Route path='/carts' element={
             <ProtectedRoutes>
               <Carts />
@@ -196,6 +210,7 @@ function App() {
             </ProtectedRoutes>
           } />
 
+           {/* 404 Page  */}
           <Route path='*' element={<Page404 />} />
 
         </Routes>

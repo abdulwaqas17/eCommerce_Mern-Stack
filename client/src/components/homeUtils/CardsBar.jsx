@@ -2,60 +2,10 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const products = [
-  {
-    id: 1,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 2,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 3,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 4,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 5,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 6,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
-  {
-    id: 7,
-    name: "Practical Wooden Bottle",
-    price: "$529.28",
-    image1: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-1.jpg?v=1734420724",
-    image2: "https://ap-medilazar.myshopify.com/cdn/shop/files/product-12-2.jpg?v=1734420724"
-  },
+const CardsBar = ({heading,products}) => {
 
-];
-
-const CardsBar = (props) => {
+  console.log(products);
+  
 
   const carouselRef = useRef();
 
@@ -71,7 +21,7 @@ const CardsBar = (props) => {
   
   return (
     <div className="relative w-full px-4">
-      <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{props.heading}</h2>
+      <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{heading}</h2>
       {/* Arrows */}
       <button
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow rounded-full"
@@ -93,7 +43,7 @@ const CardsBar = (props) => {
       >
         {products.map((product) => (
           <motion.div
-            key={product.id}
+            key={product._id}
             className="min-w-[250px] bg-white border rounded-xl shadow hover:shadow-lg transition-transform duration-300"
             whileHover={{ scale: 1.05 }}
           >
@@ -106,9 +56,9 @@ const CardsBar = (props) => {
               />
             </div>
             <div className="p-4 space-y-2">
-        <p className="text-sm text-indigo-600 font-medium">Medicine</p>
+        <p className="text-sm text-indigo-600 font-medium">{product.useFor}</p>
         <h3 className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition">
-          Practical Wooden Bottle
+        {product.name}
         </h3>
        
 
@@ -117,7 +67,7 @@ const CardsBar = (props) => {
           <span className="text-gray-500">(0 reviews)</span>
         </div>
 
-        <div className="text-xl font-bold text-gray-800">$529.28</div>
+        <div className="text-xl font-bold text-gray-800">${product.price}</div>
 
         <button className="w-full mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
           Add to Cart

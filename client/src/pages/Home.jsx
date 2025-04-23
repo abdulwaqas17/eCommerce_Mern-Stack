@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footers from '../components/Footers'
 import Slideshow from '../components/Slider'
@@ -12,6 +12,8 @@ import BlogCard from '../components/homeUtils/BlogCard'
 
 const Home = () => {
 
+  const [cards,setCards] = useState([]);
+
   
 
   useEffect(()=> {
@@ -20,7 +22,9 @@ const Home = () => {
 
       let res = await fetch('http://localhost:3000/home/products');
       let data = await res.json();
-      console.log(data);
+      console.log(data.products);
+
+      setCards(data.products)
       
     }
 
@@ -29,7 +33,14 @@ const Home = () => {
   },[])
  
 
+  let healthCareProducts = cards.filter((card) => ( card.category == 'health care' ));
+  let supplementsProducts = cards.filter((card) => ( card.category == 'supplements' ));
+  let recentProducts = cards.filter((card) => ( card.type == 'recent' ));
 
+  console.log(healthCareProducts);
+  console.log(supplementsProducts);
+  console.log(recentProducts);
+  
   
 
   return (
@@ -59,7 +70,7 @@ const Home = () => {
     <section className='py-[40px] bg-sky-50'>
       
     {/* products bar  */}
-    <CardsBar  heading='Health Products'/>
+    <CardsBar  heading='Health Products' products={healthCareProducts}/>
 
     {/* FeaturedBrands */}
     <FeaturedBrands />
@@ -67,7 +78,7 @@ const Home = () => {
     </section>
 
     {/* Daily well being products  */}
-    <CardsBar heading='Daily Well-being' />
+    <CardsBar heading='Daily Well-being' products={supplementsProducts}/>
 
     {/* 2 Banner  */}
     <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
@@ -84,7 +95,7 @@ const Home = () => {
 
          
     {/* products bar  */}
-    <CardsBar  heading='Trending Products'/>
+    <CardsBar  heading='Recent Products' products={recentProducts}/>
 
 
 

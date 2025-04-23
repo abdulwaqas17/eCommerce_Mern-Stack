@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react'; // You can use Lucide or any other icon lib
 
-const AboutHeader = () => {
+const CatHeader = () => {
   return (
     <div className="py-[50px] bg-sky-50 mx-auto">
       <nav aria-label="Breadcrumb" className="text-xs ">
@@ -25,4 +25,4 @@ const AboutHeader = () => {
   );
 };
 
-export default AboutHeader;
+export default CatHeader;

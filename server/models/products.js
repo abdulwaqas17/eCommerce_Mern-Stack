@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 let productSchema = mongoose.Schema({
 
     name :  String,
-    useFor : { type: String, enum: ['Respiratory', 'Medicine', 'Covid Protection','beauty'], default: 'Medicine' },
+    useFor : { type: String, enum: ['Respiratory', 'Medicine', 'Covid Protection'], default: 'Medicine' },
     type :   { type: String, enum: ['popular', 'trending', 'recent'], default: 'recent' },
     category :  { type: String, enum: ['Diagnostic', 'supplements', 'health care','beauty'], default: 'health care' },
     price : Number,

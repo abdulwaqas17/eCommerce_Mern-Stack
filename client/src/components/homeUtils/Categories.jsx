@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
 
 const Categories = () => {
@@ -12,7 +12,7 @@ const Categories = () => {
           count: '12 Products',
           img: '/images/asset 14.png',
           bg: 'bg-[#ecf8f8]',
-          link: '/collections/covid-essentials',
+          link: '/products',
         },
         {
           id: 'X3FdiW',
@@ -20,7 +20,7 @@ const Categories = () => {
           count: '10 Products',
           img: '/images/asset 15.png',
           bg: 'bg-[#f8f5ec]',
-          link: '/collections/infrared-thermometer',
+          link: '/products',
         },
         {
           id: 'LDXkaH',
@@ -28,7 +28,7 @@ const Categories = () => {
           count: '9 Products',
           img: '/images/asset 16.png',
           bg: 'bg-[#eeeeee]',
-          link: '/collections/health-food-and-drinks',
+          link: '/products',
         },
         {
           id: '7efjEH',
@@ -36,7 +36,7 @@ const Categories = () => {
           count: '7 Products',
           img: '/images/asset 17.png',
           bg: 'bg-[#f4f0eb]',
-          link: '/collections/skin-care',
+          link: '/products',
         }
       ];
 
@@ -54,18 +54,18 @@ const Categories = () => {
                   className={`flex items-center md:w-[23%] sm:w-[48%] w-[97%] p-5 rounded-md ${cat.bg} gap-4`}
                 >
                   <div className="max-w-[50%]">
-                    <a href={cat.link}>
+                    <Link to={cat.link}>
                       <img
                         src={cat.img}
                         alt={cat.name}
                         className="w-full h-auto"
                         loading="lazy"
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className="flex-1">
                     <h5 className="text-[15px] font-medium text-[#1d2a38] mb-2">
-                      <a href={cat.link}>{cat.name}</a>
+                      <Link to={cat.link}>{cat.name}</Link>
                     </h5>
                     <p className="text-[15px] text-[#7d879c]">{cat.count}</p>
                   </div>
