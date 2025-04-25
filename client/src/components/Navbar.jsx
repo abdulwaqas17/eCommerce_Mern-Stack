@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -85,12 +86,12 @@ const Navbar = () => {
 
             {/* Navigation - Desktop */}
             <nav className="hidden lg:flex space-x-8">
-              <a href="#" className="text-black hover:text-green-700 font-medium">Home</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Shop</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Products</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Pages</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Blog</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Contact</a>
+              <Link to="/" className="text-black hover:text-green-700 font-medium">Home</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Shop</Link>
+              <Link to="/products" className="text-black hover:text-green-700 font-medium">Products</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Pages</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Blog</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Contact</Link>
             </nav>
 
             {/* Icons */}
@@ -143,12 +144,12 @@ const Navbar = () => {
               </button>
             </div>
             <nav className="flex flex-col space-y-4">
-              <a href="#" className="text-black hover:text-green-700 font-medium">Home</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Shop</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Products</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Pages</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Blog</a>
-              <a href="#" className="text-black hover:text-green-700 font-medium">Contact</a>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Home</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Shop</Link>
+              <Link to="/products" className="text-black hover:text-green-700 font-medium">Products</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Pages</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Blog</Link>
+              <Link to="" className="text-black hover:text-green-700 font-medium">Contact</Link>
             </nav>
           </div>
         </div>
