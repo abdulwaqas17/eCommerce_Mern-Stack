@@ -17,6 +17,11 @@ import Carts from './pages/Carts'
 import EmployeeRegistrationForm from './pages/Register&Login/EmployeeRegister'
 import EmployeeLogin from './pages/Register&Login/EmployeeLogin'
 import AdminLogin from './pages/Register&Login/AdminLogin'
+import DashboardHome from './components/dashboardUtils/SidePages/HomeSide'
+import OrdersSide from './components/dashboardUtils/SidePages/OrdersSide'
+import ProductsSide from './components/dashboardUtils/SidePages/ProductsSide'
+import AddProductSide from './components/dashboardUtils/SidePages/AddProductSide'
+
 // import { userData } from './context/context'
 
 function App() {
@@ -193,12 +198,49 @@ function App() {
 
 
           {/* Dashboards  */}
-
+           {/* Route Open  of /admindashboard*/}
           <Route path='/admindashboard' element={
             <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
               <AdminDashboard />
             </ProtectedRoutes>
+           } > 
+
+          <Route path="" element={
+            <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
+              <DashboardHome/>
+            </ProtectedRoutes>
           } />
+
+          <Route path='products' element={
+            <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
+              <ProductsSide/>
+            </ProtectedRoutes>
+          } />
+
+          <Route path='orders' element={
+            <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
+              <OrdersSide/>
+            </ProtectedRoutes>
+          } />
+
+          <Route path='add-product' element={
+            <ProtectedRoutes tokenName='adminToken' redirect='/admin/login'>
+              <AddProductSide/>
+            </ProtectedRoutes>
+          } />
+
+          </Route>
+           {/* Route Close  of /admindashboard*/}
+
+
+
+
+
+
+
+
+
+
 
           <Route path='/employeedashboard' element={
             <ProtectedRoutes tokenName='employeeToken' redirect='/employee/login'>
