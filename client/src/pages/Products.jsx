@@ -54,7 +54,7 @@ const Products = () => {
       <section className='flex justify-between flex-wrap px-[30px] py-[60px] gap-4'>
 
         {products.map((product)=> (
-          <Card Key={product._id} product={product}/>
+          <Card key={product._id} product={product}/>
         ))}
     
 

@@ -56,7 +56,8 @@ const AddProductSide = () => {
             method: "POST",
             body: formDataToSend,
             headers : {
-              'authorization' : `Bearer ${token} admin`
+              'authorization' : `Bearer ${token}`,
+              'role' : 'admin'
             }
           }
         );

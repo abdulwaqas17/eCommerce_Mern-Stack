@@ -12,7 +12,7 @@ let Signup = async (req, res) => {
         // req.file.path: 'C:\\Users\\RBCOMP~1\\AppData\\Local\\Temp\\347c671889eb4ecf9693a52a46c70d84',
 
 
-        const { fullname, email, dob, password, country, number, userOders, address, city, profileImage } = req.body;
+        const { fullname, email, dob, password, country, number, userOders, address, city } = req.body;
 
         const exitingUser = await userModel.findOne({ email }); // null or document
 

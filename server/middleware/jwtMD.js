@@ -1,7 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-const verifyToken = (req,res,next) => {
 
+let userKey = process.env.USER_SECRET_KEY;
+let employeeKey = process.env.EMPLOYEE_SECRET_KEY;
+let adminKey = process.env.ADMIN_SECRET_KEY;
+console.log(process.env);
+
+const verifyToken = (req,res,next) => {
+    
     try {
 
         // ye aik obj h aur is m multiple cheezen hoti hn, aur authorization bhi hota h
@@ -20,6 +26,9 @@ const verifyToken = (req,res,next) => {
     }
 
     const token = bearerHeader.split(" ")[1];
+    const role = req.headers.role; // is role aya ga, jis ne request bhji h us ka
+    
+
 
     console.log(token);
 
@@ -31,10 +40,25 @@ const verifyToken = (req,res,next) => {
         })
     }
 
+    console.log('userKey,employeeKey,adminKey)' ,userKey,employeeKey,adminKey);
+    
+
+
+    // set correct secret key
+    let secretKey = userKey
+
+    if (role == 'admin') {
+        secretKey = adminKey
+    } else if (role == 'employee') {
+        secretKey = employeeKey
+    }
+
+    
+
     // const decoded = jwt.verify(token, 'secret_key');
     //   req.user = decoded;
 
-    jwt.verify(token,'secret123',(err,decode)=> {
+    jwt.verify(token,secretKey,(err,decode)=> {
         if(err) {
             return res.send({
                 status : 401,

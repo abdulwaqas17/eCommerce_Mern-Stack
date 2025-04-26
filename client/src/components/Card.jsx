@@ -1,10 +1,29 @@
 // import { Heart, Eye, RefreshCcw } from "lucide-react";
 
+import { useEffect, useState } from "react";
+
 
 const Card = (props) => {
 
-  console.log(props.product);
+
+
+  let [cart,setCart] = useState([]);
+
+  useEffect(() => {
+    console.log("Cart updated:", cart);
+  }, [cart]);
+
+  let addToCart = (id)=> {
+
+    // let updateCart = cart;
+    // updateCart.push(e.target.id);
+    // console.log(updateCart); 
+    setCart((prev)=> ([...prev,id]))
+    // console.log('cart',cart);
+
+  }
   
+  // console.log('cart',cart);
 
   return (
 
@@ -13,6 +32,7 @@ const Card = (props) => {
       key={props.key}
       className="w-[23%] bg-white border rounded-xl shadow hover:shadow-lg transition-transform duration-300"
       whileHover={{ scale: 1.05 }}
+      
     >
       <div className="relative overflow-hidden rounded-t-xl">
         <img src={props.product.image1} alt={props.product.name} className="w-full" />
@@ -36,7 +56,7 @@ const Card = (props) => {
 
         <div className="text-xl font-bold text-gray-800">${props.product.price}</div>
 
-        <button className="w-full mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+        <button  onClick={()=> addToCart(props.product._id)} className="w-full mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
           Add to Cart
         </button>
       </div>
