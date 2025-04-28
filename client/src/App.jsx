@@ -21,38 +21,13 @@ import DashboardHome from './components/dashboardUtils/SidePages/HomeSide'
 import OrdersSide from './components/dashboardUtils/SidePages/OrdersSide'
 import ProductsSide from './components/dashboardUtils/SidePages/ProductsSide'
 import AddProductSide from './components/dashboardUtils/SidePages/AddProductSide'
+import DataProvider from './context/DataProvider'
 
 // import { userData } from './context/context'
 
 function App() {
   const [user, setUsers] = useState(null);
 
-  // useEffect(() => {
-
-  //   let token = window.localStorage.getItem('token');
-
-  //   if (token) {
-
-  //     let currentUserData = async () => {
-
-  //       const res = await fetch('http://localhost:3000/user', {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': `Bearer ${token}` // 👉 yahan se verifyToken middleware chalega
-  //         }
-  //       });
-
-  //       let data = res.json();
-
-  //       setUsers(data);
-
-  //     }
-
-  //     currentUserData()
-  //   }
-
-  // }, [])
 
   return (
 
@@ -136,6 +111,7 @@ function App() {
 
     // </userData.provider>
 
+    <DataProvider>
     <BrowserRouter>
 
 
@@ -261,6 +237,7 @@ function App() {
 
 
       </BrowserRouter>
+      </DataProvider>
 
   )
 }

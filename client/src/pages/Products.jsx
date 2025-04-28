@@ -4,8 +4,10 @@ import Footers from '../components/Footers';
 import CatHeader from '../components/productsUtils/catHeader';
 import FilterBar from '../components/productsUtils/FilterBar';
 import Card from '../components/Card';
+import { useCarts } from '../hooks/hooks';
 
 const Products = () => {
+
 
   let [products,setProducts] = useState([]);
 
@@ -45,6 +47,27 @@ const Products = () => {
 
   },[])
 
+  // let [cart, setCart] = useState([]);
+
+  // getting value from context
+  let {carts,setCarts} = useCarts();
+
+  console.log(' useCarts()',  useCarts());
+  
+
+  useEffect(()=> {
+    console.log('cart effect',carts);
+  },[carts])
+
+
+  let addToCart = (id) => {
+    setCarts((prev) => [...prev, id]);
+    console.log('cart func',carts);
+  };
+
+
+  console.log('cart ',carts);
+
   return (
     <div>
       <Navbar />
@@ -54,7 +77,7 @@ const Products = () => {
       <section className='flex justify-between flex-wrap px-[30px] py-[60px] gap-4'>
 
         {products.map((product)=> (
-          <Card key={product._id} product={product}/>
+          <Card key={product._id} product={product} func={addToCart}/>
         ))}
     
 
