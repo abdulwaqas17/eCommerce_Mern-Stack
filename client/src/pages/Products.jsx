@@ -10,6 +10,8 @@ const Products = () => {
 
 
   let [products,setProducts] = useState([]);
+  // getting value from context
+  let {carts,setCarts} = useCarts();
 
   useEffect(()=> {
 
@@ -49,24 +51,44 @@ const Products = () => {
 
   // let [cart, setCart] = useState([]);
 
-  // getting value from context
-  let {carts,setCarts} = useCarts();
 
-  console.log(' useCarts()',  useCarts());
+  // console.log(' useCarts()',  useCarts());
   
 
+  // useEffect(()=> {
+
+    
+  //   let userCarts = JSON.parse(window.localStorage.getItem('userCarts'));
+  //   setCarts([...userCarts]);
+  //   // console.log('userCarts');
+  //   console.log('userCarts ==>', userCarts);
+
+  //   // console.log('[]');
+
+    
+    
+  // },[])
+
   useEffect(()=> {
-    console.log('cart effect',carts);
+
+    // console.log('cart effect',carts);
+    console.log('carts ===>', carts);
+    
+    window.localStorage.setItem('userCarts',JSON.stringify(carts));
+    // console.log('[carts]');
+    
+    
+
   },[carts])
 
 
   let addToCart = (id) => {
     setCarts((prev) => [...prev, id]);
-    console.log('cart func',carts);
+    // console.log('cart func',carts);
   };
 
 
-  console.log('cart ',carts);
+  // console.log('cart ',carts);
 
   return (
     <div>

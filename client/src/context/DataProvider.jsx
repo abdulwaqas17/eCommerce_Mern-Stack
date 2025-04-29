@@ -4,7 +4,7 @@ import CartContext from "./cartContext";
 
 export default function DataProvider({children}) {
 
-    console.log('CartContext',CartContext);
+    // console.log('CartContext',CartContext);
     
 
     let [carts,setCarts] = useState([]);
