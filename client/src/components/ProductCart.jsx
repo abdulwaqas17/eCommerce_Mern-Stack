@@ -52,7 +52,7 @@ const Card = (props) => {
         </div>
 
         <button
-          onClick={() => props.func(props.product._id)}
+          onClick={() => props.func(props.product)}
           className="w-full mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
         >
           Add to Cart

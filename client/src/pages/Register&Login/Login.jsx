@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/hooks";
 
 const Login = () => {
+
+  let {user,setUser} = useUser();
+  console.log(user);
+  
 
     const navigate = useNavigate();
 
@@ -37,7 +42,11 @@ const Login = () => {
 
             if (data.status == 200) {
 
+
+
                 window.localStorage.setItem('userToken', data.token);
+
+                setUser(data.user);
                 
                 setFormData({
 

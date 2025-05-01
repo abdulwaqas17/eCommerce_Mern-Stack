@@ -1,11 +1,28 @@
 import React, { useState } from "react";
+import { useCarts, useUser } from "../../hooks/hooks";
 
-const CartFooter = () => {
+
+const CartFooter = (props) => {
   const [agreed, setAgreed] = useState(false);
-  const subtotal = "$1,121.35 USD";
+
+  let {user,setUser} = useUser();
+  console.log(user);
+  
 
   let green = '#51a6b6';
 
+    let { carts, setCarts } = useCarts();
+
+  let checkOut = () => {
+
+    userOrder = {
+      id : '1',
+      items : [...carts],
+      total : props.totalPrice,
+      customer : ''
+    }
+  }
+ 
   return (
     <div className="w-full flex flex-col gap-6  rounded-md p-4 bg-white">
      
@@ -14,7 +31,7 @@ const CartFooter = () => {
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
           <span className="text-base font-semibold">Subtotal</span>
-          <span className="text-base font-semibold">{subtotal}</span>
+          <span className="text-base font-semibold">${props.totalPrice.toFixed(2)}</span>
         </div>
         <small className="text-xs text-gray-500 mb-2">
           Taxes and shipping calculated at checkout
@@ -37,6 +54,7 @@ const CartFooter = () => {
         </label>
 
         <button
+          onClick={checkOut}
           type="submit"
           disabled={!agreed}
           className={`w-full py-2 px-4 text-white text-sm rounded-md ${

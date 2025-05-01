@@ -8,16 +8,15 @@ const Navbar = () => {
 
   let {carts,setCarts} = useCarts();
 
-  // console.log(carts);
+
+  // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
    useEffect(()=> {
   
       
       let userCarts = JSON.parse(window.localStorage.getItem('userCarts'));
-      setCarts(userCarts);
-      // console.log('userCarts');
+      setCarts(userCarts || []);
       console.log('userCarts ==>', userCarts);
-  
-      // console.log('[]'); 
+
     },[])
   
 

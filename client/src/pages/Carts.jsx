@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Navbar from '../components/Navbar'
 import Footers from '../components/Footers'
 import Breadcrumb from '../components/Breadcrumb'
-import CartTable from '../components/cartsUtils/CartTable'
+import CartTable from '../components/cartsUtils/CartsTable'
 import CartNoteAndShipping from '../components/cartsUtils/NoteAndShipping'
 import CartFooter from '../components/cartsUtils/CartFooter'
 import { useCarts } from '../hooks/hooks'
-import { useEffect } from 'react'
 
 
 const Carts = () => {
 
-   let {carts,setCarts} = useCarts();
+   let { carts, setCarts } = useCarts();
+ 
+  const totalPrice = useMemo(() => {
+    return carts.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  }, [carts]);
    
-
-  
 
   const progress = 0.75;
   const progressPercent = Math.min(progress * 100, 100);
@@ -45,17 +46,19 @@ const Carts = () => {
 
     {/* carts Table  */}
     <div className='mx-6'>
-    <CartTable />
+    <CartTable  />
     </div>
 
 
     {/* CartNoteAndShipping */}
-    <div className='mx-9'>
+    {/* <div >
     <CartNoteAndShipping/>
+    </div> */}
+
+
+    <div className='mx-8'>
+    <CartFooter totalPrice={totalPrice} />
     </div>
-
-
-    <CartFooter />
 
 
     

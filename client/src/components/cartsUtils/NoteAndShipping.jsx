@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const CartNoteAndShipping = () => {
   const [note, setNote] = useState("");
   const [country, setCountry] = useState("");
-  const [province, setProvince] = useState("");
+  // const [province, setProvince] = useState("");
   const [zip, setZip] = useState("");
 
   const countries = [
