@@ -1,50 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from '../Pagination';
 
 const OrdersSide = () => {
 
-    const data = [
-        {
-          id: "0901",
-          name: "Marvin McKinney",
-          email: "marvin@example.com",
-          total: "$9.00",
-          status: "Pending",
-          date: "03.12.2022",
-        },
-        {
-          id: "2323",
-          name: "Leslie Alexander",
-          email: "leslie@example.com",
-          total: "$46.61",
-          status: "Pending",
-          date: "21.02.2022",
-        },
-        {
-          id: "1233",
-          name: "Esther Howard",
-          email: "esther@example.com",
-          total: "$12.00",
-          status: "Canceled",
-          date: "03.07.2022",
-        },
-        {
-          id: "2323",
-          name: "Jenny Wilson",
-          email: "jenny@example.com",
-          total: "$589.99",
-          status: "Received",
-          date: "22.05.2022",
-        },
-        {
-          id: "2325",
-          name: "Savannah Nguyen",
-          email: "savannah@example.com",
-          total: "$710.68",
-          status: "Received",
-          date: "23.03.2022",
-        },
-      ];
+      let [orders, setOrders] = useState([]);
+    
+       useEffect(() => {
+          
+      
+          const fetchData = async () => {
+            try {
+             
+              let res = await fetch("http://localhost:3000/dashboard/orders");
+      
+              let data = await res.json();
+      
+              console.log(data);
+      
+              setOrders(data.orders);
+            } catch (err) {
+              console.log(err);
+            }
+          };
+      
+          fetchData();
+        }, []);
+
   return (
     <div>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -102,12 +83,12 @@ const OrdersSide = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {data.map((order) => (
+            {orders.map((order) => (
               <tr key={order.id}>
-                <td className="px-4 py-3">{order.id}</td>
-                <td className="px-4 py-3 font-bold">{order.name}</td>
-                <td className="px-4 py-3">{order.email}</td>
-                <td className="px-4 py-3">{order.total}</td>
+                <td className="px-4 py-3">{order._id.slice(1,6)}</td>
+                <td className="px-4 py-3 font-bold">{order.shippingAddress.fullName}</td>
+                <td className="px-4 py-3">{order.userEmail}</td>
+                <td className="px-4 py-3">${order.totalAmount.toFixed(2)}</td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                     order.status === "Pending"
@@ -119,7 +100,7 @@ const OrdersSide = () => {
                     {order.status}
                   </span>
                 </td>
-                <td className="px-4 py-3">{order.date}</td>
+                <td className="px-4 py-3"> {new Date(order.orderDate).toISOString().split('T')[0]}</td>
                 <td className="px-4 py-3 text-right">
                   <button className=" hover:underline mr-2  p-1 rounded bg-blue-800 text-white">Detail</button>
                   <div className="relative inline-block text-left">

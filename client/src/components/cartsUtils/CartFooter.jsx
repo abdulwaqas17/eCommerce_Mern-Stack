@@ -5,24 +5,14 @@ import { useCarts, useUser } from "../../hooks/hooks";
 const CartFooter = (props) => {
   const [agreed, setAgreed] = useState(false);
 
-  let {user,setUser} = useUser();
-  console.log(user);
+
   
 
   let green = '#51a6b6';
 
     let { carts, setCarts } = useCarts();
 
-  let checkOut = () => {
-
-    userOrder = {
-      id : '1',
-      items : [...carts],
-      total : props.totalPrice,
-      customer : ''
-    }
-  }
- 
+  
   return (
     <div className="w-full flex flex-col gap-6  rounded-md p-4 bg-white">
      
@@ -54,7 +44,7 @@ const CartFooter = (props) => {
         </label>
 
         <button
-          onClick={checkOut}
+          onClick={()=> props.checkOutFunc()}
           type="submit"
           disabled={!agreed}
           className={`w-full py-2 px-4 text-white text-sm rounded-md ${

@@ -8,6 +8,8 @@ import DashboardFooter from '../../components/dashboardUtils/DashboardFooter';
 import { Outlet } from 'react-router-dom';
 
 const AdminDashboard = () => {
+
+
   return (
     <div className=" bg-gray-100">
 
@@ -19,11 +21,11 @@ const AdminDashboard = () => {
 
         <div className='p-5'>
 
-          <Outlet/> {/* Yahan pe content render hoga jab route match hoga */}
+          <Outlet  orders={orders}/> {/* Yahan pe content render hoga jab route match hoga */}
 
         </div>
           {/* DashboardFooter */}
-          <DashboardFooter />
+          <DashboardFooter/>
 
       </div>
 

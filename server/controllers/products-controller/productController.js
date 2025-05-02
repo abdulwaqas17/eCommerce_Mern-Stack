@@ -1,4 +1,4 @@
-let productsModel = require('../models/products')
+let productsModel = require('../../models/products')
 
 const getProducts = async (req,res) => {
 

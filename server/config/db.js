@@ -3,7 +3,7 @@ let dotenv = require('dotenv');
 dotenv.config();
 let mongoURI = process.env.MONGO_URI;
 
-console.log(mongoURI);
+
 
 
 const dbConnect = async() => {

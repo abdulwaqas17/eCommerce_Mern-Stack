@@ -1,7 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from '../Pagination'
 
 const ProductsSide = () => {
+
+  let [products, setProducts] = useState([]);
+
+   useEffect(() => {
+      console.log("carts []");
+  
+      const fetchData = async () => {
+        try {
+         
+          let res = await fetch("http://localhost:3000/home/products");
+  
+          let data = await res.json();
+  
+          console.log(data);
+  
+          setProducts(data.products);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+
+
   return (
     <div>
   <div className="flex justify-between items-center mb-6">
@@ -45,9 +71,9 @@ const ProductsSide = () => {
   </div>
 
   {/* Product Item */}
-  {[1, 2, 3, 4, 5].map((item, index) => (
+  {products.map((item) => (
     <div
-      key={index}
+      key={item._id}
       className="flex flex-wrap items-center border-b py-4 last:border-0"
     >
       <div className="px-2">
@@ -55,42 +81,24 @@ const ProductsSide = () => {
       </div>
       <div className="flex-1 flex items-center gap-3 min-w-[200px]">
         <img
-          src={`/assets/imgs/items/${item}.jpg`}
+          src={item.image1}
           className="w-16 h-16 object-cover rounded"
           alt="Item"
         />
         <h6 className="font-medium">
-          {item === 1
-            ? "T-shirt for men medium size"
-            : item === 2
-            ? "Helionic Hooded Down Jacket"
-            : item === 3
-            ? "Lace mini dress with faux leather"
-            : item === 4
-            ? "Fanmis Men's Travel Bag"
-            : "Jeans Shorts for Men"}
+          {item.name}
         </h6>
       </div>
-      <div className="w-28 text-gray-700 font-medium">${[34.5, 990.99, 76.99, 18, 76.99][index]}</div>
+      <div className="w-28 text-gray-700 font-medium">${item.price}</div>
       <div className="w-28">
         <span
-          className={`px-2 py-1 rounded-full text-xs font-semibold ${
-            index === 3
-              ? "bg-green-100 text-green-700"
-              : index === 4
-              ? "bg-red-100 text-red-700"
-              : index === 2
-              ? "bg-yellow-100 text-yellow-800"
-              : "bg-green-100 text-green-700"
-          }`}
+          className="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700"
+             
         >
-          {index === 3
-            ? "Active"
-            : index === 4
-            ? "Disabled"
-            : index === 2
-            ? "Archived"
-            : "Active"}
+        
+          Active
+       
+           
         </span>
       </div>
       <div className="w-28 text-sm text-gray-500">02.11.2022</div>

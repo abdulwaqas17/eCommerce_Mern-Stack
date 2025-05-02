@@ -7,6 +7,7 @@ let cors = require('cors');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const dashboardRouter = require('./routes/dashboardRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 app.use(express.json());
 
@@ -19,6 +20,7 @@ app.use('/auth',authRouter);
 app.use('/home',productRouter); 
 app.use('/dashboard',dashboardRouter); 
 app.use('/',userRouter); 
+app.use('/',orderRouter); 
 
 
 const PORT = process.env.PORT || 5000;
