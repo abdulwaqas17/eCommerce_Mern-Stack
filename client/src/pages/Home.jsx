@@ -9,33 +9,78 @@ import CardsBar from '../components/homeUtils/CardsBar'
 import BannerCard from '../components/homeUtils/BannerCards'
 import AboutSection from '../components/homeUtils/AboutSection'
 import BlogCard from '../components/homeUtils/BlogCard'
+import Card from '../components/ProductCart'
+import { useCarts } from '../hooks/hooks'
 
 const Home = () => {
 
-  const [cards,setCards] = useState([]);
+ let [products, setProducts] = useState([]);
+  // getting value from context
+  let { carts, setCarts } = useCarts();
 
-  
+  useEffect(() => {
+    console.log("carts []");
 
-  useEffect(()=> {
+    const fetchData = async () => {
+      try {
+       
+        let res = await fetch("http://localhost:3000/home/products");
 
-    let fetchData = async ()=> {
+        let data = await res.json();
 
-      let res = await fetch('http://localhost:3000/home/products');
-      let data = await res.json();
-      console.log(data.products);
+        console.log(data);
 
-      setCards(data.products)
-      
-    }
+        setProducts(data.products);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     fetchData();
+  }, []);
+  
 
-  },[])
+
+
+  
+    useEffect(() => {
+      console.log("cart effect", carts);
+  
+      window.localStorage.setItem("userCarts", JSON.stringify(carts));
+      // console.log('[carts]');
+    }, [carts]);
+  
+  
+    // add to cart
+    let addToCart = (product) => {
+  
+    // to prevent form app carsh, id hona zarori h
+      if (!product || !product._id) return;
+  
+  //Because, React detects state changes only when reference changes.
+      let existingItem = carts.find((item) => item._id === product._id);
+    
+      if (existingItem) {
+        // Update quantity immutably
+        const updatedCarts = carts.map((item) =>
+  
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }  //Mutate nahi karo, naya object banao using { ...item }.
+            : item
+  
+        );
+        setCarts(updatedCarts);
+      } else {
+        // Add new product with quantity
+        setCarts([...carts, { ...product, quantity: 1 }]);
+      }
+    };
+  
  
 
-  let healthCareProducts = cards.filter((card) => ( card.category == 'health care' ));
-  let supplementsProducts = cards.filter((card) => ( card.category == 'supplements' ));
-  let recentProducts = cards.filter((card) => ( card.type == 'recent' ));
+  let healthCareProducts = products.filter((product) => ( product.category == 'health care' ));
+  let supplementsProducts = products.filter((product) => ( product.category == 'supplements' ));
+  let recentProducts = products.filter((product) => ( product.type == 'recent' ));
 
   console.log(healthCareProducts);
   console.log(supplementsProducts);
@@ -69,8 +114,14 @@ const Home = () => {
     {/* gradient 1  */}
     <section className='py-[40px] bg-sky-50'>
       
-    {/* products bar  */}
-    <CardsBar  heading='Health Products' products={healthCareProducts}/>
+    {/* healthCareProducts  */}
+    <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Health Products</h2>
+    <section className="flex justify-between flex-wrap px-[30px] py-[60px] gap-4">
+        {healthCareProducts.map((product) => (
+          <Card key={product._id} product={product} func={addToCart} />
+        ))}
+      </section>
+  
 
     {/* FeaturedBrands */}
     <FeaturedBrands />
@@ -78,7 +129,12 @@ const Home = () => {
     </section>
 
     {/* Daily well being products  */}
-    <CardsBar heading='Daily Well-being' products={supplementsProducts}/>
+    <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Daily well being</h2>
+   <section className="flex justify-between flex-wrap px-[30px] py-[60px] gap-4">
+        {supplementsProducts.map((product) => (
+          <Card key={product._id} product={product} func={addToCart} />
+        ))}
+      </section>
 
     {/* 2 Banner  */}
     <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">

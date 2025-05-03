@@ -6,7 +6,7 @@ let connectDB = require('./config/db');
 let cors = require('cors');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
-const dashboardRouter = require('./routes/dashboardRoutes');
+const dashboardRouter = require('./routes/dashboardRoutes'); 
 const orderRouter = require('./routes/orderRoutes');
 
 app.use(express.json());
