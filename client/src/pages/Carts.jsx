@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
-import Footers from "../components/Footers";
+import Footer from "../components/Footer";
 import Breadcrumb from "../components/Breadcrumb";
 import CartTable from "../components/cartsUtils/CartsTable";
 import CartNoteAndShipping from "../components/cartsUtils/NoteAndShipping";
@@ -131,7 +131,7 @@ const Carts = () => {
         <CartFooter totalPrice={totalPrice} checkOutFunc={checkOut} />
       </div>
 
-      <Footers />
+      <Footer />
     </div>
   );
 };

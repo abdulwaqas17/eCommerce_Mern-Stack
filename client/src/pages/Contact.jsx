@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Footers from '../components/Footers'
+import Footer from '../components/Footer'
 
 const Contact = () => {
   return (
@@ -9,7 +9,7 @@ const Contact = () => {
       <Navbar/>
       Contact
       
-      <Footers/>
+      <Footer/>
       </div>
   )
 }

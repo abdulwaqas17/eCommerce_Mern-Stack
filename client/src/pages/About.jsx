@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Footers from '../components/Footers'
+import Footer from '../components/Footer'
 
 const About = () => {
   return (
     <div>
        <Navbar/>  
         About
-       <Footers/> 
+       <Footer/> 
     </div>
   )
 }

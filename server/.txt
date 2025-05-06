@@ -236,3 +236,14 @@ Code | Name | Use Case
 409 | Conflict | Duplicate data (e.g. user already exists)
 422 | Unprocessable Entity | Valid request, lekin business logic galat (e.g. price < 0)
 500 | Internal Server Error | Server side koi bug/crash ho gaya
+
+
+
+
+
+
+
+let user = null;
+
+console.log(user?.fullname); // ❌ error nahi, sirf undefined milega
+console.log(user.fullname);  // ❌ TypeError: Cannot read properties of null

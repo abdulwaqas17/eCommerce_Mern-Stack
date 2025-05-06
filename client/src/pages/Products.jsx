@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import Footers from "../components/Footers";
+import Footer from "../components/Footer";
 import CatHeader from "../components/productsUtils/catHeader";
 import FilterBar from "../components/productsUtils/FilterBar";
 import Card from "../components/ProductCart";
@@ -16,7 +16,6 @@ const Products = () => {
 
     const fetchData = async () => {
       try {
-       
         let res = await fetch("http://localhost:3000/home/products");
 
         let data = await res.json();
@@ -39,24 +38,20 @@ const Products = () => {
     // console.log('[carts]');
   }, [carts]);
 
-
   // add to cart
   let addToCart = (product) => {
-
-  // to prevent form app carsh, id hona zarori h
+    // to prevent form app carsh, id hona zarori h
     if (!product || !product._id) return;
 
-//Because, React detects state changes only when reference changes.
+    //Because, React detects state changes only when reference changes.
     let existingItem = carts.find((item) => item._id === product._id);
-  
+
     if (existingItem) {
       // Update quantity immutably
       const updatedCarts = carts.map((item) =>
-
         item._id === product._id
-          ? { ...item, quantity: item.quantity + 1 }  //Mutate nahi karo, naya object banao using { ...item }.
+          ? { ...item, quantity: item.quantity + 1 } //Mutate nahi karo, naya object banao using { ...item }.
           : item
-
       );
       setCarts(updatedCarts);
     } else {
@@ -78,7 +73,7 @@ const Products = () => {
           <Card key={product._id} product={product} func={addToCart} />
         ))}
       </section>
-      <Footers />
+      <Footer />
     </div>
   );
 };

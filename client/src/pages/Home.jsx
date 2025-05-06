@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import Footers from '../components/Footers'
+import Footer from '../components/Footer'
 import Slideshow from '../components/homeUtils/Slider'
 import FeaturedBrands from '../components/homeUtils/FeatureBrands'
 import Categories from '../components/homeUtils/Categories'
@@ -170,7 +170,7 @@ const Home = () => {
 </div>
   </section>
       
-      <Footers/>
+      <Footer/>
       </div>
   )
 }

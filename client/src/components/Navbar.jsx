@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="border-t border-gray-200"></div>
 
       {/* Main Header */}
-      <header className="bg-white sticky top-0 z-50 shadow-sm">
+      <header className="bg-white sticky top-0 z-10 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             {/* Mobile Menu Button */}
