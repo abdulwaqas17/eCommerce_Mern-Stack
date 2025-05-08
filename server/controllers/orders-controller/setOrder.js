@@ -7,10 +7,11 @@ let setOrder = async (req,res) => {
 
     try {
 
-        let {userId,orderItems,totalAmount,paymentMethod,shippingAddress} = req.body;
+        let {userEmail,userId,orderItems,totalAmount,paymentMethod,shippingAddress} = req.body;
 
         let newOrder = new orderModel({
             userId,
+            userEmail,
             orderItems,
             totalAmount,
             paymentMethod,

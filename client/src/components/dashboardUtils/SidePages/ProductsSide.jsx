@@ -5,13 +5,49 @@ const ProductsSide = () => {
 
   let [products, setProducts] = useState([]);
 
+ // 🛠️ DELETE product function
+ const deleteProduct = async (productId, productName) => {
+  const confirmDelete = window.confirm(`Are you sure you want to delete the product "${productName}"?`);
+  
+  if (!confirmDelete) return;
+
+  const token = window.localStorage.getItem("adminToken");
+
+  try {
+    const res = await fetch(`http://localhost:3000/product/delete/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+        role : 'admin'
+      },
+    });
+
+    const data = await res.json();
+    alert(data.message);
+    console.log('data ==>',data);
+    
+
+    if (res.ok && data.success) {
+      // Remove deleted product from state
+      setProducts(prev => prev.filter(item => item._id !== productId));
+    }
+
+  } catch (err) {
+    console.log("Error deleting product:", err);
+    alert("Something went wrong!");
+  }
+};
+
+
+// useEffect for getting products from db
    useEffect(() => {
       console.log("carts []");
   
       const fetchData = async () => {
         try {
          
-          let res = await fetch("http://localhost:3000/home/products");
+          let res = await fetch("http://localhost:3000/products");
   
           let data = await res.json();
   
@@ -103,8 +139,8 @@ const ProductsSide = () => {
       </div>
       <div className="w-28 text-sm text-gray-500">02.11.2022</div>
       <div className="w-36 text-end space-x-1">
-        <button className="btn btn-brand btn-sm">Edit</button>
-        <button className="btn btn-light btn-sm">Delete</button>
+        <button className="btn btn-brand btn-sm" onClick={()=> editProduct(item._id)}>Edit</button>
+        <button className="btn btn-light btn-sm" onClick={()=> deleteProduct(item._id,item.name)}>Delete</button>
       </div>
     </div>
   ))}

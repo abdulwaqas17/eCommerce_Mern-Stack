@@ -12,7 +12,6 @@ const getProduct = async (req,res) => {
                 status : 200,
                 message : 'getting product successfully',
                 success : true
-    
             })
         } else {
 

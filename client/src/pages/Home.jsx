@@ -24,7 +24,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
        
-        let res = await fetch("http://localhost:3000/home/products");
+        let res = await fetch("http://localhost:3000/products");
 
         let data = await res.json();
 

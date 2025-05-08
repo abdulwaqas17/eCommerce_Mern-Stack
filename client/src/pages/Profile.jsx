@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useUser } from "../hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+
+  let navigate = useNavigate();
   let { user, setUser } = useUser(null);
   let [orders, setOrders] = useState([]);
   let [statusCount, setStatusCount] = useState(null);
@@ -38,6 +41,12 @@ const UserProfile = () => {
         let data = await res.json();
 
         console.log(data);
+
+        if(data.message == 'invalid token') {
+          alert(data.message);
+          navigate('/login')
+          
+        }
 
         setOrders(data.orders);
 
@@ -168,13 +177,14 @@ const UserProfile = () => {
                     key={order._id}
                     className="border rounded-xl p-4 flex items-center gap-4 bg-slate-50"
                   >
-                    <img
+                    {/* <img
                       src={order.orderItems[0].productId.image1}
                       alt="product"
                       className="w-16 h-16 rounded-lg object-cover"
-                    />
+                    /> */}
                     <div>
                       <p className="font-semibold">Order #{order._id}</p>
+                      <p className="font-semibold">No. of Items : {order.orderItems.length}</p>
                       <p className="text-sm text-gray-600">
                         Date:{" "}
                         {new Date(order.orderDate).toISOString().split("T")[0]}
@@ -208,7 +218,7 @@ const UserProfile = () => {
 
           {/* Modal */}
           {showModal && (
-            <div className="z-20 fixed inset-0 z-40 backdrop-blur-sm bg-black/20 flex items-center justify-center">
+            <div className="z-20 fixed inset-0 backdrop-blur-sm bg-black/20 flex items-center justify-center">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

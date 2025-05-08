@@ -8,6 +8,7 @@ const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const dashboardRouter = require('./routes/dashboardRoutes'); 
 const orderRouter = require('./routes/orderRoutes');
+const verifyRouter = require('./routes/verifyRoute');
 
 app.use(express.json());
 
@@ -16,8 +17,9 @@ app.use(cors());
 // to connect mongo db
 connectDB();
 
+app.use('/',verifyRouter);
 app.use('/auth',authRouter);
-app.use('/home',productRouter); 
+app.use('/',productRouter); 
 app.use('/dashboard',dashboardRouter); 
 app.use('/',userRouter); 
 app.use('/',orderRouter); 

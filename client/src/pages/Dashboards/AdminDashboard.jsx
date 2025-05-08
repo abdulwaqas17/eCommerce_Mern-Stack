@@ -21,7 +21,7 @@ const AdminDashboard = () => {
 
         <div className='p-5'>
 
-          <Outlet  orders={orders}/> {/* Yahan pe content render hoga jab route match hoga */}
+          <Outlet/> {/* Yahan pe content render hoga jab route match hoga */}
 
         </div>
           {/* DashboardFooter */}

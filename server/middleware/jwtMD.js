@@ -21,7 +21,8 @@ const verifyToken = (req,res,next) => {
     if (!bearerHeader) {
         res.send({
             status : 401,
-            message : 'token not found'
+            message : 'token not found',
+            success : false
         })
     }
 
@@ -36,7 +37,8 @@ const verifyToken = (req,res,next) => {
     if (!token) {
         res.send({
             status : 401,
-            message : 'token not found'
+            message : 'token not found',
+            success : false
         })
     }
 
@@ -62,7 +64,8 @@ const verifyToken = (req,res,next) => {
         if(err) {
             return res.send({
                 status : 401,
-                message : 'invalid token'
+                message : 'invalid token',
+                success : false
             })
         }
 
@@ -78,7 +81,8 @@ const verifyToken = (req,res,next) => {
         console.log(err);
         res.send({
             status : 500,
-            message : err.message
+            message : err.message,
+            success : false
         })
         
       }

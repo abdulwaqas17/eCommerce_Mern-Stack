@@ -27,7 +27,7 @@ const AdminLogin = () => {
       alert(data.message);
 
       if (data.status === 200) {
-        window.localStorage.setItem('adminToken',data.token)
+        window.localStorage.setItem('adminToken',data.token);
         navigate("/admindashboard");
       }
     } catch (err) {
