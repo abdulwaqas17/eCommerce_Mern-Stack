@@ -22,6 +22,7 @@ import OrdersSide from './components/dashboardUtils/SidePages/OrdersSide'
 import ProductsSide from './components/dashboardUtils/SidePages/ProductsSide'
 import AddProductSide from './components/dashboardUtils/SidePages/AddProductSide'
 import DataProvider from './context/DataProvider'
+import ViewProduct from './pages/viewProduct'
 
 // import { userData } from './context/context'
 
@@ -138,6 +139,12 @@ function App() {
           <Route path='/products' element={
           
               <Products />
+            
+          } />
+
+          <Route path='/product/:id' element={
+          
+              <ViewProduct/>
             
           } />
 

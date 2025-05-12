@@ -1,10 +1,12 @@
 // import { Heart, Eye, RefreshCcw } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 const Card = (props) => {
+  const navigate = useNavigate();
 
   // console.log(props);
   // console.log(props.key); // key prop return undefined
-  
 
   // YHN PR FUNCTION BNAY SE HAR CART KA ALAG ALAG FUNCTION BUN GYA
   // let addToCart = (id) => {
@@ -18,15 +20,13 @@ const Card = (props) => {
   // console.log('cart',cart);
 
   return (
-    <div
-      className="w-[23%] bg-white border rounded-xl shadow hover:shadow-lg transition-transform duration-300"
-      
-    >
+    <div className="w-[23%] bg-white border rounded-xl shadow hover:shadow-lg transition-transform duration-300">
       <div className="relative overflow-hidden rounded-t-xl">
         <img
           src={props.product.image1}
           alt={props.product.name}
           className="w-full"
+          onClick={() => navigate(`/product/${props.product._id}`)}
         />
         <img
           src={props.product.image2}
@@ -38,7 +38,10 @@ const Card = (props) => {
         <p className="text-sm text-indigo-600 font-medium">
           {props.product.useFor}
         </p>
-        <h3 className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition">
+        <h3
+          className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition"
+          onClick={() => navigate(`/product/${props.product._id}`)}
+        >
           {props.product.name}
         </h3>
 

@@ -4,14 +4,14 @@ const jwt = require('jsonwebtoken');
 let userKey = process.env.USER_SECRET_KEY;
 let employeeKey = process.env.EMPLOYEE_SECRET_KEY;
 let adminKey = process.env.ADMIN_SECRET_KEY;
-console.log(process.env);
+
 
 const verifyToken = (req,res,next) => {
     
     try {
 
         // ye aik obj h aur is m multiple cheezen hoti hn, aur authorization bhi hota h
-    console.log(req.headers); 
+    // console.log(req.headers); 
 
     // req.headers is m aik object milta h
     const bearerHeader = req.headers.authorization;
@@ -31,7 +31,7 @@ const verifyToken = (req,res,next) => {
     
 
 
-    console.log(token);
+    // console.log(token);
 
     // ager token nhe bhi mila to developer ki galti h, user ki koi galti nhe h, is lien ye if bnaty bhi nhe hn
     if (!token) {
@@ -70,7 +70,7 @@ const verifyToken = (req,res,next) => {
         }
 
         // decode krnay se payloud k ander ka data mil jata h
-        console.log(decode);
+        // console.log(decode);
 
         req.user = decode;
 
