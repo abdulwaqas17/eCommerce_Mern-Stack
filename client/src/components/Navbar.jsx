@@ -103,7 +103,7 @@ const Navbar = () => {
             {/* Navigation - Desktop */}
             <nav className="hidden lg:flex space-x-8">
               <Link to="/" className="text-black hover:text-green-700 font-medium">Home</Link>
-              <Link to="" className="text-black hover:text-green-700 font-medium">Shop</Link>
+              <Link to="/about" className="text-black hover:text-green-700 font-medium">About</Link>
               <Link to="/products" className="text-black hover:text-green-700 font-medium">Products</Link>
               <Link to="" className="text-black hover:text-green-700 font-medium">Pages</Link>
               <Link to="" className="text-black hover:text-green-700 font-medium">Blog</Link>
@@ -120,7 +120,7 @@ const Navbar = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
-              <Link to='/' className="text-black hover:text-green-700 relative">
+              <Link to='/profile' className="text-black hover:text-green-700 relative">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>

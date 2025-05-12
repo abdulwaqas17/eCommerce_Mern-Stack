@@ -11,6 +11,9 @@ import AboutSection from '../components/homeUtils/AboutSection'
 import BlogCard from '../components/homeUtils/BlogCard'
 import Card from '../components/ProductCart'
 import { useCarts } from '../hooks/hooks'
+import ClientReview from '../components/clientReviews'
+import ForForNewsletter from '../components/FormForNewsLatter'
+import Facilities from '../components/Facilities'
 
 const Home = () => {
 
@@ -169,6 +172,10 @@ const Home = () => {
   
 </div>
   </section>
+
+      <ClientReview/>
+      <ForForNewsletter/>
+      <Facilities/>
       
       <Footer/>
       </div>
