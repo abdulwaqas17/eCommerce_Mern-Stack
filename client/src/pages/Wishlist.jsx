@@ -1,54 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import CatHeader from "../components/productsUtils/catHeader";
-import FilterBar from "../components/productsUtils/FilterBar";
-import Card from "../components/ProductCart";
+import Breadcrumb from "../components/Breadcrumb";
 import { useCarts, useWishlist } from "../hooks/hooks";
+import Card from "../components/ProductCart";
 
-const Products = () => {
-  let [products, setProducts] = useState([]);
-  // getting value from context
+const Wishlist = () => {
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
 
-  useEffect(() => {
-    console.log("carts []");
-
-    const fetchData = async () => {
-      try {
-        let res = await fetch("http://localhost:3000/products");
-
-        let data = await res.json();
-
-        console.log(data);
-
-        setProducts(data.products);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  console.log(wishlist);
+  
 
   // for set carts in local storage
   useEffect(() => {
-  
-
     window.localStorage.setItem("userCarts", JSON.stringify(carts));
-  
   }, [carts]);
-
-
 
   // for wishlist in local storage
   useEffect(() => {
-  
-
     window.localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    
   }, [wishlist]);
 
   // add to cart
@@ -91,17 +62,18 @@ const Products = () => {
     }
   };
 
-  // console.log('cart ',carts);
-
   return (
     <div>
       <Navbar />
-      <CatHeader />
-      <FilterBar />
+
+      <div>
+        <h2 className="text-center text-2xl">Wishlist</h2>
+        <Breadcrumb val="Wishlist" />
+      </div>
 
       <section className="px-[30px] py-[60px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((product) => (
+          {wishlist.map((product) => (
             <Card
               key={product._id}
               product={product}
@@ -112,9 +84,10 @@ const Products = () => {
           ))}
         </div>
       </section>
+
       <Footer />
     </div>
   );
 };
 
-export default Products;
+export default Wishlist;

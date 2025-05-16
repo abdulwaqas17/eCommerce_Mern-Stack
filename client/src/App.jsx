@@ -21,8 +21,11 @@ import DashboardHome from './components/dashboardUtils/SidePages/HomeSide'
 import OrdersSide from './components/dashboardUtils/SidePages/OrdersSide'
 import ProductsSide from './components/dashboardUtils/SidePages/ProductsSide'
 import AddProductSide from './components/dashboardUtils/SidePages/AddProductSide'
-import DataProvider from './context/DataProvider'
+import DataProvider from './providers/DataProvider'
 import ViewProduct from './pages/viewProduct'
+import Collection from './pages/Collection'
+import FAQs from './pages/FAQs'
+import Wishlist from './pages/Wishlist'
 
 // import { userData } from './context/context'
 
@@ -136,6 +139,13 @@ function App() {
 
           
 
+          <Route path='/collections' element={
+          
+              <Collection />
+            
+          } />
+
+
           <Route path='/products' element={
           
               <Products />
@@ -157,6 +167,19 @@ function App() {
           <Route path='/contact' element={
         
               <Contact />
+            
+          } />
+
+          
+          <Route path='/faqs' element={
+          
+              <FAQs />
+            
+          } />
+          
+          <Route path='/wishlist' element={
+          
+              <Wishlist/>
             
           } />
 

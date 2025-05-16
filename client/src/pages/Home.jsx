@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Slideshow from '../components/homeUtils/Slider'
-import FeaturedBrands from '../components/homeUtils/FeatureBrands'
-import Categories from '../components/homeUtils/Categories'
-import Services from '../components/homeUtils/Services'
-import CardsBar from '../components/homeUtils/CardsBar'
-import BannerCard from '../components/homeUtils/BannerCards'
-import AboutSection from '../components/homeUtils/AboutSection'
-import BlogCard from '../components/homeUtils/BlogCard'
-import Card from '../components/ProductCart'
-import { useCarts } from '../hooks/hooks'
-import ClientReview from '../components/clientReviews'
-import ForForNewsletter from '../components/FormForNewsLatter'
-import Facilities from '../components/Facilities'
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Slideshow from "../components/homeUtils/Slider";
+import FeaturedBrands from "../components/homeUtils/FeatureBrands";
+import Categories from "../components/homeUtils/Categories";
+import Services from "../components/homeUtils/Services";
+import CardsBar from "../components/homeUtils/ProductsSection";
+import BannerCard from "../components/homeUtils/BannerCards";
+import AboutSection from "../components/homeUtils/AboutSection";
+import BlogCard from "../components/homeUtils/BlogCard";
+import Card from "../components/ProductCart";
+import { useCarts } from "../hooks/hooks";
+import ClientReview from "../components/clientReviews";
+import ForForNewsletter from "../components/FormForNewsLatter";
+import Facilities from "../components/Facilities";
+import ProductsSection from "../components/homeUtils/ProductsSection";
+import Milestones from "../components/homeUtils/Milestones";
 
 const Home = () => {
-
- let [products, setProducts] = useState([]);
+  let [products, setProducts] = useState([]);
   // getting value from context
   let { carts, setCarts } = useCarts();
 
@@ -26,7 +27,6 @@ const Home = () => {
 
     const fetchData = async () => {
       try {
-       
         let res = await fetch("http://localhost:3000/products");
 
         let data = await res.json();
@@ -41,146 +41,145 @@ const Home = () => {
 
     fetchData();
   }, []);
-  
 
+  useEffect(() => {
+    console.log("cart effect", carts);
 
+    window.localStorage.setItem("userCarts", JSON.stringify(carts));
+    // console.log('[carts]');
+  }, [carts]);
 
-  
-    useEffect(() => {
-      console.log("cart effect", carts);
-  
-      window.localStorage.setItem("userCarts", JSON.stringify(carts));
-      // console.log('[carts]');
-    }, [carts]);
-  
-  
-    // add to cart
-    let addToCart = (product) => {
-  
+  // add to cart
+  let addToCart = (product) => {
     // to prevent form app carsh, id hona zarori h
-      if (!product || !product._id) return;
-  
-  //Because, React detects state changes only when reference changes.
-      let existingItem = carts.find((item) => item._id === product._id);
-    
-      if (existingItem) {
-        // Update quantity immutably
-        const updatedCarts = carts.map((item) =>
-  
-          item._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }  //Mutate nahi karo, naya object banao using { ...item }.
-            : item
-  
-        );
-        setCarts(updatedCarts);
-      } else {
-        // Add new product with quantity
-        setCarts([...carts, { ...product, quantity: 1 }]);
-      }
-    };
-  
- 
+    if (!product || !product._id) return;
 
-  let healthCareProducts = products.filter((product) => ( product.category == 'health care' ));
-  let supplementsProducts = products.filter((product) => ( product.category == 'supplements' ));
-  let recentProducts = products.filter((product) => ( product.type == 'recent' ));
+    //Because, React detects state changes only when reference changes.
+    let existingItem = carts.find((item) => item._id === product._id);
+
+    if (existingItem) {
+      // Update quantity immutably
+      const updatedCarts = carts.map((item) =>
+        item._id === product._id
+          ? { ...item, quantity: item.quantity + 1 } //Mutate nahi karo, naya object banao using { ...item }.
+          : item
+      );
+      setCarts(updatedCarts);
+    } else {
+      // Add new product with quantity
+      setCarts([...carts, { ...product, quantity: 1 }]);
+    }
+  };
+
+  let healthCareProducts = products.filter(
+    (product) => product.category == "health care"
+  );
+  let supplementsProducts = products.filter(
+    (product) => product.category == "supplements"
+  );
+  let recentProducts = products.filter((product) => product.type == "recent");
 
   console.log(healthCareProducts);
   console.log(supplementsProducts);
   console.log(recentProducts);
-  
-  
 
   return (
     <div>
+      <Navbar />
 
-      <Navbar/>
-      
-      <Slideshow/>
+      <Slideshow />
 
       {/* services list  */}
       <Services />
 
-    {/* 2 Banner  */}
+      {/* 2 Banner  */}
       <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px]">
+        <BannerCard
+          topH="GET ALL YOUR"
+          h1="Medication at"
+          h2="One Place"
+          img="/images/asset 12.jpeg"
+        />
 
-          <BannerCard topH='GET ALL YOUR' h1='Medication at' h2='One Place' img='/images/asset 12.jpeg'/>
-
-          <BannerCard topH='QUICK ACCESS TO A' h1='PLETHORA OF' h2='Medicines' img='/images/asset 13.jpeg'/>
-    
+        <BannerCard
+          topH="QUICK ACCESS TO A"
+          h1="PLETHORA OF"
+          h2="Medicines"
+          img="/images/asset 13.jpeg"
+        />
       </div>
-    
 
-    {/* categories section  */}
-    <Categories />
-    
-    {/* gradient 1  */}
-    <section className='py-[40px] bg-sky-50'>
-      
-    {/* healthCareProducts  */}
-    <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Health Products</h2>
-    <section className="flex justify-between flex-wrap px-[30px] py-[60px] gap-4">
-        {healthCareProducts.map((product) => (
-          <Card key={product._id} product={product} func={addToCart} />
-        ))}
-      </section>
-  
+      {/* categories section  */}
+      <Categories />
 
-    {/* FeaturedBrands */}
-    <FeaturedBrands />
+      {/* gradient 1  */}
+      <section className="py-[40px] bg-sky-50">
+        {/* healthCareProducts  */}
+        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">
+          Health Products
+        </h2>
+        <ProductsSection products={healthCareProducts} addToCart={addToCart} />
 
-    </section>
-
-    {/* Daily well being products  */}
-    <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Daily well being</h2>
-   <section className="flex justify-between flex-wrap px-[30px] py-[60px] gap-4">
-        {supplementsProducts.map((product) => (
-          <Card key={product._id} product={product} func={addToCart} />
-        ))}
+        {/* FeaturedBrands */}
+        <FeaturedBrands />
       </section>
 
-    {/* 2 Banner  */}
-    <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
+      {/* Daily well being products  */}
+      <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">
+        Daily well being
+      </h2>
+      <ProductsSection products={supplementsProducts} addToCart={addToCart} />
 
-      <BannerCard topH='FlAT 30% OFF' h1='Naturally' h2='Good' img='/images/asset 58.jpeg'/>
+      {/* 2 Banner  */}
+      <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
+        <BannerCard
+          topH="FlAT 30% OFF"
+          h1="Naturally"
+          h2="Good"
+          img="/images/asset 58.jpeg"
+        />
 
-      <BannerCard topH='FLAT 25% OFF' h1='Healthcare' h2='Products' img='/images/asset 59.jpeg'/>
+        <BannerCard
+          topH="FLAT 25% OFF"
+          h1="Healthcare"
+          h2="Products"
+          img="/images/asset 59.jpeg"
+        />
+      </div>
 
+      {/* AboutSection */}
+      <AboutSection />
+
+      {/* recent products  */}
+      <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">
+        Recent Products
+      </h2>
+      <ProductsSection products={recentProducts} addToCart={addToCart} />
+
+      {/* Articles Sections */}
+      <section className="bg-sky-50 py-[50px]">
+        <h2 className="text-center font-bold md:text-4xl text-2xl py-[30px]">
+          Latest Articles & Blogs
+        </h2>
+
+        <div className="flex flex-wrap justify-center md:justify-between md:gap-0 gap-6 px-[30px]">
+          <BlogCard img="images/asset 61.jpeg" />
+          <BlogCard img="images/asset 62.jpeg" />
+          <BlogCard img="images/asset 63.jpeg" />
+          <BlogCard img="images/asset 64.jpeg" />
+        </div>
+      </section>
+
+      <Milestones/>
+
+      <ClientReview />
+      <ForForNewsletter />
+      <Facilities />
+
+      <Footer />
     </div>
-
-    {/* AboutSection */}
-    <AboutSection/>
-
-
-         
-    {/* products bar  */}
-    <CardsBar  heading='Recent Products' products={recentProducts}/>
-
-
-
-   {/* Articles Sections */}
-  <section className='bg-sky-50 py-[50px]'>
-  <h2 className='text-center font-bold md:text-4xl text-2xl py-[30px]'>Latest Articles & Blogs</h2>
-
-
-<div className="flex flex-wrap justify-center md:justify-between md:gap-0 gap-6 px-[30px]">
-
-  <BlogCard img='images/asset 61.jpeg'/>
-  <BlogCard img='images/asset 62.jpeg'/>
-  <BlogCard img='images/asset 63.jpeg'/>
-  <BlogCard img='images/asset 64.jpeg'/>
-  
-</div>
-  </section>
-
-      <ClientReview/>
-      <ForForNewsletter/>
-      <Facilities/>
-      
-      <Footer/>
-      </div>
-  )
-}
+  );
+};
 
 export default Home;
 // // export default Home
@@ -244,7 +243,7 @@ export default Home;
 //   return (
 //     <div className="font-sans text-gray-800">
 //       {/* Hero Section (if any) would go here */}
-      
+
 //       {/* Featured Products Section */}
 //       <section className="py-12 bg-white">
 //         <div className="container mx-auto px-4">
@@ -252,7 +251,7 @@ export default Home;
 //             <h3 className="text-2xl font-bold">Featured Products</h3>
 //             <div className="w-24 h-px bg-gray-300 mx-auto mt-2 mb-4"></div>
 //           </div>
-          
+
 //           <div className="relative">
 //             <div className="swiper-container">
 //               <div className="flex space-x-5 overflow-x-auto pb-4">
@@ -265,7 +264,7 @@ export default Home;
 //                 ))}
 //               </div>
 //             </div>
-            
+
 //             <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2">
 //               <button className="bg-white rounded-full p-2 shadow-md">
 //                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,7 +280,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Best Sellers Section */}
 //       <section className="py-12 bg-gray-50">
 //         <div className="container mx-auto px-4">
@@ -289,7 +288,7 @@ export default Home;
 //             <h3 className="text-2xl font-bold">Best Sellers</h3>
 //             <div className="w-24 h-px bg-gray-300 mx-auto mt-2 mb-4"></div>
 //           </div>
-          
+
 //           <div className="relative">
 //             <div className="swiper-container">
 //               <div className="flex space-x-5 overflow-x-auto pb-4">
@@ -302,7 +301,7 @@ export default Home;
 //                 ))}
 //               </div>
 //             </div>
-            
+
 //             <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2">
 //               <button className="bg-white rounded-full p-2 shadow-md">
 //                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,7 +317,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Brands Section */}
 //       <section className="py-12 bg-white">
 //         <div className="container mx-auto px-4">
@@ -326,7 +325,7 @@ export default Home;
 //             <h3 className="text-2xl font-bold">Shop by Brands</h3>
 //             <div className="w-24 h-px bg-gray-300 mx-auto mt-2 mb-8"></div>
 //           </div>
-          
+
 //           <div className="relative">
 //             <div className="flex space-x-5 overflow-x-auto pb-4">
 //               {[...Array(6)].map((_, i) => (
@@ -335,7 +334,7 @@ export default Home;
 //                 </div>
 //               ))}
 //             </div>
-            
+
 //             <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2">
 //               <button className="bg-white rounded-full p-2 shadow-md">
 //                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +350,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Newsletter Section */}
 //       <section className="py-12 bg-blue-500 text-white">
 //         <div className="container mx-auto px-4">
@@ -361,17 +360,17 @@ export default Home;
 //                 <h3 className="text-2xl font-bold mb-2">Join Our Newsletter</h3>
 //                 <p className="opacity-90">Subcribe to get information about products and coupons</p>
 //               </div>
-              
+
 //               <div className="md:w-3/5">
 //                 <form className="flex">
-//                   <input 
-//                     type="email" 
-//                     placeholder="Enter your Email Address" 
+//                   <input
+//                     type="email"
+//                     placeholder="Enter your Email Address"
 //                     className="flex-grow px-4 py-3 rounded-l focus:outline-none text-gray-800"
 //                     required
 //                   />
-//                   <button 
-//                     type="submit" 
+//                   <button
+//                     type="submit"
 //                     className="bg-white text-blue-500 px-6 py-3 rounded-r font-medium flex items-center"
 //                   >
 //                     Subscribe
@@ -385,7 +384,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Blog Section */}
 //       <section className="py-12 bg-gray-100">
 //         <div className="container mx-auto px-4">
@@ -393,7 +392,7 @@ export default Home;
 //             <h3 className="text-2xl font-bold">From Our Blog</h3>
 //             <div className="w-24 h-px bg-gray-300 mx-auto mt-2 mb-4"></div>
 //           </div>
-          
+
 //           <div className="relative">
 //             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 //               {[
@@ -434,7 +433,7 @@ export default Home;
 //                 </article>
 //               ))}
 //             </div>
-            
+
 //             <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2">
 //               <button className="bg-white rounded-full p-2 shadow-md">
 //                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -450,7 +449,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Icon Boxes Section */}
 //       <section className="py-12 bg-white">
 //         <div className="container mx-auto px-4">
@@ -488,7 +487,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </section>
-      
+
 //       {/* Footer */}
 //       <footer className="bg-white pt-12 pb-6 border-t">
 //         <div className="container mx-auto px-4">
@@ -496,7 +495,7 @@ export default Home;
 //             <div className="lg:col-span-2">
 //               <div className="w-32 h-8 bg-gray-300 mb-4"></div>
 //               <p className="text-gray-600 mb-6">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-              
+
 //               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 //                 <div>
 //                   <h5 className="font-medium mb-2">Got Question? Call us 24/7</h5>
@@ -508,7 +507,7 @@ export default Home;
 //                 </div>
 //               </div>
 //             </div>
-            
+
 //             <div>
 //               <h4 className="text-lg font-semibold mb-4">Useful Links</h4>
 //               <ul className="space-y-2">
@@ -519,7 +518,7 @@ export default Home;
 //                 <li><a href="#" className="text-gray-600 hover:text-blue-500">Log in</a></li>
 //               </ul>
 //             </div>
-            
+
 //             <div>
 //               <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
 //               <ul className="space-y-2">
@@ -531,7 +530,7 @@ export default Home;
 //                 <li><a href="#" className="text-gray-600 hover:text-blue-500">Privacy Policy</a></li>
 //               </ul>
 //             </div>
-            
+
 //             <div>
 //               <h4 className="text-lg font-semibold mb-4">My Account</h4>
 //               <ul className="space-y-2">
@@ -543,7 +542,7 @@ export default Home;
 //               </ul>
 //             </div>
 //           </div>
-          
+
 //           <div className="border-t pt-6 flex flex-col md:flex-row justify-between items-center">
 //             <div className="mb-4 md:mb-0">
 //               <p className="text-gray-600">Copyright © 2019 Molla Store. All Rights Reserved.</p>
@@ -551,7 +550,7 @@ export default Home;
 //                 <li><a href="#" className="text-gray-600 hover:text-blue-500 text-sm">Terms / Privacy Policy</a></li>
 //               </ul>
 //             </div>
-            
+
 //             <div className="flex items-center">
 //               <span className="text-gray-600 mr-3">Social Media</span>
 //               <div className="flex space-x-2">
@@ -584,7 +583,7 @@ export default Home;
 //           </div>
 //         </div>
 //       </footer>
-      
+
 //       {/* Mini Cart and Scroll Top */}
 //       <div className="fixed bottom-8 right-8 z-50">
 //         <button className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
