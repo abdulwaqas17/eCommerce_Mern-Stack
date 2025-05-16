@@ -1,27 +1,23 @@
-let productsModel = require('../../models/products')
+let productsModel = require('../../models/products');
 
-const getProducts = async (req,res) => {
+const getProducts = async (req, res) => {
+  try {
+    const products = await productsModel.find(); 
 
-    try {
-  
-        // to find all the carts
-        const products = await productsModel.find();
-  
-        res.send({
-            status : 200,
-            message : 'getting products successfully',
-            products : products
-        })
-  
-    } catch (err) {
-        console.log(err);
-  
-        res.send({
-            status : 400,
-            message : 'Error occur in getting carts',
-            
-        })
-    }
-}
+    res.status(200).json({
+      success: true,
+      message: 'Products fetched successfully',
+      data: products,
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      success: false,
+      message: 'Error occurred while fetching products',
+      error: err.message,
+    });
+  }
+};
 
 module.exports = getProducts;

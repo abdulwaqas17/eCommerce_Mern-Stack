@@ -94,7 +94,10 @@ const Carts = () => {
   return (
     <div>
       <Navbar />
-      <Breadcrumb val="Your Shopping Carts" />
+    
+       <div className='bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f71c] pt-[45px] pb-[50px]'>
+          <Breadcrumb val="Your Shopping Carts"/>
+        </div>
 
       {/* Carts header */}
       <div className="w-full px-4 py-6 bg-white ">

@@ -3,7 +3,7 @@ import { Home } from 'lucide-react'; // You can use Lucide or any other icon lib
 
 const CatHeader = () => {
   return (
-    <div className="py-[50px] bg-sky-50 mx-auto">
+    <div className="py-[50px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7] mx-auto">
       <nav aria-label="Breadcrumb" className="text-xs ">
         <ol className="flex space-x-2 items-center justify-center">
           <li className="flex items-center ">

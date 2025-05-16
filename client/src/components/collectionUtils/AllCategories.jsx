@@ -45,7 +45,6 @@ const categories = [
 ];
 
 const AllCategories = () => {
-
   const navigate = useNavigate();
   return (
     <section className="py-10 px-4 md:px-8 lg:px-16 bg-white">
@@ -57,8 +56,8 @@ const AllCategories = () => {
         {categories.map((item, index) => (
           <a
             key={index}
-            onClick={()=> navigate('/products') }
-            className="w-[48%] sm:w-[30%] lg:w-[22%] flex flex-col items-center bg-white rounded-lg shadow-sm p-4 transition-transform hover:scale-105 cursor-pointer"
+            onClick={() => navigate("/products")}
+            className="w-[48%] sm:w-[30%] lg:w-[22%] flex flex-col items-center bg-white rounded-lg p-4 transition-transform hover:scale-105 cursor-pointer"
           >
             <img
               src={item.img}

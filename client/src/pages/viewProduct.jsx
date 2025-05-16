@@ -44,7 +44,10 @@ const ViewProduct = () => {
   return (
     <div>
       <Navbar />
+      <div  className='bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f727] pt-[45px] pb-[50px]'>
+
       <Breadcrumb val="Product name here" />
+      </div>
 
       <ProductOverview/>
 

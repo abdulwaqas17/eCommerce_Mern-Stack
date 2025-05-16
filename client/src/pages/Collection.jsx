@@ -9,7 +9,9 @@ const Collection = () => {
   return (
     <div>
         <Navbar/>
-        <Breadcrumb val="Collections All"/>
+        <div className='bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7] pt-[45px] pb-[50px]'>
+          <Breadcrumb val="Collections All"/>
+        </div>
         <AllCategories/>
         <Footer/>
     </div>

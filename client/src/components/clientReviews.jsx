@@ -86,10 +86,10 @@ const ClientReview = () => {
   };
 
   return (
-    <section className="bg-[#f6f7f7] bg-gradient-to-b from-[#eaf5ff] to-white py-[67px] md:py-[60px] sm:py-[60px] px-0 overflow-hidden">
+    <section className="md:py-[60px] sm:py-[60px] px-0 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-[44px]">
-          <h2 className="text-[30px] leading-[1.2] text-[#1d2a38] mb-0 max-w-[410px] mx-auto">
+          <h2 className="text-3xl font-bold leading-[1.6] text-[#1d2a38] mb-0 max-w-[500px] mx-auto">
             Trusted by 10 Lakh Customers across 3600+ Cities
           </h2>
         </div>

@@ -12,14 +12,16 @@ const About = () => {
   return (
     <div>
        <Navbar/>  
-       <div>
-        <h2 className='text-center text-2xl'>About Us</h2>
+       <div className='bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7] pt-[45px] pb-[50px]'>
+        <h2 className='text-center text-4xl font-bold'>About Us</h2>
         <Breadcrumb val='About Us'/>
        </div>
         <AboutBanner/>
         <AboutSection/>
-        <ClientReview/>
+       <section className='bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]'>
+         <ClientReview/>
         <ForForNewsletter/>
+       </section>
         <Facilities/>
        <Footer/> 
     </div>

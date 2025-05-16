@@ -26,6 +26,8 @@ import ViewProduct from './pages/viewProduct'
 import Collection from './pages/Collection'
 import FAQs from './pages/FAQs'
 import Wishlist from './pages/Wishlist'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // import { userData } from './context/context'
 
@@ -264,6 +266,8 @@ function App() {
           <Route path='*' element={<Page404 />} />
 
         </Routes>
+
+        <ToastContainer />
 
 
       </BrowserRouter>

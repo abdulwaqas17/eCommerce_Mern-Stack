@@ -2,7 +2,7 @@ import React from 'react';
 
 const BlogCard = (props) => {
   return (
-    <div className="md:w-[23%] sm:w-[50%] w-[95%] flex flex-col gap-5  rounded-lg  hover:shadow-md transition">
+    <div className="md:w-[23%] sm:w-[50%] w-[95%] flex flex-col gap-5  rounded-lg ">
       {/* Image Section */}
       <div className="flex-shrink-0">
         <a href="/blogs/news/coronavirus-tips-to-protect-yourself-your-family-and" className="block overflow-hidden rounded-md">

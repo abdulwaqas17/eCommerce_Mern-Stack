@@ -2,7 +2,7 @@ import React from "react";
 
 const ForForNewsletter = () => {
   return (
-    <section className="bg-sky-50 py-12 px-4">
+    <section className=" py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
@@ -22,7 +22,7 @@ const ForForNewsletter = () => {
             <input type="hidden" name="contact[tags]" value="newsletter" />
             <input type="hidden" name="contact[context]" value="newsletter-form" />
 
-            <div className="flex items-center gap-2 bg-gray-100 rounded-full p-2 shadow-sm">
+            <div className="flex items-center gap-2 bg-white rounded-full p-2 shadow-sm">
               <input
                 type="email"
                 name="contact[email]"

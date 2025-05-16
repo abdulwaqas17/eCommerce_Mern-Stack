@@ -8,7 +8,7 @@ const Milestones = () => {
       title: "50 Lalk +",
       description: "Families Served",
       width: 48,
-      height: 60
+      height: 60,
     },
     {
       id: "service_ybJDKA",
@@ -16,7 +16,7 @@ const Milestones = () => {
       title: "1.5 Crore +",
       description: "Orders Delivered",
       width: 60,
-      height: 48
+      height: 48,
     },
     {
       id: "service_hCCHh9",
@@ -24,7 +24,7 @@ const Milestones = () => {
       title: "22000 +",
       description: "Pincodes Served",
       width: 49,
-      height: 54
+      height: 54,
     },
     {
       id: "service_7XLiqW",
@@ -32,34 +32,34 @@ const Milestones = () => {
       title: "10 Lakl +",
       description: "Medicines Available",
       width: 54,
-      height: 54
-    }
+      height: 54,
+    },
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-white">
+    <section className="py-2 md:py-6 lg:py-8 bg-white mx-[30px]">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap -mx-2">
           {services.map((service) => (
-            <div 
-              key={service.id} 
+            <div
+              key={service.id}
               id={service.id}
-              className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 px-2 mb-4"
+              className="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 px-2"
               data-aos="zoom-out"
             >
-              <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-lg h-full hover:shadow-md transition-shadow duration-300">
+              <div className="flex items-center gap-4 text-center p-6 rounded-lg h-full">
                 <div className="mb-4">
-                  <img 
-                    src={service.icon} 
-                    alt="" 
-                    width={service.width} 
-                    height={service.height} 
+                  <img
+                    src={service.icon}
+                    alt="img"
+                    width={service.width}
+                    height={service.height}
                     loading="lazy"
                     className="mx-auto"
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-xl md:text-3xl font-bold text-gray-800 mb-2">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 text-sm md:text-base">

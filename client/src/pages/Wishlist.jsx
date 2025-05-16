@@ -66,10 +66,12 @@ const Wishlist = () => {
     <div>
       <Navbar />
 
-      <div>
-        <h2 className="text-center text-2xl">Wishlist</h2>
-        <Breadcrumb val="Wishlist" />
-      </div>
+       <div className="bg-gradient-to-b from-[#eaf6ff91] to-[#f6f7f734]">
+        <div className="pt-[45px] pb-[50px]">
+          <h2 className="text-center text-4xl font-bold">Wishlist</h2>
+          <Breadcrumb val="Wishlist" />
+        </div>
+        </div>
 
       <section className="px-[30px] py-[60px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

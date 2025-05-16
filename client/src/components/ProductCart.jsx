@@ -8,18 +8,18 @@ const Card = (props) => {
   const { product, addToWishlist, isWishlisted, addToCart } = props;
 
   return (
-    <div className="w-full bg-white border rounded-xl shadow hover:shadow-lg transition-all duration-300 mx-auto h-full flex flex-col">
-      <div className="relative overflow-hidden rounded-t-xl aspect-square group">
+    <div className="rounded-md  hover:bg-white hover:border-white hover:border-[14px] duration-100 mx-auto h-full flex flex-col">
+      <div className="relative overflow-hidden bg-[#eaf6ff] aspect-square group">
         <img
           src={product.image1}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-[333px] h-full object-cover"
           onClick={() => navigate(`/product/${product._id}`)}
         />
         <img
           src={product.image2}
           alt={product.name}
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute top-0 left-0 w-[333px] h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         />
 
         {/* Right-Top Icons */}
@@ -53,7 +53,7 @@ const Card = (props) => {
         </p>
 
         <h3
-          className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition line-clamp-2 cursor-pointer"
+          className="text-lg font-semibold text-gray-800 hover:text-indigo-700 transition line-clamp-2 cursor-pointer  h-[56px]"
           onClick={() => navigate(`/product/${product._id}`)}
         >
           {product.name}

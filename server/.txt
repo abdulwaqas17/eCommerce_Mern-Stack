@@ -797,3 +797,16 @@ url se us product ki id nikal kr porduts m se us ka data get kr k aik state m se
 aur us ka data k hisab se page pr show krwa dena
 
 industry base practice ko follow krna aur mere kam ko bhi rate kro
+
+
+
+
+
+
+
+compelte ui    ==========>
+improve ui     ==========>
+fix bug        ==========>
+extra features ==========>
+advance        ==========>
+responsive     ==========>

@@ -259,7 +259,9 @@ const ProductOverview = () => {
 
                   {/* Price */}
                   <div className="mb-6">
-                    <span className="text-2xl font-bold">${product.price}</span>
+                    <span className="text-2xl font-bold text-[#e7456f]">
+                      ${product.price}
+                    </span>
                   </div>
 
                   {/* Description */}
@@ -320,14 +322,16 @@ const ProductOverview = () => {
                       </div>
 
                       <button
-                        className="bg-black text-white px-6 py-3 rounded flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+                        className="bg-[#2ea5b6] font-bold text-white py-2 px-12 rounded-[25px] hover:bg-[#e7456f] transition-colors"
                         onClick={() => addToCart(product)}
                       >
                         <span>Add to cart</span>
                       </button>
 
-                      <button className="bg-gray-900 text-white py-3 rounded hover:bg-gray-800 transition-colors"
-                      onClick={()=> navigate('/carts')}>
+                      <button
+                        className="bg-[#2ea5b6] font-bold text-white py-2 px-12 rounded-[25px] hover:bg-[#e7456f] transition-colors"
+                        onClick={() => navigate("/carts")}
+                      >
                         Buy it now
                       </button>
                     </div>

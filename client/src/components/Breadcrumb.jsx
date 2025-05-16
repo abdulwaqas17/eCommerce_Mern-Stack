@@ -4,7 +4,7 @@ import { FaHome } from "react-icons/fa";
 
 const Breadcrumb = (props) => {
   return (
-    <div className="w-full px-4 py-10 bg-sky-50">
+    <div className="w-full px-4 py-4">
     <nav aria-label="Breadcrumb" className="text-xs">
       <ol className="flex items-center justify-center space-x-2" role="list">
         <li className="flex items-center">
