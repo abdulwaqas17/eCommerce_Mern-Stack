@@ -25,7 +25,6 @@
 //     dob: user?.dob || "",
 //   });
 
-
 //   useEffect(() => {
 //     const fetchOrders = async () => {
 //       try {
@@ -45,7 +44,7 @@
 //         if(data.message == 'invalid token') {
 //           alert(data.message);
 //           navigate('/login')
-          
+
 //         }
 
 //         setOrders(data.orders);
@@ -63,7 +62,6 @@
 //     fetchOrders();
 //   }, []);
 
-
 //   // for user update
 //   useEffect(() => {
 //     if (user) {
@@ -78,8 +76,6 @@
 //       });
 //     }
 //   }, [user]);
-
- 
 
 //   const handleChange = (e) => {
 //     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -296,7 +292,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(null);
   const [orders, setOrders] = useState([]);
-  const {wishlist, setWishlist} = useWishlist();
+  const { wishlist, setWishlist } = useWishlist();
   const [statusCount, setStatusCount] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [formData, setFormData] = useState({
@@ -312,7 +308,6 @@ const UserProfile = () => {
   const [newMessage, setNewMessage] = useState("");
 
   console.log(wishlist);
-  
 
   // Fetch user data
   useEffect(() => {
@@ -361,8 +356,6 @@ const UserProfile = () => {
     fetchOrders();
   }, []);
 
-
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -395,7 +388,11 @@ const UserProfile = () => {
     if (newMessage.trim()) {
       setChatMessages([
         ...chatMessages,
-        { text: newMessage, sender: "user", time: new Date().toLocaleTimeString() },
+        {
+          text: newMessage,
+          sender: "user",
+          time: new Date().toLocaleTimeString(),
+        },
       ]);
       setNewMessage("");
       // Here you would typically send the message to your backend
@@ -408,7 +405,9 @@ const UserProfile = () => {
         return (
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold mb-4">Welcome Back, {user?.fullname}</h2>
+              <h2 className="text-xl font-semibold mb-4">
+                Welcome Back, {user?.fullname}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-gray-600">Total Orders</p>
@@ -420,7 +419,9 @@ const UserProfile = () => {
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <p className="text-gray-600">Pending Orders</p>
-                  <p className="text-2xl font-bold">{statusCount?.pending || 0}</p>
+                  <p className="text-2xl font-bold">
+                    {statusCount?.pending || 0}
+                  </p>
                 </div>
               </div>
             </div>
@@ -470,7 +471,9 @@ const UserProfile = () => {
                   className="w-20 h-20 rounded-full object-cover"
                 />
                 <div>
-                  <button className="text-blue-600 text-sm">Change Photo</button>
+                  <button className="text-blue-600 text-sm">
+                    Change Photo
+                  </button>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -507,10 +510,15 @@ const UserProfile = () => {
             {orders?.length > 0 ? (
               <div className="space-y-4">
                 {orders.map((order) => (
-                  <div key={order._id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div
+                    key={order._id}
+                    className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                  >
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <p className="font-medium">Order #{order._id.slice(-6)}</p>
+                        <p className="font-medium">
+                          Order #{order._id.slice(-6)}
+                        </p>
                         <p className="text-sm text-gray-500">
                           {new Date(order.orderDate).toLocaleDateString()}
                         </p>
@@ -535,7 +543,9 @@ const UserProfile = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500">You haven't placed any orders yet.</p>
+              <p className="text-gray-500">
+                You haven't placed any orders yet.
+              </p>
             )}
           </div>
         );
@@ -546,7 +556,10 @@ const UserProfile = () => {
             {wishlist?.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {wishlist.map((item) => (
-                  <div key={item._id} className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                  <div
+                    key={item._id}
+                    className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+                  >
                     <img
                       src={item.image1 || "https://via.placeholder.com/300"}
                       alt={item.name}
@@ -554,7 +567,9 @@ const UserProfile = () => {
                     />
                     <div className="p-3">
                       <h3 className="font-medium">{item.name}</h3>
-                      <p className="text-blue-600 font-semibold">${item.price}</p>
+                      <p className="text-blue-600 font-semibold">
+                        ${item.price}
+                      </p>
                       <button className="mt-2 w-full bg-blue-600 text-white py-1 rounded hover:bg-blue-700">
                         Add to Cart
                       </button>
@@ -576,7 +591,9 @@ const UserProfile = () => {
                 chatMessages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                    className={`flex ${
+                      msg.sender === "user" ? "justify-end" : "justify-start"
+                    }`}
                   >
                     <div
                       className={`max-w-xs md:max-w-md rounded-lg p-3 ${
@@ -627,7 +644,7 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar/>
+      <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Sidebar - 20% width */}
@@ -689,7 +706,7 @@ const UserProfile = () => {
           <div className="w-full md:w-4/5">{renderContent()}</div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

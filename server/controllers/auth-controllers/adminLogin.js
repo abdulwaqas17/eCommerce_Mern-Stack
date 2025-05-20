@@ -1,74 +1,49 @@
-let bcrypt = require('bcryptjs');
-let adminModel = require('../../models/admin');
-let jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const adminModel = require('../../models/admin');
+const jwt = require('jsonwebtoken');
 
+const AdminLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-let AdminLogin = async (req,res) => {
-
-  console.log(req.body);
-  
-    try {
-
-      
-    const {email,password} = req.body;
-  
-    if(!email || !password) {
-  
-      return res.send({status : 404,message : 'kindly fill all the fields'})
-  
+    // Input validation
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required." });
     }
-  
-      let admin = await adminModel.findOne({email});
-  
-      console.log(admin);
-  
-      if (!admin) {
-        return (
-          res.send({
-          status : 403,
-          message : 'email not found'
-        })
-        )
-      }
-  
-      let isMatch = await bcrypt.compare(password,admin.password);
 
+    // Check if admin exists
+    const admin = await adminModel.findOne({ email });
 
-  
-      if (!isMatch) {
-        return (
-          res.send({
-          status : 403,
-          message : 'wrong password'
-        })
-        )
-      }
-
-      const {password : _, ...adminWithOutPassword} = admin._doc;
-
-      console.log('admin.doc', admin._doc);
-      console.log('adminWithOutPassword', adminWithOutPassword);
-     
-
-      const payload = adminWithOutPassword;
-  
-      const token = jwt.sign(payload,'secret-admin-123',{'expiresIn':'1h'})
-
-      res.send({
-        status : 200,
-        message : 'Admin Login Successfully',
-        token : token,
-        admin : payload
-      })
-  
-    } catch (err) {
-      console.log('error in login =', err);
-      res.send({
-        status : 500,
-        message : err.message
-      })
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found." });
     }
-    
-}
+
+    // Compare password
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials." });
+    }
+
+    // Remove password before sending
+    const { password: _, ...adminWithoutPassword } = admin.toObject();
+
+    // Create JWT token
+    const token = jwt.sign(
+      { id: admin._id, role: "admin" }, // payload should be minimal
+      process.env.ADMIN_SECRET_KEY,
+      { expiresIn: "2h" }
+    );
+
+    return res.status(200).json({
+      message: "Admin login successful",
+      token,
+      admin: adminWithoutPassword
+    });
+
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 module.exports = AdminLogin;

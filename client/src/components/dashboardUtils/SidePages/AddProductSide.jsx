@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify"; // ✅ Toasts instead of alerts
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProductSide = () => {
   let [productDetails, setProductDetails] = useState({
@@ -27,56 +29,76 @@ const AddProductSide = () => {
 
   console.log(productDetails);
   
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (
-      !productDetails.name?.trim() ||
-    !productDetails.price ||
-    !productDetails.stock ||
-    !productDetails.type?.trim() ||
-    !productDetails.category?.trim() ||
-    !productDetails.subCategory?.trim() ||
-    !productDetails.image1 ||
-    !productDetails.image2
-    ) {
-      alert("Kindly Fill all the details");
+  const {
+    name,
+    price,
+    stock,
+    type,
+    category,
+    subCategory,
+    image1,
+    image2,
+  } = productDetails;
+
+  if (
+    !name?.trim() ||
+    !price ||
+    !stock ||
+    !type?.trim() ||
+    !category?.trim() ||
+    !subCategory?.trim() ||
+    !image1 ||
+    !image2
+  ) {
+    toast.error("Kindly fill all the details.");
+    return;
+  }
+
+  const formDataToSend = new FormData();
+  for (const key in productDetails) {
+    formDataToSend.append(key, productDetails[key]);
+  }
+
+  let token = window.localStorage.getItem("adminToken");
+
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/dashboard/admin/add-product`,
+      {
+        method: "POST",
+        body: formDataToSend,
+        headers: {
+          authorization: `Bearer ${token}`,
+          role: "admin",
+        },
+      }
+    );
+
+    const data = await res.json();
+    if (res.ok) {
+      toast.success(data.message || "Product added successfully!");
+      setProductDetails({
+    name: "",
+    type: "",
+    category: "",
+    subCategory: "",
+    price: "",
+    stock: "",
+    image1: null,
+    image2: null,
+  })
     } else {
-      const formDataToSend = new FormData();
-      for (const key in productDetails) {
-        formDataToSend.append(key, productDetails[key]);
-      }
-
-      let token = window.localStorage.getItem('adminToken');
-
-      try {
-        const res = await fetch(
-          "http://localhost:3000/dashboard/admin/add-product",
-          {
-            method: "POST",
-            body: formDataToSend,
-            headers : {
-              'authorization' : `Bearer ${token}`,
-              'role' : 'admin'
-            }
-          }
-        );
-
-        const data = await res.json();
-        console.log(data);
-
-        alert(data.message);
-
-        //   if (data.status === 200) {
-
-        //     navigate("/login");
-        //   }
-      } catch (err) {
-        console.error(err);
-        alert("Signup failed. Try again.");
-      }
+      toast.error(data.message || "Failed to add product.");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong. Please try again.");
+  }
+};
+
   return (
     <section className="p-4">
       <div className="flex justify-between items-center mb-6 w-full">

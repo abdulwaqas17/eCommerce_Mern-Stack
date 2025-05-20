@@ -1,123 +1,127 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../Pagination";
 import { motion } from "framer-motion";
+import useProducts from "../../../hooks/useProducts";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ProductsSide = () => {
-  let [products, setProducts] = useState([]);
-  const [editProduct, setEditProduct] = useState(null); // selected product for editing
-  const [showModal, setShowModal] = useState(false); // modal visibility
+  const { products, loading, error } = useProducts();
+  const [dashProducts, setDashProducts] = useState([]);
+  const [editProduct, setEditProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState({
+    show: false,
+    id: null,
+    name: "",
+  });
 
-  //  DELETE product function
-  const deleteProduct = async (productId, productName) => {
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete the product "${productName}"?`
-    );
+  useEffect(() => {
+    setDashProducts(products);
+  }, [products]);
 
-    if (!confirmDelete) return;
+  const handleDeleteProduct = (productId, productName) => {
+    Swal.fire({
+      title: `Delete "${productName}"?`,
+      text: "Are you sure you want to delete this product?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("adminToken");
 
-    const token = window.localStorage.getItem("adminToken");
+        try {
+          const res = await fetch(
+            `${import.meta.env.VITE_API_URL}/product/delete/${productId}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${token}`,
+                role: "admin",
+              },
+            }
+          );
 
-    try {
-      const res = await fetch(
-        `http://localhost:3000/product/delete/${productId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-            role: "admin",
-          },
+          const data = await res.json();
+          if (res.ok && data.success) {
+            Swal.fire("Deleted!", data.message, "success");
+            setDashProducts((prev) =>
+              prev.filter((item) => item._id !== productId)
+            );
+          } else {
+            Swal.fire(
+              "Error!",
+              data.message || "Failed to delete product",
+              "error"
+            );
+          }
+        } catch (err) {
+          console.error("Error deleting product:", err);
+          Swal.fire("Error!", "Something went wrong!", "error");
         }
-      );
-
-      const data = await res.json();
-      alert(data.message);
-      console.log("data ==>", data);
-
-      if (res.ok && data.success) {
-        // Remove deleted product from state
-        setProducts((prev) => prev.filter((item) => item._id !== productId));
       }
-    } catch (err) {
-      console.log("Error deleting product:", err);
-      alert("Something went wrong!");
-    }
+    });
   };
 
-  //  EDIT product function
   const handleEditProduct = (productId) => {
-    const productToEdit = products.find(p => p._id === productId);
+    const productToEdit = dashProducts.find((p) => p._id === productId);
     if (productToEdit) {
       setEditProduct(productToEdit);
       setShowModal(true);
     }
   };
-  
-// handleSubmit function
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = window.localStorage.getItem("adminToken");
-  
+    const token = localStorage.getItem("adminToken");
+
+    // === Validation ===
+  if (!editProduct.name || !editProduct.price || !editProduct.imageFile) {
+    toast.error("Please fill all required fields: name, price, and image");
+    return; // Stop further execution
+  }
+
     const formData = new FormData();
-    formData.append("name", editProduct.name); 
+    formData.append("name", editProduct.name);
     formData.append("price", editProduct.price);
     if (editProduct.imageFile) {
-      formData.append("image", editProduct.imageFile); // multer field name should be 'image'
+      formData.append("image", editProduct.imageFile);
     }
-  
-    try {
-      const res = await fetch(`http://localhost:3000/product/update/${editProduct._id}`, { 
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${token}`,
-          role: "admin",
-        },
-        body: formData,
-      });
-  
-      const data = await res.json();
-      alert(data.message);
 
-      console.log('data =>',data);
-      
-  
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/product/update/${editProduct._id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${token}`,
+            role: "admin",
+          },
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
       if (res.ok && data.success) {
+        toast.success(data.message);
         setShowModal(false);
-  
-        // Update products list with new info
-        setProducts(prev =>
-          prev.map(p => (p._id === editProduct._id ? { ...p, ...data.updatedProduct } : p))
-         
+        setDashProducts((prev) =>
+          prev.map((p) =>
+            p._id === editProduct._id ? { ...p, ...data.updatedProduct } : p
+          )
         );
+      } else {
+        toast.error(data.message || "Update failed");
       }
-  
     } catch (error) {
       console.error("Update failed:", error);
-      alert("Error updating product");
+      toast.error("Error updating product");
     }
   };
-  
-
-  // useEffect for getting products from db
-  useEffect(() => {
-    console.log("carts []");
-
-    const fetchData = async () => {
-      try {
-        let res = await fetch("http://localhost:3000/products");
-
-        let data = await res.json();
-
-        console.log(data);
-
-        setProducts(data.products);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div>
@@ -125,7 +129,7 @@ const ProductsSide = () => {
         <div>
           <h2 className="text-3xl font-bold">Products List</h2>
           <p className="text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet.
+            List of all products
           </p>
         </div>
         <div className="space-x-2">
@@ -140,6 +144,7 @@ const ProductsSide = () => {
           </button>
         </div>
       </div>
+
       <section className="p-6 bg-white dark:bg-gray-900">
         <div className="bg-white dark:bg-gray-800 rounded shadow p-4 mb-6">
           <div className="flex flex-wrap items-center gap-4">
@@ -168,15 +173,12 @@ const ProductsSide = () => {
           </div>
         </div>
 
-        {/* Product Item */}
-        {products.map((item) => (
+        {dashProducts.map((item) => (
           <div
             key={item._id}
             className="flex flex-wrap items-center border-b py-4 last:border-0"
           >
-            <div className="px-2">
-              <input type="checkbox" className="form-checkbox" />
-            </div>
+            <input type="checkbox" className="form-checkbox px-2" />
             <div className="flex-1 flex items-center gap-3 min-w-[200px]">
               <img
                 src={item.image1}
@@ -201,7 +203,13 @@ const ProductsSide = () => {
               </button>
               <button
                 className="btn btn-light btn-sm text-red-700 font-bold cursor-pointer"
-                onClick={() => deleteProduct(item._id, item.name)}
+                onClick={() =>
+                  setConfirmDelete({
+                    show: true,
+                    id: item._id,
+                    name: item.name,
+                  })
+                }
               >
                 Delete
               </button>
@@ -221,7 +229,6 @@ const ProductsSide = () => {
               <h2 className="text-xl font-bold text-blue-800 dark:text-white mb-4">
                 Edit Product
               </h2>
-
               <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="space-y-4">
                   <input
@@ -279,6 +286,34 @@ const ProductsSide = () => {
                 </div>
               </form>
             </motion.div>
+          </div>
+        )}
+
+        {/* Custom Delete Confirmation Modal */}
+        {confirmDelete.show && (
+          <div className="fixed inset-0 z-30 bg-black/40 flex items-center justify-center">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl max-w-sm w-full">
+              <h3 className="text-lg font-semibold mb-4">
+                Are you sure you want to delete{" "}
+                <span className="text-red-600">{confirmDelete.name}</span>?
+              </h3>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() =>
+                    setConfirmDelete({ show: false, id: null, name: "" })
+                  }
+                  className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-black"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-light btn-sm text-red-700 font-bold cursor-pointer"
+                  onClick={() => handleDeleteProduct(item._id, item.name)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </section>
