@@ -14,31 +14,12 @@ import Facilities from "../components/Facilities";
 import ProductsSection from "../components/homeUtils/ProductsSection";
 import Milestones from "../components/homeUtils/Milestones";
 import useProducts from "../hooks/useProducts";
-import { useCarts } from "../hooks/hooks";
+
+
 
 const Home = () => {
   const { products, loading, error } = useProducts();
-  const { carts, setCarts } = useCarts();
-
-  // Set cart in local storage
-  useEffect(() => {
-    window.localStorage.setItem("userCarts", JSON.stringify(carts));
-  }, [carts]);
-
-  // Add to cart handler
-  const addToCart = (product) => {
-    if (!product?._id) return;
-
-    const existing = carts.find((item) => item._id === product._id);
-    if (existing) {
-      const updated = carts.map((item) =>
-        item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCarts(updated);
-    } else {
-      setCarts([...carts, { ...product, quantity: 1 }]);
-    }
-  };
+  
 
   // 🔍 Optimize Filtering with useMemo
   const healthCareProducts = useMemo(
@@ -78,7 +59,7 @@ const Home = () => {
         ) : error ? (
           <p className="text-center text-red-600">{error}</p>
         ) : (
-          <ProductsSection products={healthCareProducts} addToCart={addToCart} />
+          <ProductsSection products={healthCareProducts} />
         )}
         <FeaturedBrands />
       </section>
@@ -86,7 +67,7 @@ const Home = () => {
       {/* Supplements */}
       <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
         <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Daily Wellbeing</h2>
-        <ProductsSection products={supplementsProducts} addToCart={addToCart} />
+        <ProductsSection products={supplementsProducts} />
 
         <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
           <BannerCard topH="FlAT 30% OFF" h1="Naturally" h2="Good" img="/images/asset 58.jpeg" />
@@ -99,7 +80,7 @@ const Home = () => {
       {/* Recent Products */}
       <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
         <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Recent Products</h2>
-        <ProductsSection products={recentProducts} addToCart={addToCart} />
+        <ProductsSection products={recentProducts} />
       </section>
 
       {/* Articles, Blogs, Milestones */}

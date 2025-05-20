@@ -1,87 +1,38 @@
-let bcrypt = require('bcryptjs');
-let userModel = require('../../models/users');
-let jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const userModel = require('../../models/users');
 
+const loginCont = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-let Login = async (req,res) => {
+    if (!email || !password)
+      return res.status(400).json({ message: 'All fields are required' });
 
-  console.log(req.body);
-  
+    const user = await userModel.findOne({ email });
+    if (!user)
+      return res.status(404).json({ message: 'User not found' });
 
-  
-    try {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(401).json({ message: 'Invalid password' });
 
-      
-    const {email,password} = req.body;
-  
-    if(!email || !password) {
-  
-      return res.send({status : 404,message : 'kindly fill all the fields'})
-  
-    }
-  
-      let user = await userModel.findOne({email});
-  
-      console.log(user);
-  
-      if (!user) {
-        return (
-          res.send({
-          status : 403,
-          message : 'email not found'
-        })
-        )
-      }
-  
-      let isMatch = await bcrypt.compare(password,user.password);
+    const { password: _, ...userWithoutPassword } = user._doc;
 
+    const token = jwt.sign(userWithoutPassword, process.env.USER_SECRET_KEY, {
+      expiresIn: '2h',
+    });
 
-  
-      if (!isMatch) {
-        return (
-          res.send({
-          status : 403,
-          message : 'wrong password',
-          success : false
-        })
-        )
-      }
+    return res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: userWithoutPassword,
+    });
 
-      const {password : _, ...userWithOutPassword} = user._doc;
+  } catch (err) {
+    console.error('Login error:', err.message);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
-      console.log('user.doc', user._doc);
-      console.log('userWithOutPassword', userWithOutPassword);
-      
-  
-      // const payloud = {
-  
-      //   id : user._id,
-      //   fullname : user.fullname,
-      //   email : user.email,
-      //   role : user.role,
-        
-
-      // }
-
-      const payload = userWithOutPassword;
-  
-      const token = jwt.sign(payload,'secret-user-123',{'expiresIn':'1h'})
-
-      res.send({
-        status : 200,
-        message : 'Login Successfully',
-        token : token,
-        user : payload
-      })
-  
-    } catch (err) {
-      console.log('error in login =', err);
-      res.send({
-        status : 500,
-        message : err.message
-      })
-    }
-    
-}
-
-module.exports = Login;
+module.exports = loginCont;

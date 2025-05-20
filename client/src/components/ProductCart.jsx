@@ -5,7 +5,8 @@ import { FiEye } from "react-icons/fi"; // Eye icon
 const Card = (props) => {
   const navigate = useNavigate();
 
-  const { product, addToWishlist, isWishlisted, addToCart } = props;
+  const { product,addToCart, addToWishlist, isWishlisted } = props;
+  
 
   return (
     <div className="rounded-md  hover:bg-white hover:border-white hover:border-[14px] duration-100 mx-auto h-full flex flex-col">

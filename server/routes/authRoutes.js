@@ -7,7 +7,7 @@ let Upload = require('../middleware/upload');
 const EmpRegister = require('../controllers/auth-controllers/employeeRegister');
 const EmpLogin = require('../controllers/auth-controllers/employeeLogin');
 const AdminLogin = require('../controllers/auth-controllers/adminLogin');
-
+ 
 
 // User Register and Login 
 // Upload.single phelay, because ye data parse kry ga

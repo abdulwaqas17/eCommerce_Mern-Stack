@@ -9,6 +9,10 @@ const Navbar = () => {
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
 
+  // console.log(carts);
+  // console.log(wishlist);
+  
+
   // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
   useEffect(() => {
     let userCarts = JSON.parse(window.localStorage.getItem("userCarts"));

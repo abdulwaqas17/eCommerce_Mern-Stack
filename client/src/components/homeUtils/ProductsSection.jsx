@@ -4,8 +4,10 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Card from "../ProductCart";
+import useCartAndWishlist from "../../hooks/useCartAndWishlist";
 
-const ProductsSection = ({ products, addToCart }) => {
+const ProductsSection = ({ products}) => {
+  const { addToCart, toggleWishlist, carts, wishlist } = useCartAndWishlist();
   return (
     <section className="py-12 md:py-16 lg:py-20 px-0 overflow-hidden w-full">
       <div className="container mx-auto px-4 w-full">
@@ -41,18 +43,22 @@ const ProductsSection = ({ products, addToCart }) => {
           >
             {products.map((product) => (
               <SwiperSlide key={product._id} className="pb-2">
-                <Card product={product} func={addToCart} />
+                <Card
+                  key={product._id}
+                  product={product}
+                  addToCart={addToCart}
+                  addToWishlist={toggleWishlist}
+                  isWishlisted={wishlist.some(
+                    (item) => item._id === product._id
+                  )}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
 
           <div className="flex justify-between">
-            <button className="products-prev-button swiper-button-prev bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none">
-             
-            </button>
-            <button className="products-next-button swiper-button-next bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none">
-             
-            </button>
+            <button className="products-prev-button swiper-button-prev bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none"></button>
+            <button className="products-next-button swiper-button-next bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none"></button>
           </div>
         </div>
       </div>
