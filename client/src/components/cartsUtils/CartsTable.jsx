@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { useCarts } from "../../hooks/hooks";
+import { useCarts, useUser } from "../../hooks/hooks";
 
 const CartTable = () => {
   let { carts, setCarts } = useCarts();
+
+  let {user} = useUser();
 
   // for maintain carts
   useEffect(() => {
     console.log("cart effect", carts);
 
-    window.localStorage.setItem("userCarts", JSON.stringify(carts));
+    window.localStorage.setItem(`Carts_${user? user._id : 'guest'}`, JSON.stringify(carts));
     // console.log('[carts]');
   }, [carts]);
 

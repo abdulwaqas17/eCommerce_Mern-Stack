@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCarts, useWishlist } from "../hooks/hooks";
+import { useCarts, useUser, useWishlist } from "../hooks/hooks";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,18 +8,20 @@ const Navbar = () => {
 
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
+  let {user} = useUser();
 
-  // console.log(carts);
+
+  console.log(user);
   // console.log(wishlist);
   
 
   // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
   useEffect(() => {
-    let userCarts = JSON.parse(window.localStorage.getItem("userCarts"));
-    let userWishlist = JSON.parse(window.localStorage.getItem("wishlist"));
+    let userCarts = JSON.parse(window.localStorage.getItem(`Carts_${user? user._id : 'guest'}`));
+    let userWishlist = JSON.parse(window.localStorage.getItem(`Wishlist_${user? user._id : 'guest'}`));
     setCarts(userCarts || []);
     setWishlist(userWishlist || []);
-    console.log("userCarts ==>", userCarts);
+    
   }, []);
 
   return (

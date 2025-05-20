@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const CartNoteAndShipping = ({ onShippingDataChange }) => {
+  
   const [note, setNote] = useState("");
   const [country, setCountry] = useState("");
   // const [province, setProvince] = useState("");

@@ -1,43 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCarts } from "../../hooks/hooks";
+import useProducts from "../../hooks/useProducts";
+import useCartAndWishlist from "../../hooks/useCartAndWishlist";
 
 const ProductOverview = () => {
+  const { products, loading, error } = useProducts();
+  const { addToCart, carts } = useCartAndWishlist();
+
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-  const [products, setProducts] = useState(null);
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-
-  let { carts, setCarts } = useCarts();
-
-  // for maintain carts
-  useEffect(() => {
-    console.log("cart effect", carts);
-
-    window.localStorage.setItem("userCarts", JSON.stringify(carts));
-    // console.log('[carts]');
-  }, [carts]);
-
-  useEffect(() => {
-    console.log("carts []");
-
-    const fetchData = async () => {
-      try {
-        let res = await fetch("http://localhost:3000/products");
-
-        let data = await res.json();
-
-        console.log(data);
-
-        setProducts(data.products);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // use effect for get desire product
   useEffect(() => {
@@ -47,35 +21,9 @@ const ProductOverview = () => {
     }
   }, [products, id]);
 
-  // add to cart
-  let addToCart = (product) => {
-    // to prevent form app carsh, id hona zarori h
-    if (!product || !product._id) return;
-
-    //Because, React detects state changes only when reference changes.
-    let existingItem = carts.find((item) => item._id === product._id);
-
-    if (existingItem) {
-      // Update quantity immutably
-      const updatedCarts = carts.map((item) =>
-        item._id === product._id
-          ? { ...item, quantity: quantity } //Mutate nahi karo, naya object banao using { ...item }.
-          : item
-      );
-      setCarts(updatedCarts);
-    } else {
-      // Add new product with quantity
-      setCarts([...carts, { ...product, quantity: quantity }]);
-    }
-  };
-
   const handleQuantityChange = (value) => {
     setQuantity((prev) => Math.max(1, prev + value));
   };
-
-  console.log(product);
-  console.log(id);
-  console.log(quantity);
 
   return (
     <>

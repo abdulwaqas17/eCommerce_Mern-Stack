@@ -1,18 +1,19 @@
 import { useEffect } from "react";
-import { useCarts,useWishlist } from "../hooks/hooks";
+import { useCarts,useWishlist,useUser } from "../hooks/hooks";
 
 export default function useCartAndWishlist() {
   const { carts, setCarts } = useCarts();
+  const { user } = useUser();
   const { wishlist, setWishlist } = useWishlist();
 
   // Save carts to localStorage
   useEffect(() => {
-    localStorage.setItem("userCarts", JSON.stringify(carts));
+    localStorage.setItem(`Carts_${user? user._id : 'guest'}`, JSON.stringify(carts));
   }, [carts]);
 
   // Save wishlist to localStorage
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    localStorage.setItem(`Wishlist_${user? user._id : 'guest'}`, JSON.stringify(wishlist));
   }, [wishlist]);
 
   // Add to cart function

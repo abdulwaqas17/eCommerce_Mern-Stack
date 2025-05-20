@@ -1,55 +1,53 @@
-let orderModel = require('../../models/orders');
-console.log(orderModel);
+// controllers/orderController.js
 
+const OrderModel = require('../../models/orders');
 
+// POST: Place a new order
+const setOrder = async (req, res) => {
+  try {
+    const {
+      userEmail,
+      userId,
+      orderItems,
+      totalAmount,
+      paymentMethod,
+      shippingAddress
+    } = req.body;
 
-let setOrder = async (req,res) => {
-
-    try {
-
-        let {userEmail,userId,orderItems,totalAmount,paymentMethod,shippingAddress} = req.body;
-
-        let newOrder = new orderModel({
-            userId,
-            userEmail,
-            orderItems,
-            totalAmount,
-            paymentMethod,
-            shippingAddress
-        })
-
-        await newOrder.save();
-
-        console.log(newOrder);
-
-       if (newOrder) {
-        res.send({
-            status : 200,
-            message : 'order place successfully',
-            success : true,
-            orderId: newOrder._id,
-            invoiceNumber: newOrder.invoiceNumber,
-          })
-       } else {
-        res.send({
-            status : 403,
-            message : 'There was an error while order',
-            success : false
-          })
-       }
-        
-
-    } catch (err) {
-        console.log(err);
-        res.send({
-            status : 500,
-            message : err.message,
-            success : false
-          })
-        
+    // ✅ Basic validation (can be replaced with Joi/Yup later)
+    if (!userEmail || !userId || !orderItems || !totalAmount || !paymentMethod || !shippingAddress) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing required order fields.',
+      });
     }
 
+    const newOrder = new OrderModel({
+      userId,
+      userEmail,
+      orderItems,
+      totalAmount,
+      paymentMethod,
+      shippingAddress
+    });
 
-}
+    const savedOrder = await newOrder.save();
+
+    return res.status(201).json({
+      success: true,
+      message: 'Order placed successfully.',
+      orderId: savedOrder._id,
+      invoiceNumber: savedOrder.invoiceNumber,
+    });
+
+  } catch (error) {
+    console.error('Order Placement Error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+      error: error.message
+    });
+  }
+};
 
 module.exports = setOrder;

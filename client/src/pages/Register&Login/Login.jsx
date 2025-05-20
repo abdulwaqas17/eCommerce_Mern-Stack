@@ -32,6 +32,22 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
+        let isUser = localStorage.getItem('userToken');
+
+        if (!isUser) {
+
+          let userCarts = localStorage.getItem('Carts_guest') || [];
+          let wishlist = localStorage.getItem('Wishlist_guest') || [];
+
+          localStorage.setItem(`Carts_${data.user._id}`,userCarts);
+          localStorage.setItem(`Wishlist_${data.user._id}`,wishlist);
+
+          localStorage.removeItem('Carts_guest');
+          localStorage.removeItem('Wishlist_guest');
+
+        } 
+
+
         localStorage.setItem("userToken", data.token);
         setUser(data.user);
         toast.success(data.message || "Login successful!");
