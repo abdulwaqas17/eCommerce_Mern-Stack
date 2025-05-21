@@ -9,6 +9,7 @@ const userRouter = require('./routes/userRoutes');
 const dashboardRouter = require('./routes/dashboardRoutes'); 
 const orderRouter = require('./routes/orderRoutes');
 const verifyRouter = require('./routes/verifyRoute');
+const forgetRouter = require('./routes/forgetRoutes');
 
 app.use(express.json());
 
@@ -23,6 +24,7 @@ app.use('/',productRouter);
 app.use('/dashboard',dashboardRouter); 
 app.use('/',userRouter); 
 app.use('/',orderRouter); 
+app.use('/auth',forgetRouter); 
 
 
 const PORT = process.env.PORT || 5000;

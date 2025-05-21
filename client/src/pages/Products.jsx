@@ -6,6 +6,7 @@ import FilterBar from "../components/productsUtils/FilterBar";
 import Card from "../components/ProductCart";
 import useProducts from "../hooks/useProducts";
 import useCartAndWishlist from "../hooks/useCartAndWishlist";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Products = () => {
   //hook reuseAble
@@ -14,10 +15,19 @@ const Products = () => {
   // useCartAndWishlist hook reuseAble
   const { addToCart, toggleWishlist, carts, wishlist } = useCartAndWishlist();
 
+  let nameValue = localStorage.getItem('category');
+
+  
+
   return (
     <div>
       <Navbar />
-      <CatHeader />
+      <div className="bg-gradient-to-b from-[#eaf6ff91] to-[#f6f7f734] p-[40px]">
+
+        <Breadcrumb val={nameValue?nameValue : 'Products'} />
+
+      </div>
+      
       <FilterBar />
 
       <section className="px-[30px] py-[60px]">

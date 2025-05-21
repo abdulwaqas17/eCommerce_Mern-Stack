@@ -1,19 +1,21 @@
-let mongoose = require('mongoose');
+let mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    fullname: String,
-    email: { type: String, unique: true },
-    password: String,
-    number: String,
-    address: String,
-    city: String,
-    country: String,
-    dob: String, // 👈 Added Date of Birth
-    role: { type: String, default: 'user' },
-    userOders : [{type : mongoose.Schema.Types.ObjectId, ref : 'products'}],
-    profileImage: String,
-    createdAt: { type: Date, default: Date.now }
-  });
+  fullname: String,
+  email: { type: String, unique: true },
+  password: String,
+  number: String,
+  address: String,
+  city: String,
+  country: String,
+  dob: String, // 👈 Added Date of Birth
+  role: { type: String, default: "user" },
+  userOders: [{ type: mongoose.Schema.Types.ObjectId, ref: "products" }],
+  profileImage: String,
+  otp: String,
+  otpExpires: Date,
+  createdAt: { type: Date, default: Date.now },
+});
 
 // let userSchema = mongoose.Schema({
 
@@ -29,5 +31,5 @@ const userSchema = new mongoose.Schema({
 
 // })
 
-let users = mongoose.model('users', userSchema);
+let users = mongoose.model("users", userSchema);
 module.exports = users;

@@ -46,6 +46,11 @@ const categories = [
 
 const AllCategories = () => {
   const navigate = useNavigate();
+
+  const navigateProduct = (category) => {
+    window.localStorage.setItem('category',category);
+    navigate('/products')
+  }
   return (
     <section className="py-10 px-4 md:px-8 lg:px-16 bg-white">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
@@ -56,7 +61,7 @@ const AllCategories = () => {
         {categories.map((item, index) => (
           <a
             key={index}
-            onClick={() => navigate("/products")}
+            onClick={() => navigateProduct(item.title)}
             className="w-[48%] sm:w-[30%] lg:w-[22%] flex flex-col items-center bg-white rounded-lg p-4 transition-transform hover:scale-105 cursor-pointer"
           >
             <img

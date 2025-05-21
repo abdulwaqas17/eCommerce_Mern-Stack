@@ -344,7 +344,7 @@ const UserProfile = () => {
         }
 
         setOrders(data.orders);
-        const counts = { pending: 0, shipping: 0, declined: 0 };
+        const counts = { Pending: 0, Approved: 0, Canceled: 0 };
         data.orders.forEach((order) => {
           counts[order.status] = (counts[order.status] || 0) + 1;
         });
@@ -420,7 +420,7 @@ const UserProfile = () => {
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <p className="text-gray-600">Pending Orders</p>
                   <p className="text-2xl font-bold">
-                    {statusCount?.pending || 0}
+                    {statusCount?.Pending || 0}
                   </p>
                 </div>
               </div>
@@ -525,9 +525,9 @@ const UserProfile = () => {
                       </div>
                       <span
                         className={`px-2 py-1 rounded-full text-xs ${
-                          order.status === "pending"
+                          order.status === "Pending"
                             ? "bg-yellow-100 text-yellow-800"
-                            : order.status === "shipping"
+                            : order.status === "Approved"
                             ? "bg-green-100 text-green-800"
                             : "bg-red-100 text-red-800"
                         }`}

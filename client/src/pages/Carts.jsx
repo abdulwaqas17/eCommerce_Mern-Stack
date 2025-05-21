@@ -21,8 +21,8 @@ const Carts = () => {
     return carts.reduce((acc, item) => acc + item.quantity * item.price, 0);
   }, [carts]);
 
-  const progress = 0.75;
-  const progressPercent = Math.min(progress * 100, 100);
+  // const progress = 0.75;
+  const progressPercent = Math.min((totalPrice * 100)/5000, 100);
 
   const handleShippingData = (data) => {
     setShippingData(data);
@@ -84,11 +84,13 @@ const Carts = () => {
       }
 
       toast.success(data.message || "Order placed successfully!");
+      alert(data.message || "Order placed successfully!");
       setCarts([]);
       localStorage.removeItem("userCarts");
 
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
+      alert(error.message || "Something went wrong!");
       console.error(error);
     } finally {
       setIsPlacingOrder(false);
@@ -117,7 +119,7 @@ const Carts = () => {
           </p>
           <div className="w-[70%] rounded-md h-3 my-3 border mx-auto">
             <div
-              className="h-full bg-black transition-all"
+              className="h-full rounded-md bg-black transition-all"
               style={{ width: `${progressPercent}%` }}
             />
           </div>

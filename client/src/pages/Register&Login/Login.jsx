@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/hooks";
-import { toast } from "react-toastify"; // ✅ Toasts instead of alerts
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -31,32 +31,36 @@ const Login = () => {
 
       const data = await res.json();
 
+      console.log(data);
+      
+
       if (res.ok) {
-        let isUser = localStorage.getItem('userToken');
+        let isUser = localStorage.getItem("userToken");
 
         if (!isUser) {
+          let userCarts = localStorage.getItem("Carts_guest") || [];
+          let wishlist = localStorage.getItem("Wishlist_guest") || [];
 
-          let userCarts = localStorage.getItem('Carts_guest') || [];
-          let wishlist = localStorage.getItem('Wishlist_guest') || [];
+          localStorage.setItem(`Carts_${data.user._id}`, userCarts);
+          localStorage.setItem(`Wishlist_${data.user._id}`, wishlist);
 
-          localStorage.setItem(`Carts_${data.user._id}`,userCarts);
-          localStorage.setItem(`Wishlist_${data.user._id}`,wishlist);
-
-          localStorage.removeItem('Carts_guest');
-          localStorage.removeItem('Wishlist_guest');
-
-        } 
-
+          localStorage.removeItem("Carts_guest");
+          localStorage.removeItem("Wishlist_guest");
+        }
 
         localStorage.setItem("userToken", data.token);
         setUser(data.user);
+        alert("Login successful!")
         toast.success(data.message || "Login successful!");
 
         setFormData({ email: "", password: "" });
         navigate("/");
       } else {
+        
         toast.error(data.message || "Login failed!");
+         alert(data.message || "Login failed!");
       }
+
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
       console.error("Login Error:", error);
@@ -103,6 +107,8 @@ const Login = () => {
             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+
+          <Link to="/forgot-password">Forget password?</Link>
 
           <button
             type="submit"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useCarts, useUser, useWishlist } from "../hooks/hooks";
 
@@ -8,21 +8,30 @@ const Navbar = () => {
 
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
-  let {user} = useUser();
-
+  let { user } = useUser();
 
   console.log(user);
   // console.log(wishlist);
-  
 
   // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
   useEffect(() => {
-    let userCarts = JSON.parse(window.localStorage.getItem(`Carts_${user? user._id : 'guest'}`));
-    let userWishlist = JSON.parse(window.localStorage.getItem(`Wishlist_${user? user._id : 'guest'}`));
+    let userCarts = JSON.parse(
+      window.localStorage.getItem(`Carts_${user ? user._id : "guest"}`)
+    );
+    let userWishlist = JSON.parse(
+      window.localStorage.getItem(`Wishlist_${user ? user._id : "guest"}`)
+    );
     setCarts(userCarts || []);
     setWishlist(userWishlist || []);
-    
   }, []);
+
+  const totalPrice = useMemo(() => {
+    return carts.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  }, [carts]);
+
+  const cartsQuantity = useMemo(() => {
+    return carts.reduce((acc, item) => acc + item.quantity, 0);
+  }, [carts]);
 
   return (
     <>
@@ -208,7 +217,10 @@ const Navbar = () => {
                   />
                 </svg>
               </Link>
-              <Link to="/wishlist" className="text-black hover:text-green-700 relative">
+              <Link
+                to="/wishlist"
+                className="text-black hover:text-green-700 relative"
+              >
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -241,9 +253,13 @@ const Navbar = () => {
                   />
                 </svg>
                 <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {carts.length}
+                  {cartsQuantity}
                 </span>
+                
               </Link>
+              <span className="pr-3 text-green-600">
+                  $ {totalPrice}
+                </span>
             </div>
           </div>
         </div>

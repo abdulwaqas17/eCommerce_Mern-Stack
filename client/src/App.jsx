@@ -27,6 +27,9 @@ import Collection from './pages/Collection'
 import FAQs from './pages/FAQs'
 import Wishlist from './pages/Wishlist'
 import { ToastContainer } from "react-toastify";
+import VerifyOtp from './pages/ForgotPass/VerifyOtp'
+import ResetPassword from './pages/ForgotPass/ResetPassword'
+import ForgotPassword from './pages/ForgotPass/ForgotPassword'
 
 // import { userData } from './context/context'
 
@@ -184,7 +187,27 @@ function App() {
             
           } />
 
+          <Route path='/forgot-password' element={
+         
+              <ForgotPassword />
+            
+          } />
+
+          <Route path='/verify-otp' element={
+          
+              <VerifyOtp />
+          
+          } />
+
+          <Route path='/reset-password' element={
+       
+              <ResetPassword />
+         
+          } />
+          
           {/* Protected Routes  */}
+
+
           <Route path='/carts' element={
             <ProtectedRoutes  tokenName='userToken' redirect='/login'>
               <Carts />
