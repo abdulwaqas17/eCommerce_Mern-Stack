@@ -9,7 +9,7 @@ const Card = (props) => {
   
 
   return (
-    <div className="rounded-md  hover:bg-white hover:border-white hover:border-[14px] duration-100 mx-auto h-full flex flex-col">
+    <div className="rounded-md box-content hover:bg-white hover:border-white hover:border-[14px] duration-100 mx-auto h-full flex flex-col">
       <div className="relative overflow-hidden bg-[#eaf6ff] aspect-square group">
         <img
           src={product.image1}

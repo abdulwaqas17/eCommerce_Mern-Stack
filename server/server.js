@@ -10,8 +10,10 @@ const dashboardRouter = require('./routes/dashboardRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const verifyRouter = require('./routes/verifyRoute');
 const forgetRouter = require('./routes/forgetRoutes');
+const webhookRoute = require('./routes/webhookRoute');
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors()); 
 
@@ -25,6 +27,7 @@ app.use('/dashboard',dashboardRouter);
 app.use('/',userRouter); 
 app.use('/',orderRouter); 
 app.use('/auth',forgetRouter); 
+app.use('/',webhookRoute); 
 
 
 const PORT = process.env.PORT || 5000;

@@ -10,7 +10,7 @@ const Navbar = () => {
   let { wishlist, setWishlist } = useWishlist();
   let { user } = useUser();
 
-  console.log(user);
+  // console.log(user);
   // console.log(wishlist);
 
   // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
