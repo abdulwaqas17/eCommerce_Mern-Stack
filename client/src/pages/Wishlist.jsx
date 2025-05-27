@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Breadcrumb from "../components/Breadcrumb";
 import Card from "../components/ProductCart";
-import useCartAndWishlist from "../hooks/useCartAndWishlist";
+import useCartAndWishlist from "../utils/useCartAndWishlist";
 
 const Wishlist = () => {
 

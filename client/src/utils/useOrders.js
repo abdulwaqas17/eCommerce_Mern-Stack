@@ -24,6 +24,7 @@ const useOrders = () => {
 
  
 
+  // fetching orders from backend
   return { orders, loading, error };
 };
 

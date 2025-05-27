@@ -1,5 +1,5 @@
 import React from "react";
-import useOrders from "../../hooks/useOrders";
+import useOrders from "../../utils/useOrders";
 
 const DashOrders = () => {
   const { orders, loading, error } = useOrders();

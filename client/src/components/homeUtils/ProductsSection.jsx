@@ -4,7 +4,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Card from "../ProductCart";
-import useCartAndWishlist from "../../hooks/useCartAndWishlist";
+import useCartAndWishlist from "../../utils/useCartAndWishlist";
 
 const ProductsSection = ({ products}) => {
   const { addToCart, toggleWishlist, carts, wishlist } = useCartAndWishlist();

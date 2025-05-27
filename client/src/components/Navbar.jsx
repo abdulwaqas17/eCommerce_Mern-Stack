@@ -6,14 +6,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  // get carts and wishlist of LS and decode user data
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
   let { user } = useUser();
 
-  // console.log(user);
-  // console.log(wishlist);
 
-  // get carts from local storage, because navbar m card ki quntity show krwani hn, yhn se sab jagah avialble ho gyn gy
+
+  // get carts from local storage for specfic user, because navbar m card ki quntity show krwani hn
   useEffect(() => {
     let userCarts = JSON.parse(
       window.localStorage.getItem(`Carts_${user ? user._id : "guest"}`)

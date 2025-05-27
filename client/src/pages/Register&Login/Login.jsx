@@ -50,7 +50,7 @@ const Login = () => {
 
         localStorage.setItem("userToken", data.token);
         setUser(data.user);
-        alert("Login successful!")
+        // alert("Login successful!")
         toast.success(data.message || "Login successful!");
 
         setFormData({ email: "", password: "" });
@@ -58,7 +58,7 @@ const Login = () => {
       } else {
         
         toast.error(data.message || "Login failed!");
-         alert(data.message || "Login failed!");
+        //  alert(data.message || "Login failed!");
       }
 
     } catch (error) {

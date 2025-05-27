@@ -26,10 +26,13 @@ export default function DataProvider({ children }) {
     }
   }, []);
 
+
+  // to save un neccesary re renders
   const userValue = useMemo(() => ({ user, setUser }), [user]);
   const cartValue = useMemo(() => ({ carts, setCarts }), [carts]);
   const wishlistValue = useMemo(() => ({ wishlist, setWishlist }), [wishlist]);
 
+  
   return (
     <userContext.Provider value={userValue}>
       <cartContext.Provider value={cartValue}>

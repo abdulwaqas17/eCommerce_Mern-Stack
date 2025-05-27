@@ -83,7 +83,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <ToastContainer />
+      
       <div className="max-w-2xl w-full bg-white p-6 rounded-xl shadow-md">
         <div className="flex justify-center mb-6">
           <a href="https://ap-medilazar.myshopify.com">

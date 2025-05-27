@@ -6,7 +6,7 @@ import SalesAndRevenue from "../SalesAndRevenue";
 import DashOrders from "../DashOrders";
 import Pagination from "../Pagination";
 import DashboardFooter from "../DashboardFooter";
-import useOrders from "../../../hooks/useOrders";
+import useOrders from "../../../utils/useOrders";
 
 const DashboardHome = () => {
   const { orders, loading, error } = useOrders();

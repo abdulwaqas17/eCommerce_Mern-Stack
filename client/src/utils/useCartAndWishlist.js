@@ -47,6 +47,7 @@ export default function useCartAndWishlist() {
     }
   };
 
+  // utility functions and setting carts and wishlist
   return {
     carts,
     wishlist,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../Pagination";
-import useOrders from "../../../hooks/useOrders";
+import useOrders from "../../../utils/useOrders";
 import { toast } from "react-toastify";
 
 const OrdersSide = () => {

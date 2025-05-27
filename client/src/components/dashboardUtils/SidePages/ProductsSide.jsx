@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../Pagination";
 import { motion } from "framer-motion";
-import useProducts from "../../../hooks/useProducts";
+import useProducts from "../../../utils/useProducts";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 

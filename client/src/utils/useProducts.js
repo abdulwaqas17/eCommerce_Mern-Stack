@@ -25,6 +25,7 @@ const useProducts = () => {
     fetchProducts();
   }, []);
 
+  // fetching products from backend
   return { products, loading, error };
 };
 

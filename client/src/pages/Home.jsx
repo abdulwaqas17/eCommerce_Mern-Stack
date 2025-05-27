@@ -13,7 +13,7 @@ import ForForNewsletter from "../components/FormForNewsLatter";
 import Facilities from "../components/Facilities";
 import ProductsSection from "../components/homeUtils/ProductsSection";
 import Milestones from "../components/homeUtils/Milestones";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../utils/useProducts";
 
 
 
@@ -61,13 +61,21 @@ const Home = () => {
         ) : (
           <ProductsSection products={healthCareProducts} />
         )}
+
         <FeaturedBrands />
       </section>
 
       {/* Supplements */}
       <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
         <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Daily Wellbeing</h2>
-        <ProductsSection products={supplementsProducts} />
+      
+         {loading ? (
+          <p className="text-center py-4">Loading products...</p>
+        ) : error ? (
+          <p className="text-center text-red-600">{error}</p>
+        ) : (
+          <ProductsSection products={supplementsProducts} />
+        )}
 
         <div className="flex flex-col lg:flex-row justify-center gap-6 px-[30px] py-[60px]">
           <BannerCard topH="FlAT 30% OFF" h1="Naturally" h2="Good" img="/images/asset 58.jpeg" />
@@ -80,7 +88,14 @@ const Home = () => {
       {/* Recent Products */}
       <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
         <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Recent Products</h2>
-        <ProductsSection products={recentProducts} />
+       
+          {loading ? (
+          <p className="text-center py-4">Loading products...</p>
+        ) : error ? (
+          <p className="text-center text-red-600">{error}</p>
+        ) : (
+          <ProductsSection products={recentProducts} />
+        )}
       </section>
 
       {/* Articles, Blogs, Milestones */}

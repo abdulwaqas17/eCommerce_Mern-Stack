@@ -1,68 +1,44 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const ProtectedRoutes = (props)=> {
+const ProtectedRoutes = (props) => {
+  const token = localStorage.getItem(props.tokenName);
+  const role = props.tokenName.replace("Token", "").toLowerCase(); // Safer extraction
+  const navigate = useNavigate();
 
-    console.log(props);
-    let token = window.localStorage.getItem(props.tokenName);
-    let role = props.tokenName.split('T')[0];
-    let navigate = useNavigate();
+  useEffect(() => {
+    const verifyFunction = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/verify/${role}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+            role: role,
+          },
+        });
 
-    console.log('role ==>',role);
-    
+        const data = await res.json();
 
-    useEffect(()=> {
-
-        let verifyFunction = async()=> {
-
-        if(token) {
-            try {
-
-                const res = await fetch(`http://localhost:3000/verify/${role}`, {
-                    method: "GET",
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        authorization: `Bearer ${token}`,
-                        role: role,
-                     },
-                    
-                })
-        
-                let data = await res.json();
-        
-                console.log('data ==>',data);
-        
-                // alert(data.message);
-        
-                if (!data.success) {
-        
-                    navigate(props.redirect)
-                    // <Navigate to={props.redirect} />
-        
-                }
-        
-        
-               } catch (err) {
-        
-                console.log(err);
-                
-               }
-        } else {
-
-            navigate(props.redirect)
-
+        if (!data.success) {
+          navigate(props.redirect);
         }
+      } catch (err) {
+        console.error(err);
+        navigate(props.redirect);
+      }
+    };
 
+    if (token) {
+      verifyFunction();
+    } else {
+      navigate(props.redirect);
+    }
+  }, []);
 
-        }
+  if (!token) return <Navigate to={props.redirect} />;
 
-        verifyFunction();
+  return props.children;
+};
 
-    },[])
-
-    return props.children
-    // return token ? props.children : <Navigate to={props.redirect} />
-
-}
-
-export default ProtectedRoutes
+export default ProtectedRoutes;

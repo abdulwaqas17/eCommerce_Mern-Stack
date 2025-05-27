@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCarts } from "../../hooks/hooks";
-import useProducts from "../../hooks/useProducts";
-import useCartAndWishlist from "../../hooks/useCartAndWishlist";
+import useProducts from "../../utils/useProducts";
+import useCartAndWishlist from "../../utils/useCartAndWishlist";
 
 const ProductOverview = () => {
   const { products, loading, error } = useProducts();
