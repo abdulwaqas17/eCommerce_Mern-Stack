@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import { useState } from "react";
 import { useCarts, useUser } from "../../hooks/hooks";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CartFooter = (props) => {
   const [agreed, setAgreed] = useState(false);
+  console.log(agreed);
+
+  let navigate = useNavigate();
+  
 
   let green = "#51a6b6";
 
-  let { carts, setCarts } = useCarts();
+  // let { carts, setCarts } = useCarts();
 
   return (
     <div className="w-full flex flex-col gap-6  rounded-md p-4 bg-white">
@@ -39,25 +45,20 @@ const CartFooter = (props) => {
             </a>
           </label>
           <button
-            onClick={props.checkOutFunc}
+            onClick={() => navigate('/place-order')}
             type="submit"
-            disabled={!agreed || props.loading}
-            aria-busy={props.loading ? "true" : "false"}
+            disabled={!agreed}
             className={`w-full py-2 px-4 text-white text-sm rounded-md flex items-center justify-center transition-all duration-300
     ${
       !agreed || props.loading
         ? "bg-gray-400 cursor-not-allowed opacity-60"
         : "bg-blue-600 hover:bg-blue-700"
     }`}
+    
           >
-            {props.loading ? (
-              <div className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin" />
-                <span>Placing order...</span>
-              </div>
-            ) : (
-              "Checkout"
-            )}
+           
+              Checkout
+            
           </button>
         </div>
       </div>

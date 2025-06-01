@@ -30,6 +30,8 @@ import { ToastContainer } from "react-toastify";
 import VerifyOtp from './pages/ForgotPass/VerifyOtp'
 import ResetPassword from './pages/ForgotPass/ResetPassword'
 import ForgotPassword from './pages/ForgotPass/ForgotPassword'
+import PlaceOrder from './pages/PlaceOrder'
+import OrderSuccess from './pages/OrderSuccess'
 
 // import { userData } from './context/context'
 
@@ -206,6 +208,20 @@ function App() {
           } />
           
           {/* Protected Routes  */}
+
+
+          <Route path='/place-order' element={
+            <ProtectedRoutes  tokenName='userToken' redirect='/login'>
+              <PlaceOrder />
+            </ProtectedRoutes>
+          } />
+
+
+          <Route path='/order-success' element={
+            <ProtectedRoutes  tokenName='userToken' redirect='/login'>
+              <OrderSuccess />
+            </ProtectedRoutes>
+          } />
 
 
           <Route path='/carts' element={

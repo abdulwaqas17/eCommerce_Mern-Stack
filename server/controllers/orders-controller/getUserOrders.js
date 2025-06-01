@@ -14,17 +14,17 @@ const getUserOrders = async (req, res) => {
 
     if(orders) {
 
-        res.send({
+        res.status(200).json({
           success: true,
           totalOrders: orders.length,
           orders,
-          status:200
+          message : 'getting orders successfully'
         });
     } else {
-        res.send({
+        res.status(404).json({
             success: false,
             message : 'Orders not found',
-            status:404
+            
           });
     }
 

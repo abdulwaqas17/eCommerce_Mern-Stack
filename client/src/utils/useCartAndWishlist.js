@@ -47,11 +47,31 @@ export default function useCartAndWishlist() {
     }
   };
 
+
+  // for product overview page
+  const addToCartProduct = (product,quantity) => {
+    if (!product || !product._id) return;
+
+    const existingItem = carts.find((item) => item._id === product._id);
+
+    if (existingItem) {
+      const updatedCarts = carts.map((item) =>
+        item._id === product._id
+          ? { ...item, quantity: quantity }
+          : item
+      );
+      setCarts(updatedCarts);
+    } else {
+      setCarts([...carts, { ...product, quantity: 1 }]);
+    }
+  };
+
   // utility functions and setting carts and wishlist
   return {
     carts,
     wishlist,
     addToCart,
     toggleWishlist,
+    addToCartProduct
   };
 }

@@ -4,6 +4,7 @@ import React, { useEffect, useState,useRef } from "react";
 import { motion } from "framer-motion";
 import { useUser, useWishlist } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   FiUser,
   FiShoppingBag,
@@ -57,7 +58,7 @@ const UserProfile = () => {
     const fetchOrders = async () => {
       try {
         const token = window.localStorage.getItem("userToken");
-        const res = await fetch("http://localhost:3000/api/orders/my-orders", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/my-orders`, {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token}`,
@@ -66,19 +67,23 @@ const UserProfile = () => {
         });
 
         const data = await res.json();
-        if (data.message === "invalid token") {
-          alert(data.message);
-          navigate("/login");
-        }
+        // if (data.message === "invalid token") {
+        //   alert(data.message);
+        //   navigate("/login");
+        // }
+
+
 
         setOrders(data.orders);
+        console.log(data.orders);
+
         const counts = { Pending: 0, Approved: 0, Canceled: 0 };
         data.orders.forEach((order) => {
           counts[order.status] = (counts[order.status] || 0) + 1;
         });
         setStatusCount(counts);
       } catch (err) {
-        console.error("Error fetching orders", err);
+        toast.error("Error fetching orders", err);
       }
     };
     fetchOrders();
@@ -102,13 +107,13 @@ const UserProfile = () => {
 
       const data = await res.json();
       if (res.ok) {
-        alert("Profile updated!");
+        toast.success("Profile updated!");
         setUser(data.updatedUser);
       } else {
-        alert(data.message || "Failed to update");
+        toast.error(data.message || "Failed to update");
       }
     } catch (err) {
-      console.error(err);
+      toast.error(err);
     }
   };
 
@@ -139,11 +144,11 @@ const UserProfile = () => {
 
     const handleSendMessage = async () => {
 
-      console.log('hello 1');
+      
 
     if (!newMessage.trim()) return;
 
-    console.log('hello 2');
+
     
 
     // Add user message to chat
@@ -331,7 +336,7 @@ const UserProfile = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <p>{order.orderItems.length} items</p>
-                      <p className="font-semibold">${order.totalAmount}</p>
+                      <p className="font-semibold">${order.total}</p>
                     </div>
                   </div>
                 ))}

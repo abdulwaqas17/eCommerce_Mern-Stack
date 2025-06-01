@@ -15,7 +15,7 @@ const Carts = () => {
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
-  const [shippingData, setShippingData] = useState({});
+  // const [shippingData, setShippingData] = useState({});
 
   const totalPrice = useMemo(() => {
     return carts.reduce((acc, item) => acc + item.quantity * item.price, 0);
@@ -24,78 +24,78 @@ const Carts = () => {
   // const progress = 0.75;
   const progressPercent = Math.min((totalPrice * 100)/5000, 100);
 
-  const handleShippingData = (data) => {
-    setShippingData(data);
-  };
+  // const handleShippingData = (data) => {
+  //   setShippingData(data);
+  // };
 
-  const checkOut = async () => {
-    // === VALIDATION ===
-    if (!user || !user._id || !user.email) {
-      return toast.error("User information is missing.");
-    }
+  // const checkOut = async () => {
+  //   // === VALIDATION ===
+  //   if (!user || !user._id || !user.email) {
+  //     return toast.error("User information is missing.");
+  //   }
 
-    if (!shippingData.paymentMethod) {
-      return toast.error("Please select a payment method.");
-    }
+  //   if (!shippingData.paymentMethod) {
+  //     return toast.error("Please select a payment method.");
+  //   }
 
-    if (!user.fullname || !user.number || !user.address || !user.country) {
-      return toast.error("Shipping address is incomplete.");
-    }
+  //   if (!user.fullname || !user.number || !user.address || !user.country) {
+  //     return toast.error("Shipping address is incomplete.");
+  //   }
 
-    if (carts.length === 0) {
-      return toast.error("Your cart is empty.");
-    }
+  //   if (carts.length === 0) {
+  //     return toast.error("Your cart is empty.");
+  //   }
 
-    const userOrder = {
-      orderItems: carts.map(({ _id, quantity }) => ({
-        productId: _id,
-        qty: quantity,
-      })),
-      totalAmount: totalPrice,
-      userId: user._id,
-      userEmail: user.email,
-      paymentMethod: shippingData.paymentMethod,
-      shippingAddress: {
-        fullName: user.fullname,
-        phone: user.number,
-        address: user.address,
-        country: user.country,
-      },
-    };
+  //   const userOrder = {
+  //     orderItems: carts.map(({ _id, quantity }) => ({
+  //       productId: _id,
+  //       qty: quantity,
+  //     })),
+  //     totalAmount: totalPrice,
+  //     userId: user._id,
+  //     userEmail: user.email,
+  //     paymentMethod: shippingData.paymentMethod,
+  //     shippingAddress: {
+  //       fullName: user.fullname,
+  //       phone: user.number,
+  //       address: user.address,
+  //       country: user.country,
+  //     },
+  //   };
 
-    const userToken = localStorage.getItem("userToken");
-    setIsPlacingOrder(true); // 🔄 Loading state ON
+  //   const userToken = localStorage.getItem("userToken");
+  //   setIsPlacingOrder(true); // 🔄 Loading state ON
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${userToken}`,
-          role: "user",
-        },
-        body: JSON.stringify(userOrder),
-      });
+  //   try {
+  //     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/order`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         authorization: `Bearer ${userToken}`,
+  //         role: "user",
+  //       },
+  //       body: JSON.stringify(userOrder),
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to place order.");
-      }
+  //     if (!res.ok) {
+  //       throw new Error(data.message || "Failed to place order.");
+  //     }
 
-      toast.success(data.message || "Order placed successfully!");
-      alert(data.message || "Order placed successfully!");
-      setCarts([]);
-      localStorage.removeItem("userCarts");
+  //     toast.success(data.message || "Order placed successfully!");
+  //     alert(data.message || "Order placed successfully!");
+  //     setCarts([]);
+  //     localStorage.removeItem("userCarts");
 
-    } catch (error) {
-      toast.error(error.message || "Something went wrong!");
-      alert(error.message || "Something went wrong!");
-      console.error(error);
-    } finally {
-      setIsPlacingOrder(false);
-    }
-  };
+  //   } catch (error) {
+  //     toast.error(error.message || "Something went wrong!");
+  //     alert(error.message || "Something went wrong!");
+  //     console.error(error);
+  //   } finally {
+  //     setIsPlacingOrder(false);
+  //   }
+  // };
 
   return (
     <div>
@@ -132,13 +132,13 @@ const Carts = () => {
       </div>
 
       {/* Shipping Note & Info */}
-      <div className="mx-10">
+      {/* <div className="mx-10">
         <CartNoteAndShipping onShippingDataChange={handleShippingData} />
-      </div>
+      </div> */}
 
       {/* Checkout Footer */}
       <div className="mx-8">
-        <CartFooter totalPrice={totalPrice} checkOutFunc={checkOut} loading={isPlacingOrder} />
+        <CartFooter totalPrice={totalPrice}  loading={isPlacingOrder} />
       </div>
 
       <Footer />

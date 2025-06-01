@@ -5,6 +5,9 @@ import { useCarts, useUser } from "../../hooks/hooks";
 const CartTable = () => {
   let { carts, setCarts } = useCarts();
 
+  console.log(carts);
+  
+
   let {user} = useUser();
 
   // for maintain carts

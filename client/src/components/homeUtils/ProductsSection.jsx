@@ -7,7 +7,7 @@ import Card from "../ProductCart";
 import useCartAndWishlist from "../../utils/useCartAndWishlist";
 
 const ProductsSection = ({ products}) => {
-  const { addToCart, toggleWishlist, carts, wishlist } = useCartAndWishlist();
+  const { addToCart, toggleWishlist, wishlist } = useCartAndWishlist();
   return (
     <section className="py-12 md:py-16 lg:py-20 px-0 overflow-hidden w-full">
       <div className="container mx-auto px-4 w-full">

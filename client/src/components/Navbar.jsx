@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useCarts, useUser, useWishlist } from "../hooks/hooks";
+import { calculateTotalPrice, calculateTotalQuantity, getItemFromLS } from "../utils/utilityFunctions";
 
 const Navbar = () => {
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // get carts and wishlist of LS and decode user data
+   // get carts and wishlist of LS and decode user data
   let { carts, setCarts } = useCarts();
   let { wishlist, setWishlist } = useWishlist();
   let { user } = useUser();
+  console.log(user);
+  
 
 
 
   // get carts from local storage for specfic user, because navbar m card ki quntity show krwani hn
   useEffect(() => {
-    let userCarts = JSON.parse(
+    if (user) {
+      let userCarts = JSON.parse(
       window.localStorage.getItem(`Carts_${user ? user._id : "guest"}`)
     );
     let userWishlist = JSON.parse(
@@ -23,15 +28,12 @@ const Navbar = () => {
     );
     setCarts(userCarts || []);
     setWishlist(userWishlist || []);
-  }, []);
+  }
+  }, [user]);
 
-  const totalPrice = useMemo(() => {
-    return carts.reduce((acc, item) => acc + item.quantity * item.price, 0);
-  }, [carts]);
+   const totalPrice = useMemo(() => calculateTotalPrice(carts), [carts]);
 
-  const cartsQuantity = useMemo(() => {
-    return carts.reduce((acc, item) => acc + item.quantity, 0);
-  }, [carts]);
+  const cartsQuantity = useMemo(()=> calculateTotalQuantity(carts),[carts])
 
   return (
     <>

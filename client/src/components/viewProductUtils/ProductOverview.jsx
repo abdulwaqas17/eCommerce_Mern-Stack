@@ -5,7 +5,8 @@ import useCartAndWishlist from "../../utils/useCartAndWishlist";
 
 const ProductOverview = () => {
   const { products, loading, error } = useProducts();
-  const { addToCart, carts } = useCartAndWishlist();
+  const { addToCartProduct } = useCartAndWishlist();
+  
 
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
@@ -23,6 +24,11 @@ const ProductOverview = () => {
   const handleQuantityChange = (value) => {
     setQuantity((prev) => Math.max(1, prev + value));
   };
+
+
+ 
+
+  
 
   return (
     <>
@@ -270,7 +276,7 @@ const ProductOverview = () => {
 
                       <button
                         className="bg-[#2ea5b6] font-bold text-white py-2 px-12 rounded-[25px] hover:bg-[#e7456f] transition-colors"
-                        onClick={() => addToCart(product)}
+                        onClick={() => addToCartProduct(product,quantity)}
                       >
                         <span>Add to cart</span>
                       </button>

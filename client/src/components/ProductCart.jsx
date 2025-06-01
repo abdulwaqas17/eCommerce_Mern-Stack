@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 import { FiEye } from "react-icons/fi"; // Eye icon
+import { FaHeart } from "react-icons/fa";
 
 const Card = (props) => {
   const navigate = useNavigate();
@@ -28,12 +29,12 @@ const Card = (props) => {
           {/* Wishlist */}
           <div
             onClick={() => addToWishlist(product)}
-            className={`p-1.5 rounded-full shadow cursor-pointer transition ${
-              isWishlisted ? "bg-pink-200" : "bg-white hover:bg-red-100"
-            }`}
+            className="p-1.5 rounded-full shadow cursor-pointer transitio bg-white"
+            
             title="Add to Wishlist"
           >
-            <FiHeart className="text-red-500" size={18} />
+            {isWishlisted ? <FaHeart className="text-red-500" size={18}/> : <FiHeart className="text-red-500" size={18} />} 
+            
           </div>
 
           {/* View (Eye icon) */}

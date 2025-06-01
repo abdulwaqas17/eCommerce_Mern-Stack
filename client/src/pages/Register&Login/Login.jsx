@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/hooks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getItemFromLS } from "../../utils/utilityFunctions";
 
 const Login = () => {
   const { setUser } = useUser();
@@ -35,7 +36,7 @@ const Login = () => {
       
 
       if (res.ok) {
-        let isUser = localStorage.getItem("userToken");
+        let isUser = getItemFromLS("userToken");
 
         if (!isUser) {
           let userCarts = localStorage.getItem("Carts_guest") || [];

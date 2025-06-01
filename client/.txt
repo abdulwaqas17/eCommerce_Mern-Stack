@@ -120,3 +120,18 @@ Async Timeout
 **"JavaScript aik insaan ki tarah kaam karta hai — aik waqt me sirf aik kaam karta hai, lekin planning karta rehta hai ke agla kaam kab karna hai."**
 
 Waqas bhai, aap inn cheezon ko samajh kar ek real software engineer ki soch ki taraf badh rahe ho. Keep going — industry is waiting for minds like yours! 💪🔥
+
+
+
+
+
+
+Review Code
+
+Home
+navbar
+products
+register & login
+forgot pass
+wishlist.jsx
+profile.jsx
