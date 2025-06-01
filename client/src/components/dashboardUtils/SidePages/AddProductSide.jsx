@@ -7,7 +7,7 @@ const AddProductSide = () => {
     name: "",
     type: "",
     category: "",
-    subCategory: "",
+    useFor: "",
     price: "",
     stock: "",
     image1: null,
@@ -38,7 +38,7 @@ const AddProductSide = () => {
     stock,
     type,
     category,
-    subCategory,
+    useFor,
     image1,
     image2,
   } = productDetails;
@@ -49,7 +49,7 @@ const AddProductSide = () => {
     !stock ||
     !type?.trim() ||
     !category?.trim() ||
-    !subCategory?.trim() ||
+    !useFor?.trim() ||
     !image1 ||
     !image2
   ) {
@@ -84,7 +84,7 @@ const AddProductSide = () => {
     name: "",
     type: "",
     category: "",
-    subCategory: "",
+    useFor: "",
     price: "",
     stock: "",
     image1: null,
@@ -298,9 +298,9 @@ const AddProductSide = () => {
                   <label className="block mb-1 text-sm">Sub-category</label>
                   <select
                     className="w-full border rounded px-3 py-2"
-                    name="subCategory"
+                    name="useFor"
                     onChange={handleChange}
-                    value={productDetails.subCategory}
+                    value={productDetails.useFor}
                   >
                     <option value="Respiratory">Respiratory</option>
                     <option value="Medicine">Medicine</option>

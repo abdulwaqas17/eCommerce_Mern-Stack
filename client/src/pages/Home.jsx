@@ -23,17 +23,17 @@ const Home = () => {
 
   // 🔍 Optimize Filtering with useMemo
   const healthCareProducts = useMemo(
-    () => products.filter((p) => p.category === "health care"),
+    () => products.filter((p) => p.category === "Health Care"),
     [products]
   );
 
   const supplementsProducts = useMemo(
-    () => products.filter((p) => p.category === "supplements"),
+    () => products.filter((p) => p.category === "Supplement"),
     [products]
   );
 
   const recentProducts = useMemo(
-    () => products.filter((p) => p.type === "recent"),
+    () => products.filter((p) => p.type === "Recent"),
     [products]
   );
 

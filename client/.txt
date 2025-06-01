@@ -122,16 +122,3 @@ Async Timeout
 Waqas bhai, aap inn cheezon ko samajh kar ek real software engineer ki soch ki taraf badh rahe ho. Keep going — industry is waiting for minds like yours! 💪🔥
 
 
-
-
-
-
-Review Code
-
-Home
-navbar
-products
-register & login
-forgot pass
-wishlist.jsx
-profile.jsx

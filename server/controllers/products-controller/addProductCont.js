@@ -6,7 +6,7 @@ const cloudinary = require('../../config/cloudinary');
 const addProduct = async (req, res) => {
  
   try {
-    const { name, price, stock, category, subCategory, type } = req.body;
+    const { name, price, stock, category, useFor, type } = req.body;
 
     // Check files exist
     if (!req.files || !req.files.image1 || !req.files.image2) {
@@ -27,7 +27,7 @@ const addProduct = async (req, res) => {
       price,
       stock,
       category,
-      subCategory,
+      useFor,
       type,
       image1: result1.secure_url,
       image2: result2.secure_url,
