@@ -38,7 +38,7 @@ const OrdersSide = () => {
       
 
       if (res.ok) {
-        toast.success("✅ Order status updated!");
+        toast.success("Order status updated!");
         setDashOrders(data.allOrders)
       
       } else {
@@ -124,11 +124,11 @@ const OrdersSide = () => {
                   <tr key={order._id}>
                     <td className="px-4 py-3">{order._id.slice(1, 6)}</td>
                     <td className="px-4 py-3 font-bold">
-                      {order.shippingAddress.fullName}
+                      {order.shippingAddress.firstName+" " +order.shippingAddress.lastName}
                     </td>
                     <td className="px-4 py-3">{order.userEmail}</td>
                     <td className="px-4 py-3">
-                      ${order.totalAmount.toFixed(2)}
+                      ${order.total.toFixed(2)}
                     </td>
                     <td className="px-4 py-3">
                       <select

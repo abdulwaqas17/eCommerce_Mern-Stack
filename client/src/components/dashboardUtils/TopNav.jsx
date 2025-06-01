@@ -189,7 +189,7 @@ const TobNav = () => {
 
         <button className="text-gray-600 hover:text-black">
           <img
-            src="assets/imgs/people/avatar2.jpg"
+            src="/images/asset 74.png"
             alt="User"
             className="w-8 h-8 rounded-full"
           />

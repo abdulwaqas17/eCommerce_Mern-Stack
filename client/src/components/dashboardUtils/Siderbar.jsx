@@ -7,10 +7,9 @@ const Sidebar = () => {
     <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow-md overflow-y-auto">
       {/* Top Section */}
       <div className="flex justify-between items-center p-4">
-        <Link to="index.html" className="flex items-center space-x-2">
-          <img src="assets/imgs/theme/logo.svg" alt="Evara Dashboard" className="w-8" />
-          <span className="text-xl font-semibold">Evara Dashboard</span>
-        </Link>
+        
+          <img src=" //ap-medilazar.myshopify.com/cdn/shop/files/logo.png" alt="Dashboard"  />
+         
         <button className="text-gray-600">
           <i className="material-icons">menu_open</i>
         </button>
@@ -54,7 +53,7 @@ const Sidebar = () => {
 
           {/* Sellers Menu with Submenu */}
           <li className="relative group hover:bg-gray-100 rounded">
-            <Link to="page-sellers-cards.html" className="flex items-center space-x-2 p-3 text-gray-700">
+            <Link to="#" className="flex items-center space-x-2 p-3 text-gray-700">
               <FaStore className="text-xl" />
               <span>Sellers</span>
             </Link>
@@ -77,7 +76,7 @@ const Sidebar = () => {
 
           {/* Transactions Menu with Submenu */}
           <li className="relative group hover:bg-gray-100 rounded">
-            <Link to="page-transactions-1.html" className="flex items-center space-x-2 p-3 text-gray-700">
+            <Link to="#" className="flex items-center space-x-2 p-3 text-gray-700">
               <FaMoneyBillWave className="text-xl" />
               <span>Transactions</span>
             </Link>
@@ -99,7 +98,7 @@ const Sidebar = () => {
 
           {/* Reviews */}
           <li className="hover:bg-gray-100 rounded">
-            <Link to="page-reviews.html" className="flex items-center space-x-2 p-3 text-gray-700">
+            <Link to="#" className="flex items-center space-x-2 p-3 text-gray-700">
               <FaComments className="text-xl" />
               <span>Reviews</span>
             </Link>
@@ -107,7 +106,7 @@ const Sidebar = () => {
 
           {/* Brands */}
           <li className="hover:bg-gray-100 rounded">
-            <Link to="page-brands.html" className="flex items-center space-x-2 p-3 text-gray-700">
+            <Link to="#" className="flex items-center space-x-2 p-3 text-gray-700">
               <FaStar className="text-xl" />
               <span>Brands</span>
             </Link>
@@ -127,7 +126,7 @@ const Sidebar = () => {
 
           {/* Starter Page */}
           <li className="hover:bg-gray-100 rounded">
-            <Link to="page-blank.html" className="flex items-center space-x-2 p-3 text-gray-700">
+            <Link to="#" className="flex items-center space-x-2 p-3 text-gray-700">
               <FaTags className="text-xl" />
               <span>Starter Page</span>
             </Link>

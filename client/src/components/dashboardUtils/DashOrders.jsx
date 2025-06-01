@@ -72,10 +72,10 @@ const DashOrders = () => {
                     {order._id.slice(1, 6)}
                   </td>
                   <td className="p-2 font-bold">
-                    {order.shippingAddress.fullName}
+                     {order.shippingAddress.firstName+" " +order.shippingAddress.lastName}
                   </td>
                   <td className="p-2">{order.userEmail}</td>
-                  <td className="p-2">${order.totalAmount.toFixed(2)}</td>
+                  <td className="p-2">${order.total.toFixed(2)}</td>
                   <td className="p-2">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${

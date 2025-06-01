@@ -8,7 +8,7 @@ const SalesAndRevenue = () => {
         {/* Sale Statistics */}
         <div className="bg-white shadow-md rounded-xl p-4">
           <h5 className="text-xl font-semibold mb-4">Sale statistics</h5>
-          <canvas id="myChart" height="265" className="w-full h-[265px]" />
+          <img src="/images/chart1.png" alt="revenue chart" className="w-full h-[265px]" />
         </div>
 
         {/* New Members & Recent Activities */}
@@ -19,7 +19,7 @@ const SalesAndRevenue = () => {
             {["Patric Adams", "Dilan Specter", "Tomas Baker"].map((name, idx) => (
               <div key={idx} className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
-                  <img src={`assets/imgs/people/avatar${idx + 2}.jpg`} alt="" className="w-12 h-12 rounded-full" />
+                  <img src={`/images/asset ${74 + idx}.png`} alt="" className="w-12 h-12 rounded-full" />
                   <div>
                     <h6 className="font-medium">{name}</h6>
                     <p className="text-gray-500 text-sm">Sanfrancisco</p>
@@ -59,7 +59,7 @@ const SalesAndRevenue = () => {
         {/* Revenue Chart */}
         <div className="bg-white shadow-md rounded-xl p-4">
           <h5 className="text-xl font-semibold mb-4">Revenue Base on Area</h5>
-          <canvas id="myChart2" height="215" className="w-full h-[215px]" />
+          <img src="/images/chart2.png" alt="revenue chart"  className="w-full h-[215px]" />
         </div>
 
         {/* Marketing Channel */}

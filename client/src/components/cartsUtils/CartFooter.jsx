@@ -2,12 +2,23 @@
 import { useState } from "react";
 import { useCarts, useUser } from "../../hooks/hooks";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CartFooter = (props) => {
   const [agreed, setAgreed] = useState(false);
+   const { carts, setCarts } = useCarts();
   console.log(agreed);
 
   let navigate = useNavigate();
+
+  const nextPage = () => {
+    if (carts.length == 0) {
+       toast.error("Your cart is empty");
+      navigate('/')
+    } else {
+      navigate('/place-order')
+    }
+  }
   
 
   let green = "#51a6b6";
@@ -45,7 +56,7 @@ const CartFooter = (props) => {
             </a>
           </label>
           <button
-            onClick={() => navigate('/place-order')}
+            onClick={nextPage}
             type="submit"
             disabled={!agreed}
             className={`w-full py-2 px-4 text-white text-sm rounded-md flex items-center justify-center transition-all duration-300

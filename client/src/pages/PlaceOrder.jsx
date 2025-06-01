@@ -414,6 +414,7 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
+
   // Form state
   const [formData, setFormData] = useState({
     contact: "",
@@ -478,6 +479,7 @@ const CheckoutPage = () => {
     if (!validateForm()) return;
     if (carts.length === 0) {
       toast.error("Your cart is empty");
+      navigate('/')
       return;
     }
     const userToken = localStorage.getItem("userToken");
@@ -531,6 +533,7 @@ const CheckoutPage = () => {
 
       toast.success(data.message || "Order placed successfully!");
       setCarts([]);
+      localStorage.setItem(`Carts_${user?._id}`, JSON.stringify([]));
       // localStorage.removeItem("userCarts");
       navigate("/order-success", { state: { orderId: data.orderId } });
     } catch (error) {

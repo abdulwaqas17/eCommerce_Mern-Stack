@@ -107,7 +107,9 @@ const Carts = () => {
       </div>
 
       {/* Header */}
-      <div className="w-full px-4 py-6 bg-white">
+      {
+        carts.length !== 0 &&
+        <div className="w-full px-4 py-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-semibold text-gray-800 mb-3 text-center">
             Your cart
@@ -125,6 +127,7 @@ const Carts = () => {
           </div>
         </div>
       </div>
+      }
 
       {/* Cart Table */}
       <div className="mx-6">
@@ -137,9 +140,10 @@ const Carts = () => {
       </div> */}
 
       {/* Checkout Footer */}
+      {carts.length !== 0 &&
       <div className="mx-8">
         <CartFooter totalPrice={totalPrice}  loading={isPlacingOrder} />
-      </div>
+      </div>}
 
       <Footer />
     </div>

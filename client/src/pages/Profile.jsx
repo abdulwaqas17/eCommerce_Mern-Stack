@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useCartAndWishlist from "../utils/useCartAndWishlist";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const UserProfile = () => {
   });
   const [chatMessages, setChatMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const {toggleWishlist,addToCart} = useCartAndWishlist();
 
   console.log(wishlist);
 
@@ -95,7 +97,7 @@ const UserProfile = () => {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user/update", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -365,12 +367,15 @@ const UserProfile = () => {
                       className="w-full h-40 object-cover"
                     />
                     <div className="p-3">
-                      <h3 className="font-medium">{item.name}</h3>
+                      <h3 className="font-medium h-[50px]">{item.name}</h3>
                       <p className="text-blue-600 font-semibold">
                         ${item.price}
                       </p>
-                      <button className="mt-2 w-full bg-blue-600 text-white py-1 rounded hover:bg-blue-700">
+                      <button onClick={() => addToCart(item)} className="mt-2 w-full bg-blue-600 text-white py-1 rounded hover:bg-blue-700">
                         Add to Cart
+                      </button>
+                      <button onClick={()=> toggleWishlist(item)} className="mt-2 w-full bg-red-500 text-white py-1 rounded hover:bg-red-700">
+                        Remove From Wishlist
                       </button>
                     </div>
                   </div>
