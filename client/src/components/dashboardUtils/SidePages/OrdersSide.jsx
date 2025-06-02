@@ -114,7 +114,7 @@ const OrdersSide = () => {
                     Status
                   </th>
                   <th className="px-4 py-3 font-medium text-gray-600">Date</th>
-                  <th className="px-4 py-3 font-medium text-right text-gray-600">
+                  <th className="px-4 py-3 font-medium text-left text-gray-600">
                     Action
                   </th>
                 </tr>
@@ -124,7 +124,7 @@ const OrdersSide = () => {
                   <tr key={order._id}>
                     <td className="px-4 py-3">{order._id.slice(1, 6)}</td>
                     <td className="px-4 py-3 font-bold">
-                      {order.shippingAddress.firstName+" " +order.shippingAddress.lastName}
+                      <p className="w-[100px]">{order.shippingAddress.firstName+" " +order.shippingAddress.lastName}</p>
                     </td>
                     <td className="px-4 py-3">{order.userEmail}</td>
                     <td className="px-4 py-3">
@@ -144,10 +144,11 @@ const OrdersSide = () => {
                       </select>
                     </td>
                     <td className="px-4 py-3">
-                      {new Date(order.orderDate).toISOString().split("T")[0]}
+                      <p className="w-[80px]">{new Date(order.orderDate).toISOString().split("T")[0]}</p>
                     </td>
-                    <td className="px-4 py-3 text-right">
-                      <button className="hover:underline mr-2 p-1 rounded bg-blue-800 text-white">
+                    <td className="px-4 py-3 text-left ">
+                    <div className="w-[80px]">
+                        <button className="hover:underline mr-2 p-1 rounded bg-blue-800 text-white">
                         Detail
                       </button>
                       <div className="relative inline-block text-left">
@@ -155,6 +156,7 @@ const OrdersSide = () => {
                           ...
                         </button>
                       </div>
+                    </div>
                     </td>
                   </tr>
                 ))}

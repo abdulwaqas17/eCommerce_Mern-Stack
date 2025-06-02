@@ -461,7 +461,7 @@ const Slideshow = () => {
           </h3>
         )}
 
-        <h1 className="text-white text-3xl md:text-5xl font-bold mb-5 md:leading-5">
+        <h1 className="text-white text-3xl md:text-5xl font-bold mb-5 leading-5">
           {slide.heading}
         </h1>
 

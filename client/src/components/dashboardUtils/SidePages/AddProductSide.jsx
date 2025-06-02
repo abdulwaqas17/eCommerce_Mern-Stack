@@ -100,7 +100,7 @@ const AddProductSide = () => {
 };
 
   return (
-    <section className="p-4">
+    <section >
       <div className="flex justify-between items-center mb-6 w-full">
         <h2 className="text-2xl font-semibold">Add New Product</h2>
         <div className="space-x-3">

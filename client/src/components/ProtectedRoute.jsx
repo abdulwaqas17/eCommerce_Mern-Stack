@@ -69,6 +69,7 @@ const ProtectedRoutes = (props) => {
         if (data.success) {
           setIsVerified(true);
         } else {
+          toast.error("Unauthorized access, Login First");
           navigate(props.redirect);
         }
       } catch (err) {

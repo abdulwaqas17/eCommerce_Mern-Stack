@@ -1,3 +1,116 @@
+// import React from "react";
+// import useOrders from "../../utils/useOrders";
+
+// const DashOrders = () => {
+//   const { orders, loading, error } = useOrders();
+
+//   return (
+//     <div className="bg-white rounded-xl shadow-md p-6 my-6">
+//       <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+//         <h4 className="text-xl font-semibold mb-3 md:mb-0">Latest Orders</h4>
+//         <div className="flex flex-wrap gap-3">
+//           <select className="border border-gray-300 rounded-md px-3 py-1 text-sm">
+//             <option>All Categories</option>
+//             <option>Women's Clothing</option>
+//             <option>Men's Clothing</option>
+//             <option>Cellphones</option>
+//             <option>Computer & Office</option>
+//             <option>Consumer Electronics</option>
+//             <option>Jewelry & Accessories</option>
+//             <option>Home & Garden</option>
+//             <option>Luggage & Bags</option>
+//             <option>Shoes</option>
+//             <option>Mother & Kids</option>
+//           </select>
+//           <input
+//             type="date"
+//             className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+//           />
+//           <select className="border border-gray-300 rounded-md px-3 py-1 text-sm">
+//             <option>Status</option>
+//             <option>All</option>
+//             <option>Paid</option>
+//             <option>Chargeback</option>
+//             <option>Refund</option>
+//           </select>
+//         </div>
+//       </div>
+
+//       {/* Conditional Rendering */}
+//       {loading ? (
+//         <div className="p-4 text-center text-blue-600 font-semibold">
+//           Loading orders...
+//         </div>
+//       ) : error ? (
+//         <div className="p-4 text-center text-red-600 font-semibold">
+//           Failed to fetch orders. Please try again.
+//         </div>
+//       ) : (
+//         <div className="overflow-x-auto">
+//           <table className="min-w-full table-auto text-sm">
+//             <thead className="bg-gray-100 text-left">
+//               <tr>
+//                 <th className="p-2 text-center">
+//                   <input type="checkbox" />
+//                 </th>
+//                 <th className="p-2">Order ID</th>
+//                 <th className="p-2">Billing Name</th>
+//                 <th className="p-2">Email</th>
+//                 <th className="p-2">Total</th>
+//                 <th className="p-2">Status</th>
+//                 <th className="p-2">Date</th>
+//                 <th className="p-2 text-right">Action</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {orders.map((order) => (
+//                 <tr key={order._id} className="border-t">
+//                   <td className="text-center p-2">
+//                     <input type="checkbox" />
+//                   </td>
+//                   <td className="p-2 font-semibold text-blue-600">
+//                     {order._id.slice(1, 6)}
+//                   </td>
+//                   <td className="p-2 font-bold">
+//                      {order.shippingAddress.firstName+" " +order.shippingAddress.lastName}
+//                   </td>
+//                   <td className="p-2">{order.userEmail}</td>
+//                   <td className="p-2">${order.total.toFixed(2)}</td>
+//                   <td className="p-2">
+//                     <span
+//                       className={`px-2 py-1 rounded-full text-xs font-medium ${
+//                         order.status === "Pending"
+//                           ? "bg-yellow-100 text-yellow-700"
+//                           : order.status === "Canceled"
+//                           ? "bg-red-100 text-red-700"
+//                           : "bg-green-100 text-green-700"
+//                       }`}
+//                     >
+//                       {order.status}
+//                     </span>
+//                   </td>
+//                   <td className="p-2">
+//                     {new Date(order.orderDate).toISOString().split("T")[0]}
+//                   </td>
+//                   <td className="p-2 text-right">
+//                     <button className="hover:underline mr-2 p-1 rounded bg-blue-800 text-white">
+//                       Detail
+//                     </button>
+//                     <button className="text-gray-600 font-bold p-1 hover:text-gray-800 rounded border border-blue-800">
+//                       ...
+//                     </button>
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default DashOrders;
 import React from "react";
 import useOrders from "../../utils/useOrders";
 
@@ -5,11 +118,13 @@ const DashOrders = () => {
   const { orders, loading, error } = useOrders();
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 my-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-        <h4 className="text-xl font-semibold mb-3 md:mb-0">Latest Orders</h4>
-        <div className="flex flex-wrap gap-3">
-          <select className="border border-gray-300 rounded-md px-3 py-1 text-sm">
+    <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 my-4 sm:my-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+        <h4 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-0">
+          Latest Orders
+        </h4>
+        <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
+          <select className="border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm focus:outline-none">
             <option>All Categories</option>
             <option>Women's Clothing</option>
             <option>Men's Clothing</option>
@@ -24,9 +139,9 @@ const DashOrders = () => {
           </select>
           <input
             type="date"
-            className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+            className="border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm focus:outline-none"
           />
-          <select className="border border-gray-300 rounded-md px-3 py-1 text-sm">
+          <select className="border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm focus:outline-none">
             <option>Status</option>
             <option>All</option>
             <option>Paid</option>
@@ -47,18 +162,23 @@ const DashOrders = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto text-sm">
+          <table className="min-w-full table-auto text-xs sm:text-sm">
             <thead className="bg-gray-100 text-left">
               <tr>
                 <th className="p-2 text-center">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                  />
                 </th>
                 <th className="p-2">Order ID</th>
                 <th className="p-2">Billing Name</th>
-                <th className="p-2">Email</th>
+                <th className="p-2 hidden sm:table-cell">Email</th>
+                {/* Hide on small screens */}
                 <th className="p-2">Total</th>
                 <th className="p-2">Status</th>
-                <th className="p-2">Date</th>
+                <th className="p-2 hidden md:table-cell">Date</th>
+                {/* Hide on medium screens */}
                 <th className="p-2 text-right">Action</th>
               </tr>
             </thead>
@@ -66,15 +186,21 @@ const DashOrders = () => {
               {orders.map((order) => (
                 <tr key={order._id} className="border-t">
                   <td className="text-center p-2">
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      className="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                    />
                   </td>
                   <td className="p-2 font-semibold text-blue-600">
                     {order._id.slice(1, 6)}
                   </td>
                   <td className="p-2 font-bold">
-                     {order.shippingAddress.firstName+" " +order.shippingAddress.lastName}
+                    {order.shippingAddress.firstName + " " + order.shippingAddress.lastName}
                   </td>
-                  <td className="p-2">{order.userEmail}</td>
+                  <td className="p-2 hidden sm:table-cell">
+                    {order.userEmail}
+                  </td>
+                  {/* Hide on small screens */}
                   <td className="p-2">${order.total.toFixed(2)}</td>
                   <td className="p-2">
                     <span
@@ -89,14 +215,16 @@ const DashOrders = () => {
                       {order.status}
                     </span>
                   </td>
-                  <td className="p-2">
+                  <td className="p-2 hidden md:table-cell">
+                    
+                    {/* Hide on medium screens */}
                     {new Date(order.orderDate).toISOString().split("T")[0]}
                   </td>
-                  <td className="p-2 text-right">
-                    <button className="hover:underline mr-2 p-1 rounded bg-blue-800 text-white">
+                  <td className="p-2 text-right flex justify-end gap-2">
+                    <button className="hover:underline mr-2 p-1 rounded bg-blue-600 text-white text-xs sm:text-sm focus:outline-none">
                       Detail
                     </button>
-                    <button className="text-gray-600 font-bold p-1 hover:text-gray-800 rounded border border-blue-800">
+                    <button className="text-gray-600 font-bold p-1 hover:text-gray-800 rounded border border-gray-300 text-xs sm:text-sm focus:outline-none">
                       ...
                     </button>
                   </td>
