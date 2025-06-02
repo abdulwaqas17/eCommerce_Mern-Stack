@@ -527,9 +527,16 @@ const CheckoutPage = () => {
 
       const data = await res.json();
 
+      console.log(data);
+      
+      if(data.message === 'Invalid or expired token') {
+        navigate('/login')
+      }
+
       if (!res.ok) {
         throw new Error(data.message || "Failed to place order.");
       }
+
 
       toast.success(data.message || "Order placed successfully!");
       setCarts([]);
@@ -825,7 +832,7 @@ const CheckoutPage = () => {
                     Shopping cart ({calculateTotalPrice(carts)} items)
                   </h3>
 
-                  <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2">
+                  <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2 pt-3">
                     {carts.length === 0 ? (
                       <p className="text-gray-500">Your cart is empty</p>
                     ) : (
