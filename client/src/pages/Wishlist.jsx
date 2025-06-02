@@ -14,7 +14,7 @@ const Wishlist = () => {
     <div>
       <Navbar />
 
-      <div className="bg-gradient-to-b from-[#eaf6ff91] to-[#f6f7f734]">
+      <div className="bg-gradient-to-b from-[#e4f6ffe1] to-[#f6f7f71c]">
         <div className="pt-[45px] pb-[50px]">
           <h2 className="text-center text-4xl font-bold">Wishlist</h2>
           <Breadcrumb val="Wishlist" />

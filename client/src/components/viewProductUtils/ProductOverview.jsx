@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useProducts from "../../utils/useProducts";
 import useCartAndWishlist from "../../utils/useCartAndWishlist";
+import { FaFacebook, FaLinkedin, FaPinterest } from "react-icons/fa";
+import { AiFillTwitterCircle } from "react-icons/ai";
 
 const ProductOverview = () => {
   const { products, loading, error } = useProducts();
@@ -11,12 +13,17 @@ const ProductOverview = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
+  const [image, setImage] = useState(null);
   const { id } = useParams();
+  
 
   // use effect for get desire product
   useEffect(() => {
     if (products) {
       const found = products.find((item) => item._id === id);
+      console.log(found);
+      
+      setImage(found?.image1)
       setProduct(found);
     }
   }, [products, id]);
@@ -24,6 +31,10 @@ const ProductOverview = () => {
   const handleQuantityChange = (value) => {
     setQuantity((prev) => Math.max(1, prev + value));
   };
+
+  const changeImage= (img) => {
+    setImage(img);
+  }
 
 
  
@@ -43,7 +54,7 @@ const ProductOverview = () => {
                   {/* Main Image */}
                   <div className="relative aspect-square">
                     <img
-                      src={product.image1}
+                      src={image}
                       alt={product.name}
                       className="w-full h-full object-cover"
                       loading="lazy"
@@ -54,12 +65,13 @@ const ProductOverview = () => {
                     <div className="flex space-x-4 min-w-max">
                       <button
                         type="button"
+                        onClick={() => changeImage(product.image1)}
                         className="flex-shrink-0 border border-gray-300 rounded-md p-1 hover:border-blue-500 transition"
                       >
                         <div className="w-[60px] h-[60px] overflow-hidden rounded-md">
                           <img
                             src={product.image1}
-                            alt={product.image1}
+                            alt={product.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
@@ -67,12 +79,13 @@ const ProductOverview = () => {
                       </button>
                       <button
                         type="button"
+                          onClick={() => changeImage(product.image1)}
                         className="flex-shrink-0 border border-gray-300 rounded-md p-1 hover:border-blue-500 transition"
                       >
-                        <div className="w-[60px] h-[60px] overflow-hidden rounded-md">
+                        <div className="w-[60px] h-[60px] overflow-hidden rounded-md scale-110">
                           <img
                             src={product.image1}
-                            alt={product.image1}
+                            alt={product.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
@@ -80,12 +93,13 @@ const ProductOverview = () => {
                       </button>
                       <button
                         type="button"
+                          onClick={() => changeImage(product.image2)}
                         className="flex-shrink-0 border border-gray-300 rounded-md p-1 hover:border-blue-500 transition"
                       >
                         <div className="w-[60px] h-[60px] overflow-hidden rounded-md">
                           <img
-                            src={product.image1}
-                            alt={product.image1}
+                            src={product.image2}
+                            alt={product.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
@@ -93,12 +107,13 @@ const ProductOverview = () => {
                       </button>
                       <button
                         type="button"
+                          onClick={() => changeImage(product.image2)}
                         className="flex-shrink-0 border border-gray-300 rounded-md p-1 hover:border-blue-500 transition"
                       >
-                        <div className="w-[60px] h-[60px] overflow-hidden rounded-md">
+                        <div className="w-[60px] h-[60px] overflow-hidden rounded-md scale-110">
                           <img
-                            src={product.image1}
-                            alt={product.image1}
+                            src={product.image2}
+                            alt={product.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
@@ -414,58 +429,19 @@ const ProductOverview = () => {
                   {/* Share Buttons */}
                   <div className="mb-6">
                     <div className="flex gap-4">
-                      <a href="#" className="text-gray-600 hover:text-black">
-                        <svg
-                          width="8"
-                          height="14"
-                          viewBox="0 0 9 17"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M2.486 16.2084L2.486 8.81845H0L0 5.93845L2.486 5.93845L2.486 3.81845C2.38483 2.79982 2.73793 1.78841 3.45107 1.05407C4.16421 0.319722 5.16485 -0.0628415 6.186 0.00844868C6.9284 0.00408689 7.67039 0.0441585 8.408 0.128449V2.69845L6.883 2.69845C6.4898 2.61523 6.08104 2.73438 5.79414 3.01585C5.50724 3.29732 5.3803 3.70373 5.456 4.09845L5.456 5.93845H8.308L7.936 8.81845H5.46L5.46 16.2084H2.486Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a href="#" className="text-gray-600 hover:text-black">
-                        <svg
-                          width="17"
-                          height="14"
-                          viewBox="0 0 20 16"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M12.845 2.13398C14.0997 2.11363 14.7676 2.53229 15.4054 3.06445C15.9468 3.02216 16.6505 2.74528 17.065 2.55232C17.1993 2.48493 17.3337 2.41786 17.468 2.35046C17.2312 2.93602 16.9103 3.39474 16.417 3.74251C16.3074 3.81976 16.1987 3.92434 16.0613 3.97362C16.0613 3.97584 16.0613 3.97838 16.0613 3.98061C16.7643 3.97394 17.3441 3.6837 17.8947 3.52603C17.8947 3.52856 17.8947 3.5311 17.8947 3.53365C17.6055 3.95454 17.214 4.38147 16.7963 4.6876C16.6277 4.8103 16.4591 4.93301 16.2905 5.05571C16.2997 5.73696 16.2795 6.38704 16.1404 6.95989C15.3314 10.2888 13.1878 12.5491 9.7945 13.517C8.5761 13.8648 6.60702 14.0075 5.21102 13.6903C4.51872 13.5329 3.89334 13.3552 3.30644 13.1203C2.98052 12.9896 2.67854 12.8485 2.38972 12.6876C2.29496 12.6346 2.2001 12.5818 2.10522 12.5287C2.42018 12.5376 2.78846 12.6168 3.14052 12.5649C3.45896 12.5179 3.77128 12.53 4.06514 12.4712C4.79794 12.324 5.4486 12.1294 6.00916 11.829C6.2809 11.6834 6.69324 11.5124 6.88634 11.3026C6.52248 11.3083 6.19256 11.2311 5.9223 11.144C4.87436 10.8051 4.26436 10.1824 3.86752 9.2468C4.1851 9.27827 5.09982 9.35394 5.31368 9.18894C4.91398 9.16891 4.52956 8.95688 4.25478 8.7992C3.41184 8.31634 2.72438 7.50634 2.72954 6.26021C2.84022 6.30821 2.9509 6.35653 3.06148 6.40453C3.27324 6.48622 3.48848 6.52978 3.74112 6.57778C3.8478 6.59781 4.06114 6.65534 4.18362 6.6137C4.17836 6.6137 4.17308 6.6137 4.16782 6.6137C4.00476 6.43982 3.73902 6.32411 3.57512 6.1375C3.03438 5.52206 2.52758 4.57507 2.84812 3.44686C2.9294 3.16077 3.05842 2.90805 3.19586 2.67502C3.20114 2.67757 3.2064 2.67979 3.21168 2.68234C3.2746 2.80282 3.415 2.89152 3.50408 2.99229C3.78024 3.30573 4.1209 3.5877 4.46812 3.83629C5.65108 4.68347 6.71642 5.20386 8.42738 5.58946C8.86134 5.68706 9.36308 5.76176 9.88146 5.76238C9.73578 5.37424 9.78258 4.7461 9.89726 4.37035C10.1856 3.42557 10.8119 2.74402 11.7307 2.37907C11.9504 2.29197 12.1941 2.22838 12.4498 2.17722C12.5815 2.16291 12.7133 2.14861 12.845 2.13398Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a href="#" className="text-gray-600 hover:text-black">
-                        <svg
-                          width="10"
-                          height="14"
-                          viewBox="0 0 12 16"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M5.8042 0.00123531C8.79537 -0.0442356 10.6685 1.16769 11.5498 3.29299C11.8407 3.99433 12.1516 5.28439 11.9181 6.35474C11.825 6.78208 11.7985 7.22812 11.6726 7.63086C11.4163 8.4496 11.0829 9.17441 10.6413 9.79945C10.0418 10.6486 9.13196 11.2212 7.98951 11.5091C6.97899 11.7637 6.04959 11.3826 5.50954 10.9732C5.33747 10.843 5.10674 10.6728 5.04304 10.4377C5.03488 10.4377 5.0267 10.4377 5.01853 10.4377C4.97972 10.8669 4.81532 11.3224 4.69924 11.7135C4.53858 12.2545 4.50733 12.8146 4.3064 13.3208C4.08349 13.8828 3.81274 14.3978 3.52072 14.8776C3.36739 15.1292 2.94427 15.9904 2.63675 16C2.60311 15.9354 2.58964 15.9105 2.58761 15.796C2.48858 15.6383 2.55757 15.3724 2.51393 15.1578C2.44604 14.8236 2.39317 14.2217 2.46491 13.8824C2.46491 13.7038 2.46491 13.5248 2.46491 13.3465C2.54397 12.9786 2.54085 12.6015 2.63675 12.2494C2.84537 11.4824 2.96145 10.6699 3.17692 9.87611C3.38398 9.11352 3.57396 8.27939 3.74172 7.50321C3.77957 7.32789 3.56652 6.82389 3.52072 6.63572C3.37628 6.04186 3.48624 5.21874 3.66805 4.77269C3.89698 4.21111 4.56717 3.3535 5.43589 3.57359C6.13407 3.75039 6.57846 4.50528 6.34437 5.46192C6.09862 6.46589 5.7798 7.3653 5.5587 8.37035C5.50173 8.62933 5.59968 8.90442 5.65687 9.05958C5.86357 9.61934 6.49037 10.163 7.32652 9.95278C8.59396 9.63365 9.15431 8.48627 9.53645 7.24791C9.63981 6.91302 9.62743 6.59647 9.70831 6.22709C9.87894 5.44763 9.80648 4.28411 9.56098 3.67556C9.16753 2.70023 8.43329 2.07518 7.42471 1.73624C7.1465 1.68526 6.86819 1.63427 6.58988 1.58329C6.12397 1.47655 5.23532 1.63685 4.92023 1.73624C3.51171 2.18156 2.63952 2.92544 2.09658 4.26247C1.91177 4.71767 1.81046 5.17911 1.77741 5.81884C1.76913 5.8955 1.76094 5.97217 1.75278 6.04883C1.86153 6.62068 1.87259 6.99959 2.09658 7.42657C2.20715 7.63711 2.46971 7.8029 2.51393 8.06444C2.54001 8.2185 2.42705 8.45105 2.39125 8.57467C2.33705 8.76137 2.35676 8.97522 2.26844 9.13625C2.10873 9.42678 1.67383 9.20852 1.48275 9.08491C0.489307 8.44373 -0.329526 6.5895 0.132284 4.79837C0.20342 4.5218 0.206915 4.28118 0.304126 4.03285C0.906661 2.49554 1.80565 1.55101 3.10325 0.741098C3.58947 0.437749 4.24511 0.287354 4.84657 0.128885C5.16574 0.0863481 5.48503 0.0437917 5.8042 0.00123531Z"
-                          ></path>
-                        </svg>
-                      </a>
-                      <a href="#" className="text-gray-600 hover:text-black">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"></path>
-                        </svg>
-                      </a>
+                     <span>
+                      <FaFacebook  className="text-blue-600 text-[1.5rem]"/>
+                     </span>
+                     <span>
+                      <AiFillTwitterCircle   className="text-sky-500 text-[1.5rem]"/>
+                     </span>
+                     <span>
+                      <FaPinterest   className="text-red-600 text-[1.5rem]"/>
+                     </span>
+                     <span>
+                      <FaLinkedin   className="text-blue-800 text-[1.5rem]"/>
+                     </span>
+                     
                     </div>
                   </div>
 
@@ -546,7 +522,7 @@ const ProductOverview = () => {
           </div>
         </section>
       ) : (
-        <p>Loadding product..</p>
+        <p className="text-center text-xl">Loading product..</p>
       )}
     </>
   );

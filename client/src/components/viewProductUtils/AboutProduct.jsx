@@ -174,7 +174,7 @@ const AboutProduct = () => {
               </div>
 
               {/* Desktop tabs */}
-              <div className="hidden md:flex justify-center border-b border-gray-200">
+              <div className="hidden md:flex justify-start border-b border-gray-200">
                 <nav className="flex space-x-8">
                   {tabs.map((tab) => (
                     <button

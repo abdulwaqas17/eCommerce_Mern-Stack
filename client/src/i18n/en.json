@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "shop": "Shop",
+    "faqs": "FAQs",
+    "contact": "Contact"
+  },
+    "headings": {
+    "popularCategories": "Popular Categories",
+    "healthProducts": "Health Products",
+    "featuredBrands": "Featured Brands",
+    "dailyWellbeing": "Daily Wellbeing",
+    "recentProducts": "Recent Products",
+    "latestArticles": "Latest Articles & Blogs",
+    "trustedCustomers": "Trusted by 10 Lakh Customers across 3600+ Cities",
+    "newsletterSignup": "Sign Up For Newsletter"
+  },
+  "categories": {
+    "Respiratory": "Respiratory",
+    "Medicine": "Medicine",
+    "Covid Protection": "Covid Protection"
+  },
+  "buttons": {
+    "addToCart": "Add to Cart"
+  }
+
+}

@@ -5,6 +5,7 @@ import {
   userContext,
   cartContext,
   wishlistContext,
+  themeContext
 } from "../context/contextdata";
 
 export default function DataProvider({ children }) {
@@ -34,6 +35,8 @@ export default function DataProvider({ children }) {
 
   
   return (
+    <themeContext.Provider value={{ dark: "#e4f6ffe1", light: "rgba(230,230,230,0.25)" }}>
+      {/* You can replace "light" with your actual theme logic */}
     <userContext.Provider value={userValue}>
       <cartContext.Provider value={cartValue}>
         <wishlistContext.Provider value={wishlistValue}>
@@ -41,5 +44,6 @@ export default function DataProvider({ children }) {
         </wishlistContext.Provider>
       </cartContext.Provider>
     </userContext.Provider>
+    </themeContext.Provider>
   );
 }

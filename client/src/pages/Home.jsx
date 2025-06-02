@@ -14,12 +14,14 @@ import Facilities from "../components/Facilities";
 import ProductsSection from "../components/homeUtils/ProductsSection";
 import Milestones from "../components/homeUtils/Milestones";
 import useProducts from "../utils/useProducts";
+import { useTheme } from "../hooks/hooks";
+import { useTranslation } from "react-i18next";
 
 
 
 const Home = () => {
   const { products, loading, error } = useProducts();
-  
+   const {dark,light} = useTheme();
 
   // 🔍 Optimize Filtering with useMemo
   const healthCareProducts = useMemo(
@@ -37,6 +39,8 @@ const Home = () => {
     [products]
   );
 
+  const { t } = useTranslation();
+
   return (
     <div>
       <Navbar />
@@ -52,8 +56,10 @@ const Home = () => {
       <Categories />
 
       {/* Health Care Products */}
-      <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
-        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Health Products</h2>
+      <section className="py-[40px]"  style={{
+          backgroundImage: `linear-gradient(to bottom, ${dark}, ${light})`,
+        }}>
+        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{t("headings.healthProducts")}</h2>
         {loading ? (
           <p className="text-center py-4">Loading products...</p>
         ) : error ? (
@@ -66,8 +72,10 @@ const Home = () => {
       </section>
 
       {/* Supplements */}
-      <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
-        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Daily Wellbeing</h2>
+      <section className="py-[40px]"  style={{
+          backgroundImage: `linear-gradient(to bottom, ${dark}, ${light})`,
+        }}>
+        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{t("headings.dailyWellbeing")}</h2>
       
          {loading ? (
           <p className="text-center py-4">Loading products...</p>
@@ -86,8 +94,10 @@ const Home = () => {
       </section>
 
       {/* Recent Products */}
-      <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
-        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">Recent Products</h2>
+      <section className="py-[40px]"  style={{
+          backgroundImage: `linear-gradient(to bottom, ${dark}, ${light})`,
+        }}>
+        <h2 className="text-center font-bold md:text-4xl text-2xl md:py-[20px]">{t("headings.recentProducts")}</h2>
        
           {loading ? (
           <p className="text-center py-4">Loading products...</p>
@@ -99,9 +109,11 @@ const Home = () => {
       </section>
 
       {/* Articles, Blogs, Milestones */}
-      <section className="py-[40px] bg-gradient-to-b from-[#eaf6ff] to-[#f6f7f7]">
+      <section className="py-[40px]"  style={{
+          backgroundImage: `linear-gradient(to bottom, ${dark}, ${light})`,
+        }}>
         <section className="py-[50px]">
-          <h2 className="text-center font-bold md:text-4xl text-2xl py-[30px]">Latest Articles & Blogs</h2>
+          <h2 className="text-center font-bold md:text-4xl text-2xl py-[30px]">{t("headings.latestArticles")}</h2>
           <div className="flex flex-wrap justify-center md:justify-between md:gap-0 gap-6 px-[30px]">
             <BlogCard img="images/asset 61.jpeg" />
             <BlogCard img="images/asset 62.jpeg" />

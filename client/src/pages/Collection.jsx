@@ -8,13 +8,12 @@ import { useTheme } from '../hooks/hooks'
 
 const Collection = () => {
 
-  let theme = useTheme();
-  console.log(theme);
+const {dark,light} = useTheme();
   
   return (
     <div>
         <Navbar/>
-        <div className={`bg-gradient-to-b from-[${theme[0]?theme[0]:'bg-sky-100'}] to-[${theme[1]?theme[1]:'bg-lime-50'}] pt-[45px] pb-[50px]`}>
+        <div  className="pt-[45px] pb-[50px] bg-gradient-to-b from-[#e4f6ffe1] to-[#f6f7f71c]">
           <Breadcrumb val="Collections All"/>
         </div>
         <AllCategories/>

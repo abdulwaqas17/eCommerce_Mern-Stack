@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "products": "المنتجات",
+    "shop": "المتجر",
+    "faqs": "الأسئلة الشائعة",
+    "contact": "اتصل بنا"
+  },
+  "headings": {
+    "popularCategories": "الفئات الشائعة",
+    "healthProducts": "منتجات صحية",
+    "featuredBrands": "العلامات التجارية المميزة",
+    "dailyWellbeing": "العافية اليومية",
+    "recentProducts": "المنتجات الحديثة",
+    "latestArticles": "أحدث المقالات والمدونات",
+    "trustedCustomers": "موثوق من قبل مليون عميل في أكثر من 3600 مدينة",
+    "newsletterSignup": "اشترك في النشرة الإخبارية"
+  },
+  "categories": {
+    "Respiratory": "أمراض الجهاز التنفسي",
+    "Medicine": "الأدوية",
+    "Covid Protection": "الحماية من كوفيد"
+  },
+  "buttons": {
+    "addToCart": "أضف إلى السلة"
+  }
+}

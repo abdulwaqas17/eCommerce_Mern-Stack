@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const brandImages = [
   "https://ap-medilazar.myshopify.com/cdn/shop/files/brand_1.png?crop=center&height=48&v=1734657741&width=144",
@@ -12,10 +13,11 @@ const brandImages = [
 ];
 
 const FeaturedBrands = () => {
+    const { t } = useTranslation();
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-4xl font-bold text-gray-800">Featured Brands</h2>
+        <h2 className="text-2xl md:text-4xl font-bold text-gray-800">{t("headings.featuredBrands")}</h2>
         <p className="text-sm text-gray-500 pt-[13px] md:text-[1rem]">Trusted by top health & wellness companies</p>
       </div>
 

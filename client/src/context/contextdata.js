@@ -3,6 +3,6 @@ import { createContext } from "react";
 const cartContext = createContext(null);
 const wishlistContext = createContext(null);
 const userContext = createContext(null);
-const themeContext = createContext(['#ebf7ff','#f6f7f71c']);
+const themeContext = createContext(null);
 
 export {cartContext,userContext,wishlistContext,themeContext};

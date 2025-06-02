@@ -2,15 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 import { FiEye } from "react-icons/fi"; // Eye icon
 import { FaHeart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Card = (props) => {
   const navigate = useNavigate();
 
   const { product,addToCart, addToWishlist, isWishlisted } = props;
+  const { t } = useTranslation();
   
 
   return (
-    <div className="rounded-md box-content hover:bg-white hover:border-white hover:border-[14px] duration-100 mx-auto h-full flex flex-col">
+    <div className="bg-transparent hover:bg-white p-4 rounded-lg">
+      <div className="rounded-md box-content hover:bg-white  duration-100 mx-auto h-full flex flex-col">
       <div className="relative overflow-hidden bg-[#eaf6ff] aspect-square group">
         <img
           src={product.image1}
@@ -40,18 +43,18 @@ const Card = (props) => {
           {/* View (Eye icon) */}
           <div
             onClick={() => navigate(`/product/${product._id}`)}
-            className="p-1.5 rounded-full shadow bg-white hover:bg-gray-100 cursor-pointer"
+            className="p-1.5 rounded-full shadow text-gray-600 hover:text-white bg-white hover:bg-pink-600  cursor-pointer"
             title="View Details"
           >
-            <FiEye className="text-gray-600" size={18} />
+            <FiEye  size={18} />
           </div>
         </div>
       </div>
 
       {/* Product Details */}
-      <div className="p-4 space-y-2 flex-grow flex flex-col">
+      <div className=" space-y-2 flex-grow flex flex-col">
         <p className="text-sm text-indigo-600 font-medium line-clamp-1">
-          {product.useFor}
+          {t(`categories.${product.useFor}`)}
         </p>
 
         <h3
@@ -66,7 +69,7 @@ const Card = (props) => {
           <span className="text-gray-500">(0 reviews)</span>
         </div>
 
-        <div className="text-xl font-bold text-gray-800 mt-2">
+        <div className="text-xl font-bold text-pink-600 mt-2">
           ${product.price}
         </div>
 
@@ -74,9 +77,10 @@ const Card = (props) => {
           onClick={() => addToCart(product)}
           className="w-full mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
         >
-          Add to Cart
+          {t("buttons.addToCart")}
         </button>
       </div>
+    </div>
     </div>
   );
 };

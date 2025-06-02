@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "home": "主页",
+    "about": "关于我们",
+    "products": "产品",
+    "shop": "商店",
+    "faqs": "常见问题",
+    "contact": "联系我们"
+  },
+  "headings": {
+    "popularCategories": "热门类别",
+    "healthProducts": "健康产品",
+    "featuredBrands": "精选品牌",
+    "dailyWellbeing": "每日健康",
+    "recentProducts": "最近的产品",
+    "latestArticles": "最新文章和博客",
+    "trustedCustomers": "受到来自3600多个城市的100万客户的信任",
+    "newsletterSignup": "订阅新闻通讯"
+  },
+  "categories": {
+    "Respiratory": "呼吸系统",
+    "Medicine": "药品",
+    "Covid Protection": "新冠防护"
+  },
+  "buttons": {
+    "addToCart": "加入购物车"
+  }
+}

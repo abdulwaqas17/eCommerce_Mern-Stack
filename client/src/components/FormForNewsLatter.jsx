@@ -1,12 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const ForForNewsletter = () => {
+     const { t } = useTranslation();
   return (
     <section className=" py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Sign Up For Newsletter
+          {t("headings.newsletterSignup")}
           </h2>
           <p className="text-gray-600 max-w-xl">
             Join 60,000+ Subscribers and get a new discount coupon every

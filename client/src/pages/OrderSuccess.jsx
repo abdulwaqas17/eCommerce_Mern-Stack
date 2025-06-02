@@ -19,7 +19,7 @@ const OrderSuccess = () => {
   }, []);
 
   return (
-     <div>
+     <div >
        <Navbar />
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Optional Navbar - will only render if component exists */}

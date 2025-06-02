@@ -1,10 +1,11 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import {Link} from 'react-router-dom'
 
 
 const Categories = () => {
 
-
+  const { t } = useTranslation();
     const categories = [
         {
           id: 'hVRgfR',
@@ -44,7 +45,7 @@ const Categories = () => {
     <section className="bg-white py-16 px-[30px]">
           <div className="w-full">
             <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#1d2a38] mb-10">
-              Popular Categories
+              {t("headings.popularCategories")}
             </h2>
     
             <div className="flex flex-wrap md:justify-between justify-center md:gap-0 gap-3">

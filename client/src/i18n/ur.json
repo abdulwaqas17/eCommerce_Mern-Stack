@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "home": "ہوم",
+    "about": "ہمارے بارے میں",
+    "products": "مصنوعات",
+    "shop": "خریداری",
+    "faqs": "اکثر سوالات",
+    "contact": "رابطہ"
+  },
+  "headings": {
+    "popularCategories": "مشہور زمرے",
+    "healthProducts": "صحت کی مصنوعات",
+    "featuredBrands": "نمایاں برانڈز",
+    "dailyWellbeing": "روزانہ کی فلاح و بہبود",
+    "recentProducts": "حال ہی میں مصنوعات",
+    "latestArticles": "تازہ ترین مضامین اور بلاگز",
+    "trustedCustomers": "10 لاکھ صارفین کی اعتماد، 3600+ شہروں میں",
+    "newsletterSignup": "نیوز لیٹر کے لیے سائن اپ کریں"
+  },
+  "categories": {
+    "Respiratory": "سانس کی بیماری",
+    "Medicine": "دوائیاں",
+    "Covid Protection": "کورونا سے تحفظ"
+  },
+  "buttons": {
+    "addToCart": "کارٹ میں شامل کریں"
+  }
+}

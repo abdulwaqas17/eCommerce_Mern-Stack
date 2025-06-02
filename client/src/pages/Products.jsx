@@ -6,10 +6,12 @@ import Card from "../components/ProductCart";
 import Breadcrumb from "../components/Breadcrumb";
 import useCartAndWishlist from "../utils/useCartAndWishlist";
 import useProducts from "../utils/useProducts";
+import { useTheme } from "../hooks/hooks";
 
 const Products = () => {
   //hook reuseAble
   const { products, loading, error } = useProducts();
+  const {dark,light} = useTheme();
 
   // useCartAndWishlist hook reuseAble
   const { addToCart, toggleWishlist, wishlist } = useCartAndWishlist();
@@ -19,7 +21,7 @@ const Products = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-to-b from-[#eaf6ff91] to-[#f6f7f734] p-[40px]">
+      <div  className="p-[40px] bg-gradient-to-b from-[#e4f6ffe1] to-[#f6f7f71c]">
         <Breadcrumb val={nameValue ? nameValue : "Products"} />
       </div>
 
@@ -30,7 +32,7 @@ const Products = () => {
           {loading ? (
             <p className="text-center py-4">Loading products...</p>
           ) : error ? (
-            <p className="text-center text-red-600">{error}</p>
+            <p className="text-center text-red-600 bg-[rgba(230,230,230,0.81)]">{error}</p>
           ) : (
             products.map((product) => (
               <Card
