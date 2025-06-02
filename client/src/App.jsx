@@ -211,9 +211,9 @@ function App() {
 
 
           <Route path='/place-order' element={
-            <ProtectedRoutes  tokenName='userToken' redirect='/login'>
+            
               <PlaceOrder />
-            </ProtectedRoutes>
+    
           } />
 
 
@@ -225,9 +225,9 @@ function App() {
 
 
           <Route path='/carts' element={
-            <ProtectedRoutes  tokenName='userToken' redirect='/login'>
+          
               <Carts />
-            </ProtectedRoutes>
+           
           } />
 
           <Route path='/profile' element={
