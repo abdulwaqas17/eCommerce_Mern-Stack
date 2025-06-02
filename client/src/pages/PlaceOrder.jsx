@@ -797,7 +797,7 @@ const CheckoutPage = () => {
                         disabled={isPlacingOrder}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isPlacingOrder ? "Processing..." : "Pay now"}
+                        {isPlacingOrder ? "Processing..." : "Confirm Order"}
                       </button>
                     </div>
                   </section>

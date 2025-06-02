@@ -1,3 +1,225 @@
+// import React, { useEffect } from "react";
+// import { FaMinus, FaPlus } from "react-icons/fa";
+// import { useCarts, useUser } from "../../hooks/hooks";
+// import { Link } from "react-router-dom";
+
+// const CartTable = () => {
+//   let { carts, setCarts } = useCarts();
+
+//   console.log(carts);
+
+//   let { user } = useUser();
+
+//   // for maintain carts
+//   useEffect(() => {
+//     console.log("cart effect", carts);
+
+//     window.localStorage.setItem(
+//       `Carts_${user ? user._id : "guest"}`,
+//       JSON.stringify(carts)
+//     );
+//     // console.log('[carts]');
+//   }, [carts]);
+
+//   // removeCart function
+//   const removeCart = (cartId) => {
+//     // 🔄 Filter out the item with matching _id
+//     const updatedCarts = carts.filter((cart) => cart._id !== cartId);
+
+//     setCarts(updatedCarts); // ✅ No mutation
+//   };
+
+//   // updateCartQuantity function
+//   let updateCartQuantity = (cartId, action) => {
+//     const updatedCarts = carts.map((cart) => {
+//       if (cart._id == cartId) {
+//         let newQty =
+//           action === "inc" ? cart.quantity + 1 : Math.max(cart.quantity - 1, 1);
+//         return { ...cart, quantity: newQty };
+//       }
+
+//       return cart;
+//     });
+
+//     console.log(updatedCarts);
+
+//     setCarts(updatedCarts);
+//   };
+
+//   return (
+//     // <div className="w-full px-5 py-6 overflow-x-auto">
+//     //   <form action="/cart" method="post" className="w-full">
+//     //     <table className="min-w-full bg-white  rounded-md">
+//     //       <thead>
+//     //         <tr className="text-left font-semibold">
+//     //           <th className="p-3">Product</th>
+//     //           <th className="p-3 text-center">Quantity</th>
+//     //           <th className="p-3 text-right">Total</th>
+//     //         </tr>
+//     //       </thead>
+//     //       <tbody>
+//     //         {carts.length === 0 ? (
+//     //           <tr>
+//     //             <td
+//     //               colSpan="3"
+//     //               className="text-center py-10 text-gray-500 text-sm"
+//     //             >
+//     //               No carts found.
+//     //             </td>
+//     //           </tr>
+//     //         ) : (
+//     //           carts.map((item) => (
+//     //             <tr key={item._id} className="border border-gray-300">
+//     //               <td className="p-3 flex gap-4 items-start">
+//     //                 <img
+//     //                   src={item.image1}
+//     //                   alt={item.name}
+//     //                   className="w-20 h-20 rounded object-cover"
+//     //                 />
+//     //                 <div>
+//     //                   <h4 className="text-sm font-medium text-gray-800">
+//     //                     {item.name}
+//     //                   </h4>
+//     //                   <p className="text-gray-500 text-xs mt-1">
+//     //                     ${item.price.toFixed(2)}
+//     //                   </p>
+//     //                 </div>
+//     //               </td>
+
+//     //               <td className="p-3 text-center">
+//     //                 <div className="inline-flex items-center border rounded px-2">
+//     //                   <button
+//     //                     onClick={() => updateCartQuantity(item._id, "dec")}
+//     //                     type="button"
+//     //                     className="text-gray-600 hover:text-black"
+//     //                   >
+//     //                     <FaMinus />
+//     //                   </button>
+//     //                   <input
+//     //                     type="text"
+//     //                     value={item.quantity}
+//     //                     className="w-10 text-center border-0 focus:ring-0 text-sm"
+//     //                     readOnly
+//     //                   />
+//     //                   <button
+//     //                     onClick={() => updateCartQuantity(item._id, "inc")}
+//     //                     type="button"
+//     //                     className="text-gray-600 hover:text-black"
+//     //                   >
+//     //                     <FaPlus />
+//     //                   </button>
+//     //                 </div>
+
+//     //                 <div>
+//     //                   <button
+//     //                     onClick={() => removeCart(item._id)}
+//     //                     type="button"
+//     //                     className="text-xs text-red-500 hover:underline mt-1"
+//     //                   >
+//     //                     Remove
+//     //                   </button>
+//     //                 </div>
+//     //               </td>
+
+//     //               <td className="p-3 text-right text-sm text-gray-800">
+//     //                 ${(item.price * item.quantity).toFixed(2)}
+//     //               </td>
+//     //             </tr>
+//     //           ))
+//     //         )}
+//     //       </tbody>
+//     //     </table>
+//     //   </form>
+//     // </div>
+//     <div className="w-full px-5 py-6 overflow-x-auto">
+//   {carts.length === 0 ? (
+//     <div className="w-full bg-white rounded-md text-center pt-5 pb-10">
+//       <p className="text-gray-500 text-sm mb-6">No carts found.</p>
+//       <Link
+//         to="/"
+//         className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded shadow"
+//       >
+//         Shop Now
+//       </Link>
+//     </div>
+//   ) : (
+//     <form action="/cart" method="post" className="w-full">
+//       <table className="min-w-full bg-white rounded-md">
+//         <thead>
+//           <tr className="text-left font-semibold">
+//             <th className="p-3">Product</th>
+//             <th className="p-3 text-center">Quantity</th>
+//             <th className="p-3 text-right">Total</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {carts.map((item) => (
+//             <tr key={item._id} className="border border-gray-300">
+//               <td className="p-3 flex gap-4 items-start">
+//                 <img
+//                   src={item.image1}
+//                   alt={item.name}
+//                   className="w-20 h-20 rounded object-cover"
+//                 />
+//                 <div>
+//                   <h4 className="text-sm font-medium text-gray-800">
+//                     {item.name}
+//                   </h4>
+//                   <p className="text-gray-500 text-xs mt-1">
+//                     ${item.price.toFixed(2)}
+//                   </p>
+//                 </div>
+//               </td>
+
+//               <td className="p-3 text-center">
+//                 <div className="inline-flex items-center border rounded px-2">
+//                   <button
+//                     onClick={() => updateCartQuantity(item._id, "dec")}
+//                     type="button"
+//                     className="text-gray-600 hover:text-black"
+//                   >
+//                     <FaMinus />
+//                   </button>
+//                   <input
+//                     type="text"
+//                     value={item.quantity}
+//                     className="w-10 text-center border-0 focus:ring-0 text-sm"
+//                     readOnly
+//                   />
+//                   <button
+//                     onClick={() => updateCartQuantity(item._id, "inc")}
+//                     type="button"
+//                     className="text-gray-600 hover:text-black"
+//                   >
+//                     <FaPlus />
+//                   </button>
+//                 </div>
+//                 <div>
+//                   <button
+//                     onClick={() => removeCart(item._id)}
+//                     type="button"
+//                     className="text-xs text-red-500 hover:underline mt-1"
+//                   >
+//                     Remove
+//                   </button>
+//                 </div>
+//               </td>
+
+//               <td className="p-3 text-right text-sm text-gray-800">
+//                 ${(item.price * item.quantity).toFixed(2)}
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </form>
+//   )}
+// </div>
+
+//   );
+// };
+
+// export default CartTable;
 import React, { useEffect } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useCarts, useUser } from "../../hooks/hooks";
@@ -5,28 +227,20 @@ import { Link } from "react-router-dom";
 
 const CartTable = () => {
   let { carts, setCarts } = useCarts();
-
-  console.log(carts);
-
   let { user } = useUser();
 
   // for maintain carts
   useEffect(() => {
-    console.log("cart effect", carts);
-
     window.localStorage.setItem(
       `Carts_${user ? user._id : "guest"}`,
       JSON.stringify(carts)
     );
-    // console.log('[carts]');
   }, [carts]);
 
   // removeCart function
   const removeCart = (cartId) => {
-    // 🔄 Filter out the item with matching _id
     const updatedCarts = carts.filter((cart) => cart._id !== cartId);
-
-    setCarts(updatedCarts); // ✅ No mutation
+    setCarts(updatedCarts);
   };
 
   // updateCartQuantity function
@@ -37,185 +251,111 @@ const CartTable = () => {
           action === "inc" ? cart.quantity + 1 : Math.max(cart.quantity - 1, 1);
         return { ...cart, quantity: newQty };
       }
-
       return cart;
     });
-
-    console.log(updatedCarts);
-
     setCarts(updatedCarts);
   };
 
   return (
-    // <div className="w-full px-5 py-6 overflow-x-auto">
-    //   <form action="/cart" method="post" className="w-full">
-    //     <table className="min-w-full bg-white  rounded-md">
-    //       <thead>
-    //         <tr className="text-left font-semibold">
-    //           <th className="p-3">Product</th>
-    //           <th className="p-3 text-center">Quantity</th>
-    //           <th className="p-3 text-right">Total</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {carts.length === 0 ? (
-    //           <tr>
-    //             <td
-    //               colSpan="3"
-    //               className="text-center py-10 text-gray-500 text-sm"
-    //             >
-    //               No carts found.
-    //             </td>
-    //           </tr>
-    //         ) : (
-    //           carts.map((item) => (
-    //             <tr key={item._id} className="border border-gray-300">
-    //               <td className="p-3 flex gap-4 items-start">
-    //                 <img
-    //                   src={item.image1}
-    //                   alt={item.name}
-    //                   className="w-20 h-20 rounded object-cover"
-    //                 />
-    //                 <div>
-    //                   <h4 className="text-sm font-medium text-gray-800">
-    //                     {item.name}
-    //                   </h4>
-    //                   <p className="text-gray-500 text-xs mt-1">
-    //                     ${item.price.toFixed(2)}
-    //                   </p>
-    //                 </div>
-    //               </td>
+    <div className="w-full px-4 py-6">
+      {carts.length === 0 ? (
+        <div className="w-full bg-white rounded-md text-center pt-5 pb-10">
+          <p className="text-gray-500 text-sm mb-6">No carts found.</p>
+          <Link
+            to="/"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded shadow"
+          >
+            Shop Now
+          </Link>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <div className="min-w-[600px]">
+            
+            {/* Minimum width to prevent content from breaking */}
+            <table className="w-full bg-white rounded-md">
+              <thead>
+                <tr className="text-left font-semibold w-[100%]">
+                  <th className="p-3 w-[45%]">Product</th> 
+                  <th className="p-3 w-[30%] text-center">Quantity</th>
+                  <th className="p-3 w-[25%] text-right">Total</th>    
+                </tr>
+              </thead>
+              <tbody>
+                {carts.map((item) => (
+                  <tr
+                    key={item._id}
+                    className="border border-gray-300 w-[100%]"
+                  >
+                    <td className="p-3 flex gap-4 items-start w-[45%]">
+                  
+                      {/* Match header width */}
+                      <img
+                        src={item.image1}
+                        alt={item.name}
+                        className="w-20 h-20 rounded object-cover min-w-[80px]"
+                      />
+                      <div className="min-w-[200px]">
+                       
+                        {/* Prevent text overflow */}
+                        <h4 className="text-sm font-medium text-gray-800">
+                          {item.name}
+                        </h4>
+                        <p className="text-gray-500 text-xs mt-1">
+                          ${item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </td>
 
-    //               <td className="p-3 text-center">
-    //                 <div className="inline-flex items-center border rounded px-2">
-    //                   <button
-    //                     onClick={() => updateCartQuantity(item._id, "dec")}
-    //                     type="button"
-    //                     className="text-gray-600 hover:text-black"
-    //                   >
-    //                     <FaMinus />
-    //                   </button>
-    //                   <input
-    //                     type="text"
-    //                     value={item.quantity}
-    //                     className="w-10 text-center border-0 focus:ring-0 text-sm"
-    //                     readOnly
-    //                   />
-    //                   <button
-    //                     onClick={() => updateCartQuantity(item._id, "inc")}
-    //                     type="button"
-    //                     className="text-gray-600 hover:text-black"
-    //                   >
-    //                     <FaPlus />
-    //                   </button>
-    //                 </div>
+                    <td className="p-3 text-center w-[30%]">
+                   
+                      {/* Match header width */}
+                      <div className="inline-flex items-center border rounded px-2">
+                        <button
+                          onClick={() => updateCartQuantity(item._id, "dec")}
+                          type="button"
+                          className="text-gray-600 hover:text-black"
+                        >
+                          <FaMinus />
+                        </button>
+                        <input
+                          type="text"
+                          value={item.quantity}
+                          className="w-10 text-center border-0 focus:ring-0 text-sm"
+                          readOnly
+                        />
+                        <button
+                          onClick={() => updateCartQuantity(item._id, "inc")}
+                          type="button"
+                          className="text-gray-600 hover:text-black"
+                        >
+                          <FaPlus />
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          onClick={() => removeCart(item._id)}
+                          type="button"
+                          className="text-xs text-red-500 hover:underline mt-1"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </td>
 
-    //                 <div>
-    //                   <button
-    //                     onClick={() => removeCart(item._id)}
-    //                     type="button"
-    //                     className="text-xs text-red-500 hover:underline mt-1"
-    //                   >
-    //                     Remove
-    //                   </button>
-    //                 </div>
-    //               </td>
-
-    //               <td className="p-3 text-right text-sm text-gray-800">
-    //                 ${(item.price * item.quantity).toFixed(2)}
-    //               </td>
-    //             </tr>
-    //           ))
-    //         )}
-    //       </tbody>
-    //     </table>
-    //   </form>
-    // </div>
-    <div className="w-full px-5 py-6 overflow-x-auto">
-  {carts.length === 0 ? (
-    <div className="w-full bg-white rounded-md text-center pt-5 pb-10">
-      <p className="text-gray-500 text-sm mb-6">No carts found.</p>
-      <Link
-        to="/"
-        className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded shadow"
-      >
-        Shop Now
-      </Link>
+                    <td className="p-3 text-right text-sm text-gray-800 w-[25%]">
+                      
+                      {/* Match header width */}$
+                      {(item.price * item.quantity).toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
-  ) : (
-    <form action="/cart" method="post" className="w-full">
-      <table className="min-w-full bg-white rounded-md">
-        <thead>
-          <tr className="text-left font-semibold">
-            <th className="p-3">Product</th>
-            <th className="p-3 text-center">Quantity</th>
-            <th className="p-3 text-right">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {carts.map((item) => (
-            <tr key={item._id} className="border border-gray-300">
-              <td className="p-3 flex gap-4 items-start">
-                <img
-                  src={item.image1}
-                  alt={item.name}
-                  className="w-20 h-20 rounded object-cover"
-                />
-                <div>
-                  <h4 className="text-sm font-medium text-gray-800">
-                    {item.name}
-                  </h4>
-                  <p className="text-gray-500 text-xs mt-1">
-                    ${item.price.toFixed(2)}
-                  </p>
-                </div>
-              </td>
-
-              <td className="p-3 text-center">
-                <div className="inline-flex items-center border rounded px-2">
-                  <button
-                    onClick={() => updateCartQuantity(item._id, "dec")}
-                    type="button"
-                    className="text-gray-600 hover:text-black"
-                  >
-                    <FaMinus />
-                  </button>
-                  <input
-                    type="text"
-                    value={item.quantity}
-                    className="w-10 text-center border-0 focus:ring-0 text-sm"
-                    readOnly
-                  />
-                  <button
-                    onClick={() => updateCartQuantity(item._id, "inc")}
-                    type="button"
-                    className="text-gray-600 hover:text-black"
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
-                <div>
-                  <button
-                    onClick={() => removeCart(item._id)}
-                    type="button"
-                    className="text-xs text-red-500 hover:underline mt-1"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </td>
-
-              <td className="p-3 text-right text-sm text-gray-800">
-                ${(item.price * item.quantity).toFixed(2)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </form>
-  )}
-</div>
-
   );
 };
 

@@ -1,513 +1,326 @@
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import {
-//   FaTemperatureLow,
-//   FaPercentage,
-//   FaTruck
-// } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import Pagination from "../Pagination";
+import { motion } from "framer-motion";
+import useProducts from "../../../utils/useProducts";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-// const Slideshow = () => {
-//   const [currentSlide, setCurrentSlide] = useState(0);
-//   const [isVisible, setIsVisible] = useState(true);
+const ProductsSide = () => {
+  const { products, loading, error } = useProducts();
+  const [dashProducts, setDashProducts] = useState([]);
+  const [editProduct, setEditProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState({
+    show: false,
+    id: null,
+    name: "",
+  });
 
-//   const slides = [
-//     {
-//       id: "slide1",
-//       bgImage: "https://ap-medilazar.myshopify.com/cdn/shop/files/home3_slide.jpg?v=1735962010&width=3000",
-//       itemImage: "https://ap-medilazar.myshopify.com/cdn/shop/files/home3_slide-item.png?v=1735962009&width=479",
-//       heading: "Your Cancer Care Companion",
-//       features: [
-//         { icon: <FaTemperatureLow className="text-3xl mb-2 text-teal-400" />, text: "Temperature Controlled Meds" },
-//         { icon: <FaPercentage className="text-3xl mb-2 text-teal-400" />, text: "Up to 70% Off" },
-//         { icon: <FaTruck className="text-3xl mb-2 text-teal-400" />, text: "Free Doorstep Delivery" }
-//       ],
-//       buttonLink: "/collections",
-//       buttonText: "SHOP NOW",
-//       textPosition: "right",
-//       buttonStyle: "text-gray-900 bg-white border-white hover:bg-pink-500 hover:border-pink-500 hover:text-white"
-//     },
-//     {
-//       id: "slide2",
-//       bgImage: "https://ap-medilazar.myshopify.com/cdn/shop/files/home2_slide_bg.jpg?v=1735526051&width=3000",
-//       itemImage: "https://ap-medilazar.myshopify.com/cdn/shop/files/home2_slide_item.png?v=1735526052&width=679",
-//       subHeading: "PRODUCTS",
-//       heading: "Flat 25% Off Medicine order",
-//       description: "Original price <b>$29.99</b>",
-//       buttonLink: "",
-//       buttonText: "SHOP NOW",
-//       textPosition: "left",
-//       buttonStyle: "text-white bg-teal-500 border-teal-500 hover:bg-pink-500 hover:border-pink-500 rounded-md"
-//     }
-//   ];
-
-//   // Auto slide change
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       goToNextSlide();
-//     }, 5000);
-//     return () => clearInterval(interval);
-//   }, [currentSlide]);
-
-//   const goToNextSlide = () => {
-//     setIsVisible(false);
-//     setTimeout(() => {
-//       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-//       setIsVisible(true);
-//     }, 300);
-//   };
-
-//   const goToPrevSlide = () => {
-//     setIsVisible(false);
-//     setTimeout(() => {
-//       setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-//       setIsVisible(true);
-//     }, 300);
-//   };
-
-//   const goToSlide = (index) => {
-//     setIsVisible(false);
-//     setTimeout(() => {
-//       setCurrentSlide(index);
-//       setIsVisible(true);
-//     }, 300);
-//   };
-
-//   function renderSlideContent(slide) {
-//     return (
-//       <>
-//         {slide.subHeading && (
-//           <h3 className="text-white text-xl md:text-2xl mb-2">
-//             {slide.subHeading}
-//           </h3>
-//         )}
-
-//         <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">
-//           {slide.heading}
-//         </h1>
-
-//         {slide.description && (
-//           <div
-//             className="text-white text-lg mb-8"
-//             dangerouslySetInnerHTML={{ __html: slide.description }}
-//           />
-//         )}
-
-//         {slide.features && Array.isArray(slide.features) && (
-//           <div className="flex flex-col md:flex-row justify-between max-w-md mx-auto gap-6 md:gap-4 mb-8">
-//             {slide.features.map((feature, idx) => (
-//               <div key={idx} className="flex flex-col items-center text-white">
-//                 {feature.icon}
-//                 <span className="text-center">{feature.text}</span>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-
-//         <div className="mt-6">
-//           <Link
-//             to={slide.buttonLink}
-//             className={`inline-flex items-center px-8 py-3 border-2 rounded-full font-bold transition-colors ${slide.buttonStyle}`}
-//           >
-//             {slide.buttonText}
-//             <FaChevronRight className="ml-2" />
-//           </Link>
-//         </div>
-//       </>
-//     );
-//   }
-
-//   return (
-//     <section className="w-full">
-//       <div className="relative">
-//         <div className="relative h-[550px] overflow-hidden">
-//           {slides.map((slide, index) => (
-//             <div
-//               key={slide.id}
-//               id={slide.id}
-//               className={`absolute inset-0 transition-opacity duration-300 ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
-//               style={{ zIndex: currentSlide === index ? 10 : 1 }}
-//             >
-//               {/* Background Image */}
-//               <div className="absolute inset-0">
-//                 <img
-//                   src={slide.bgImage}
-//                   srcSet={`${slide.bgImage}&width=400 400w, ${slide.bgImage}&width=500 500w, ${slide.bgImage}&width=600 600w, ${slide.bgImage}&width=700 700w, ${slide.bgImage}&width=800 800w, ${slide.bgImage}&width=900 900w, ${slide.bgImage}&width=1000 1000w, ${slide.bgImage}&width=1200 1200w, ${slide.bgImage}&width=3000 1400w`}
-//                   loading="eager"
-//                   className="w-full h-full object-cover"
-//                   alt=""
-//                 />
-//               </div>
-
-//               {/* Item Image - Only shown on desktop for blue slide */}
-//               {slide.id === "slide1" && (
-//                 <div className="hidden md:block absolute bottom-0 right-0 max-w-[50%]">
-//                   <img
-//                     src={slide.itemImage}
-//                     srcSet={`${slide.itemImage}&width=352 352w, ${slide.itemImage}&width=479 479w`}
-//                     className="max-h-[405px]"
-//                     alt=""
-//                   />
-//                 </div>
-//               )}
-
-//               {/* Green slide item image on right with gap */}
-//               {slide.id === "slide2" && (
-//                 <div className="hidden md:block absolute bottom-0 right-8 max-w-[50%]">
-//                   <img
-//                     src={slide.itemImage}
-//                     srcSet={`${slide.itemImage}&width=352 352w, ${slide.itemImage}&width=679 679w`}
-//                     className="max-h-[399px]"
-//                     alt=""
-//                   />
-//                 </div>
-//               )}
-
-//               {/* Content Container */}
-//               <div className="container mx-auto px-4 h-full relative z-10">
-//                 {/* Mobile layout - image at top, text at bottom */}
-//                 <div className="md:hidden flex flex-col h-full">
-//                   {/* Image at top for mobile */}
-//                   <div className="flex-1 flex items-center justify-center pt-4">
-//                     <img
-//                       src={slide.itemImage}
-//                       className="max-h-[200px]"
-//                       alt=""
-//                     />
-//                   </div>
-//                   {/* Text at bottom for mobile */}
-//                   <div className="pb-8">
-//                     {renderSlideContent(slide)}
-//                   </div>
-//                 </div>
-
-//                 {/* Desktop layout */}
-//                 <div className="hidden md:flex h-full items-center" style={{
-//                   justifyContent: slide.textPosition === 'center' ? 'center' :
-//                     slide.textPosition === 'right' ? 'flex-end' : 'flex-start'
-//                 }}>
-//                   <div
-//                     className={`max-w-md ${slide.textPosition === 'center' ? 'text-center mx-auto' : ''}`}
-//                     style={{
-//                       opacity: isVisible && currentSlide === index ? 1 : 0,
-//                       transition: 'opacity 0.3s ease'
-//                     }}
-//                   >
-//                     {renderSlideContent(slide)}
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Navigation Dots */}
-//         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
-//           {slides.map((_, index) => (
-//             <button
-//               key={index}
-//               className={`w-10 h-1 rounded-full transition-colors ${currentSlide === index ? 'bg-white' : 'bg-white/50'}`}
-//               onClick={() => goToSlide(index)}
-//               aria-label={`Go to slide ${index + 1}`}
-//             />
-//           ))}
-//         </div>
-
-//         {/* Navigation Arrows */}
-//         <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-20 flex justify-between px-4">
-//           <button
-//             className="bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors"
-//             onClick={goToPrevSlide}
-//             aria-label="Previous slide"
-//           >
-//             <FaChevronLeft />
-//           </button>
-//           <button
-//             className="bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors"
-//             onClick={goToNextSlide}
-//             aria-label="Next slide"
-//           >
-//             <FaChevronRight />
-//           </button>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Slideshow;
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { FaTemperatureLow, FaPercentage, FaTruck } from "react-icons/fa";
-
-const Slideshow = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-
-  const slides = [
-    {
-      id: "slide1",
-      bgImage:
-        "https://ap-medilazar.myshopify.com/cdn/shop/files/home3_slide.jpg?v=1735962010&width=3000",
-      itemImage:
-        "https://ap-medilazar.myshopify.com/cdn/shop/files/home3_slide-item.png?v=1735962009&width=479",
-      heading: "Your Cancer Care Companion",
-      features: [
-        {
-          icon: <FaTemperatureLow className="text-3xl mb-2 text-teal-400" />,
-          text: "Temperature Controlled Meds",
-        },
-        {
-          icon: <FaPercentage className="text-3xl mb-2 text-teal-400" />,
-          text: "Up to 70% Off",
-        },
-        {
-          icon: <FaTruck className="text-3xl mb-2 text-teal-400" />,
-          text: "Free Doorstep Delivery",
-        },
-      ],
-      buttonLink: "/collections",
-      buttonText: "SHOP NOW",
-      textPosition: "right",
-      buttonStyle:
-        "text-gray-900 bg-white border-white hover:bg-pink-500 hover:border-pink-500 hover:text-white",
-    },
-    {
-      id: "slide2",
-      bgImage:
-        "https://ap-medilazar.myshopify.com/cdn/shop/files/home2_slide_bg.jpg?v=1735526051&width=3000",
-      itemImage:
-        "https://ap-medilazar.myshopify.com/cdn/shop/files/home2_slide_item.png?v=1735526052&width=679",
-      subHeading: "PRODUCTS",
-      heading: "Flat 25% Off Medicine order",
-      description: "Original price <b>$29.99</b>",
-      buttonLink: "",
-      buttonText: "shop now",
-      textPosition: "left",
-      buttonStyle:
-        "text-white bg-teal-500 border-teal-500 hover:bg-pink-500 hover:border-pink-500",
-    },
-  ];
-
-  // Auto slide change
   useEffect(() => {
-    const interval = setInterval(() => {
-      goToNextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
+    setDashProducts(products);
+  }, [products]);
 
-  const goToNextSlide = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-      setIsVisible(true);
-    }, 300);
+  const handleDeleteProduct = (productId, productName) => {
+    Swal.fire({
+      title: `Delete "${productName}"?`,
+      text: "Are you sure you want to delete this product?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("adminToken");
+
+        try {
+          const res = await fetch(
+            `${import.meta.env.VITE_API_URL}/product/delete/${productId}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${token}`,
+                role: "admin",
+              },
+            }
+          );
+
+          const data = await res.json();
+          if (res.ok && data.success) {
+            Swal.fire("Deleted!", data.message, "success");
+            setDashProducts((prev) =>
+              prev.filter((item) => item._id !== productId)
+            );
+          } else {
+            Swal.fire(
+              "Error!",
+              data.message || "Failed to delete product",
+              "error"
+            );
+          }
+        } catch (err) {
+          console.error("Error deleting product:", err);
+          Swal.fire("Error!", "Something went wrong!", "error");
+        }
+      }
+    });
   };
 
-  const goToPrevSlide = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-      setIsVisible(true);
-    }, 300);
+  const handleEditProduct = (productId) => {
+    const productToEdit = dashProducts.find((p) => p._id === productId);
+    if (productToEdit) {
+      setEditProduct(productToEdit);
+      setShowModal(true);
+    }
   };
 
-  const goToSlide = (index) => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setCurrentSlide(index);
-      setIsVisible(true);
-    }, 300);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("adminToken");
+
+    // === Validation ===
+  if (!editProduct.name || !editProduct.price || !editProduct.imageFile) {
+    toast.error("Please fill all required fields: name, price, and image");
+    return; // Stop further execution
+  }
+
+    const formData = new FormData();
+    formData.append("name", editProduct.name);
+    formData.append("price", editProduct.price);
+    if (editProduct.imageFile) {
+      formData.append("image", editProduct.imageFile);
+    }
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/product/update/${editProduct._id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${token}`,
+            role: "admin",
+          },
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(data.message);
+        setShowModal(false);
+        setDashProducts((prev) =>
+          prev.map((p) =>
+            p._id === editProduct._id ? { ...p, ...data.updatedProduct } : p
+          )
+        );
+      } else {
+        toast.error(data.message || "Update failed");
+      }
+    } catch (error) {
+      console.error("Update failed:", error);
+      toast.error("Error updating product");
+    }
   };
 
   return (
-    <section className="w-full">
-      <div className="relative">
-        <div className="relative h-[550px] overflow-hidden">
-          {slides.map((slide, index) => (
-            <div
-              key={slide.id}
-              id={slide.id}
-              className={`absolute inset-0 transition-opacity duration-300 ${
-                currentSlide === index ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ zIndex: currentSlide === index ? 10 : 1 }}
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <img
-                  src={slide.bgImage}
-                  srcSet={`${slide.bgImage}&width=400 400w, ${slide.bgImage}&width=500 500w, ${slide.bgImage}&width=600 600w, ${slide.bgImage}&width=700 700w, ${slide.bgImage}&width=800 800w, ${slide.bgImage}&width=900 900w, ${slide.bgImage}&width=1000 1000w, ${slide.bgImage}&width=1200 1200w, ${slide.bgImage}&width=3000 1400w`}
-                  loading="eager"
-                  className="w-full h-full object-cover"
-                  alt=""
-                />
-              </div>
-
-              {/* Blue slide - image on right for desktop */}
-              {slide.id === "slide1" && (
-                <>
-                  <div className="hidden md:block absolute bottom-0 right-0 max-w-[50%]">
-                    <img
-                      src={slide.itemImage}
-                      srcSet={`${slide.itemImage}&width=352 352w, ${slide.itemImage}&width=479 479w`}
-                      className="max-h-[405px]"
-                      alt=""
-                    />
-                  </div>
-                  {/* Mobile layout - image at top */}
-                  <div className="md:hidden absolute top-0 w-full flex justify-center pt-4">
-                    <img
-                      src={slide.itemImage}
-                      className="max-h-[200px]"
-                      alt=""
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Green slide - image on right with gap for desktop */}
-              {slide.id === "slide2" && (
-                <>
-                  <div className="hidden md:block absolute bottom-0 right-0 max-w-[50%] mr-12">
-                    <img
-                      src={slide.itemImage}
-                      srcSet={`${slide.itemImage}&width=352 352w, ${slide.itemImage}&width=679 679w`}
-                      className="max-h-[399px]"
-                      alt=""
-                    />
-                  </div>
-                  {/* Mobile layout - image at top */}
-                  <div className="md:hidden absolute top-0 w-full flex justify-center pt-4">
-                    <img
-                      src={slide.itemImage}
-                      className="max-h-[200px]"
-                      alt=""
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Content Container */}
-              <div className="container mx-auto px-4 h-full relative z-10">
-                {/* Mobile layout - text at bottom */}
-                <div className="md:hidden absolute bottom-0 w-full px-4 pb-8">
-                  {renderSlideContent(slide)}
-                </div>
-
-                {/* Desktop layout */}
-                <div
-                  className="hidden md:flex h-full items-center"
-                  style={{
-                    justifyContent:
-                      slide.textPosition === "center"
-                        ? "center"
-                        : slide.textPosition === "right"
-                        ? "flex-end"
-                        : "flex-start",
-                  }}
-                >
-                  <div
-                    className={`max-w-md ${
-                      slide.textPosition === "center"
-                        ? "text-center mx-auto"
-                        : ""
-                    }`}
-                    style={{
-                      opacity: isVisible && currentSlide === index ? 1 : 0,
-                      transition: "opacity 0.3s ease",
-                    }}
-                  >
-                    {renderSlideContent(slide)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-3xl font-bold">Products List</h2>
+          <p className="text-gray-500 dark:text-gray-400">
+            List of all products
+          </p>
         </div>
-
-        {/* Navigation Dots */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`w-10 h-1 rounded-full transition-colors ${
-                currentSlide === index ? "bg-white" : "bg-white/50"
-              }`}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
-        <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-20 flex justify-between px-4">
-          <button
-            className="bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors"
-            onClick={goToPrevSlide}
-            aria-label="Previous slide"
-          >
-            <FaChevronLeft />
+        <div className="space-x-2">
+          <button className="btn btn-light border-blue-900 border rounded px-3 py-1">
+            Export
           </button>
-          <button
-            className="bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors"
-            onClick={goToNextSlide}
-            aria-label="Next slide"
-          >
-            <FaChevronRight />
+          <button className="btn btn-light border-blue-900 border rounded px-3 py-1">
+            Import
+          </button>
+          <button className="btn btn-primary border-blue-900 border rounded px-3 py-1">
+            Create new
           </button>
         </div>
       </div>
-    </section>
-  );
 
-  function renderSlideContent(slide) {
-    return (
-      <>
-        {slide.subHeading && (
-          <h3 className="text-white text-xl md:text-2xl mb-2">
-            {slide.subHeading}
-          </h3>
-        )}
+      <section className="p-6 bg-white dark:bg-gray-900">
+        <div className="bg-white dark:bg-gray-800 rounded shadow p-4 mb-6">
+          <div className="flex flex-wrap items-center gap-4">
+            <div>
+              <input type="checkbox" className="form-checkbox" />
+            </div>
+            <div className="flex-1 min-w-[200px]">
+              <select className="form-select w-full">
+                <option>All category</option>
+                <option>Electronics</option>
+                <option>Clothes</option>
+                <option>Automobile</option>
+              </select>
+            </div>
+            <div>
+              <input type="date" className="form-input w-full" />
+            </div>
+            <div>
+              <select className="form-select w-full">
+                <option>Status</option>
+                <option>Active</option>
+                <option>Disabled</option>
+                <option>Show all</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-        <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">
-          {slide.heading}
-        </h1>
-
-        {slide.description && (
+        {dashProducts.map((item) => (
           <div
-            className="text-white text-lg mb-8"
-            dangerouslySetInnerHTML={{ __html: slide.description }}
-          />
-        )}
+            key={item._id}
+            className="flex flex-wrap items-center border-b py-4 last:border-0"
+          >
+            <input type="checkbox" className="form-checkbox px-2" />
+            <div className="flex-1 flex items-center gap-3 min-w-[200px]">
+              <img
+                src={item.image1}
+                className="w-16 h-16 object-cover rounded"
+                alt="Item"
+              />
+              <h6 className="font-medium">{item.name}</h6>
+            </div>
+            <div className="w-28 text-gray-700 font-medium">${item.price}</div>
+            <div className="w-28">
+              <span className="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                Active
+              </span>
+            </div>
+            <div className="w-28 text-sm text-gray-500">02.11.2022</div>
+            <div className="w-36 text-end space-x-1 flex gap-[20px] justify-center">
+              <button
+                className="btn btn-brand btn-sm text-green-700 font-bold cursor-pointer"
+                onClick={() => handleEditProduct(item._id)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-light btn-sm text-red-700 font-bold cursor-pointer"
+                onClick={() =>
+                  setConfirmDelete({
+                    show: true,
+                    id: item._id,
+                    name: item.name,
+                  })
+                }
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
 
-        {slide.features && (
+        {showModal && editProduct && (
+          <div className="z-20 fixed inset-0 backdrop-blur-sm bg-black/30 flex items-center justify-center">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white dark:bg-gray-900 p-6 rounded-2xl w-full max-w-md shadow-xl relative"
+            >
+              <h2 className="text-xl font-bold text-blue-800 dark:text-white mb-4">
+                Edit Product
+              </h2>
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    className="w-full border px-3 py-2 rounded-xl"
+                    placeholder="Name"
+                    value={editProduct.name}
+                    onChange={(e) =>
+                      setEditProduct({ ...editProduct, name: e.target.value })
+                    }
+                  />
+                  <input
+                    type="number"
+                    className="w-full border px-3 py-2 rounded-xl"
+                    placeholder="Price"
+                    value={editProduct.price}
+                    onChange={(e) =>
+                      setEditProduct({ ...editProduct, price: e.target.value })
+                    }
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="w-full border px-3 py-2 rounded-xl"
+                    onChange={(e) =>
+                      setEditProduct({
+                        ...editProduct,
+                        imageFile: e.target.files[0],
+                      })
+                    }
+                  />
+                  {editProduct.image1 && (
+                    <img
+                      src={editProduct.image1}
+                      alt="Current"
+                      className="w-20 h-20 rounded object-cover"
+                    />
+                  )}
+                </div>
 
-          
-          <div className="flex flex-col md:flex-row justify-between max-w-md mx-auto gap-6 md:gap-4 mb-8">
-            {slide.features.map((feature, idx) => (
-              <div key={idx} className="flex flex-col items-center text-white">
-                {feature.icon}
-                <span className="text-center">{feature.text}</span>
-              </div>
-            ))}
+                <div className="flex justify-end mt-4 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="px-4 py-1.5 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-xl"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
         )}
 
-        <div className="mt-6">
-          <Link
-            to={slide.buttonLink}
-            className={`inline-flex items-center px-8 py-3 border-2 rounded-full font-bold transition-colors ${slide.buttonStyle}`}
-          >
-            {slide.buttonText}
-            <FaChevronRight className="ml-2" />
-          </Link>
-        </div>
-      </>
-    );
-  }
+        {/* Custom Delete Confirmation Modal */}
+        {confirmDelete.show && (
+          <div className="fixed inset-0 z-30 bg-black/40 flex items-center justify-center">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl max-w-sm w-full">
+              <h3 className="text-lg font-semibold mb-4">
+                Are you sure you want to delete{" "}
+                <span className="text-red-600">{confirmDelete.name}</span>?
+              </h3>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() =>
+                    setConfirmDelete({ show: false, id: null, name: "" })
+                  }
+                  className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-black"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-light btn-sm text-red-700 font-bold cursor-pointer"
+                  onClick={() => handleDeleteProduct(item._id, item.name)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <Pagination />
+    </div>
+  );
 };
 
-export default Slideshow;
+export default ProductsSide;

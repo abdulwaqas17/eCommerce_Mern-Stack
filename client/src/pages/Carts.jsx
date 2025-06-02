@@ -141,7 +141,7 @@ const Carts = () => {
 
       {/* Checkout Footer */}
       {carts.length !== 0 &&
-      <div className="mx-8">
+      <div className="md:mx-6">
         <CartFooter totalPrice={totalPrice}  loading={isPlacingOrder} />
       </div>}
 

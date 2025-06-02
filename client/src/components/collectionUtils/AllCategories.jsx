@@ -52,7 +52,7 @@ const AllCategories = () => {
     navigate('/products')
   }
   return (
-    <section className="py-10 px-4 md:px-8 lg:px-16 bg-white">
+    <section className="py-10 px-2 md:px-6 lg:px-12 bg-white">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
         Shop by Category
       </h2>
@@ -62,15 +62,16 @@ const AllCategories = () => {
           <a
             key={index}
             onClick={() => navigateProduct(item.title)}
-            className="w-[48%] sm:w-[30%] lg:w-[22%] flex flex-col items-center bg-white rounded-lg p-4 transition-transform hover:scale-105 cursor-pointer"
+            className="group w-[80%] sm:w-[30%] lg:w-[22%] flex flex-col items-center bg-white rounded-lg p-4 transition-transform hover:scale-105 cursor-pointer "
           >
             <img
               src={item.img}
               alt={item.title}
-              className="object-contain mb-2"
+              className="object-contain mb-2 "
               loading="lazy"
+
             />
-            <p className="text-center text-sm font-medium text-gray-800">
+            <p className="text-center text-sm font-medium text-gray-800 group-hover:text-pink-600 transition-colors">
               {item.title}
             </p>
           </a>

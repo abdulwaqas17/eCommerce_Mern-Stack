@@ -1,7 +1,7 @@
 // components/Footer.jsx
 const Footer = () => {
   return (
-    <footer className="bg-white py-16 border-t md:mx-[40px] px-2">
+    <footer className="bg-white py-16 border-t px-2">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap gap-8">
           {/* Logo + Description */}
