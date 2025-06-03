@@ -600,7 +600,7 @@ const SlideShow = () => {
                   <img
                     src={slide.itemImageUrl}
                     alt="image"
-                    className="absolute bottom-10 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-auto h-1/2 md:h-full object-contain"
+                    className="absolute bottom-10 md:bottom-0 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-auto h-1/2 md:h-[90%] object-contain"
                     loading="eager"
                   />
                 )}

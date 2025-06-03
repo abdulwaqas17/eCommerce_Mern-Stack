@@ -1,4 +1,6 @@
 import React from "react";
+import LineChart from "./cartsUtils/LineChart";
+import BarChart from "./cartsUtils/BarChart";
 
 const SalesAndRevenue = () => {
   return (
@@ -8,7 +10,8 @@ const SalesAndRevenue = () => {
         {/* Sale Statistics */}
         <div className="bg-white shadow-md rounded-xl p-4">
           <h5 className="text-xl font-semibold mb-4">Sale statistics</h5>
-          <img src="/images/chart1.png" alt="revenue chart" className="w-full h-[265px]" />
+          {/* <img src="/images/chart1.png" alt="revenue chart" className="w-full h-[265px]" /> */}
+          <LineChart/>
         </div>
 
         {/* New Members & Recent Activities */}
@@ -59,7 +62,8 @@ const SalesAndRevenue = () => {
         {/* Revenue Chart */}
         <div className="bg-white shadow-md rounded-xl p-4">
           <h5 className="text-xl font-semibold mb-4">Revenue Base on Area</h5>
-          <img src="/images/chart2.png" alt="revenue chart"  className="w-full h-[215px]" />
+          {/* <img src="/images/chart2.png" alt="revenue chart"  className="w-full h-[215px]" /> */}
+          <BarChart/>
         </div>
 
         {/* Marketing Channel */}
