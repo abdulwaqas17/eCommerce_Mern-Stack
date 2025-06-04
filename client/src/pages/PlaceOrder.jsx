@@ -485,6 +485,7 @@ const CheckoutPage = () => {
     const userToken = localStorage.getItem("userToken");
     if (!userToken) {
       toast.error("Please login to place order");
+      navigate('/login')
       return;
     }
     if (!user || !user._id) {

@@ -1,6 +1,6 @@
 import React from "react";
-import LineChart from "./cartsUtils/LineChart";
-import BarChart from "./cartsUtils/BarChart";
+import LineChart from "./chartsUtils/LineChart";
+import BarChart from "./chartsUtils/BarChart";
 
 const SalesAndRevenue = () => {
   return (

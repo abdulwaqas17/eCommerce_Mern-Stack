@@ -62,7 +62,7 @@ export default function useCartAndWishlist() {
       );
       setCarts(updatedCarts);
     } else {
-      setCarts([...carts, { ...product, quantity: 1 }]);
+      setCarts([...carts, { ...product, quantity}]);
     }
   };
 

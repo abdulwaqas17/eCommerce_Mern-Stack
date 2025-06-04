@@ -40,7 +40,7 @@ const LineChart = () => {
         fill: false
       },
       {
-        label: 'Category',
+        label: 'Users',
         borderColor: 'rgba(54, 162, 235, 1)',
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
         data: [50, 300, 100, 450, 150, 200, 300],

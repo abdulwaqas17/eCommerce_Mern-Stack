@@ -29,12 +29,15 @@ const ProductOverview = () => {
   }, [products, id]);
 
   const handleQuantityChange = (value) => {
-    setQuantity((prev) => Math.max(1, prev + value));
+    setQuantity((prev) => Math.max(prev + value,1));
   };
 
   const changeImage= (img) => {
     setImage(img);
   }
+
+  console.log(quantity);
+  
 
 
  

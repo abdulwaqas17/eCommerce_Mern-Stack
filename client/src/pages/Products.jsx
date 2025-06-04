@@ -28,13 +28,13 @@ const Products = () => {
       <FilterBar />
 
       <section className="px-[30px] py-[60px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {loading ? (
-            <p className="text-center py-4">Loading products...</p>
+            <p className="text-center py-4 w-full">Loading products...</p>
           ) : error ? (
             <p className="text-center text-red-600 bg-[rgba(230,230,230,0.81)]">{error}</p>
           ) : (
-            products.map((product) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {  products.map((product) => (
               <Card
                 key={product._id}
                 product={product}
@@ -42,9 +42,9 @@ const Products = () => {
                 addToWishlist={toggleWishlist}
                 isWishlisted={wishlist.some((item) => item._id === product._id)}
               />
-            ))
-          )}
+            ))}
         </div>
+          )}
       </section>
       <Footer />
     </div>
